@@ -1,0 +1,27 @@
+
+<div>
+    <button >Login</button>
+</div>
+
+
+<div>
+    <button mat-button  [matMenuTriggerFor]="menu">Menu</button>
+    <mat-menu #menu="matMenu">
+        <button (click)="SetUserName('user1')" mat-menu-item>User1</button>
+        <button (click)="SetUserName('user2')" mat-menu-item>User2</button>
+    </mat-menu>
+</div>
+<div>
+    <button mat-button  [matMenuTriggerFor]="userMenu">MenuForUsers</button>
+    <mat-menu #userMenu="matMenu">
+        <button *ngFor="let accounts of accounts" (click)="SetUserName(accounts.name)" mat-menu-item>{{accounts.name}}</button>
+
+    </mat-menu>
+</div>
+
+
+
+
+<p>{{username}}</p>
+
+
