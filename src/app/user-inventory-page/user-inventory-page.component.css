@@ -1,0 +1,50 @@
+
+
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  
+  
+  flex-wrap: wrap;
+
+  /* min and max width */
+  max-width: 1180px;
+  min-width: 570px;
+  
+  /* Margins */
+  margin-left: 320px;
+  margin-top: 200px;
+  
+  
+}
+
+.flex-container > div {
+
+  
+  margin: 0.2%;
+  
+  border: solid;
+  border-width: 1px;
+  
+  min-width:280px;
+  
+  height:385px;
+  /*margin: 10px;*/
+  /*flex: 1;
+  font-size: 30px;
+  display: flex;
+  padding: 2%;
+  flex-basis: 16%;*/
+  
+  
+  /*min-width:100px;
+    line-height: 385px;
+
+  width: 300px;*/
+  
+  
+  
+  
+}
+
