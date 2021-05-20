@@ -7,19 +7,33 @@ import {MatSelectModule} from '@angular/material/select';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
+import { MatStepperModule} from '@angular/material/stepper';
+import {FormsModule} from "@angular/forms";
+
+const MaterialComp = [
+    MatMenuModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatStepperModule,
+    FormsModule,
+
+]
+
 
 @NgModule({
 
-    imports: [
 
-        MatMenuModule,
-        BrowserAnimationsModule,
-        MatSelectModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatDividerModule,
+    imports: [
+        MaterialComp
+
 
     ],
+    exports:[
+        MaterialComp
+    ]
 
 })
 export class MaterialModules {
