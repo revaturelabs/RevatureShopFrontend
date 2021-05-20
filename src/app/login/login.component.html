@@ -1,27 +1,35 @@
-
-<div>
-    <button >Login</button>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<div style="text-align: center">
+    <h1>INSERT HEADER COMPONENT HERE</h1>
 </div>
 
+<div class="container" fxLayoutAlign="center">
 
-<div>
-    <button mat-button  [matMenuTriggerFor]="menu">Menu</button>
-    <mat-menu #menu="matMenu">
-        <button (click)="SetUserName('user1')" mat-menu-item>User1</button>
-        <button (click)="SetUserName('user2')" mat-menu-item>User2</button>
-    </mat-menu>
+    <div fxFlex="20" class="side-card side-temp">
+        <!--<img mat-card-image class="side-card-img" src="../../assets/Simple-Chevron-Stripe-Pattern-Orange.png" alt="Pretty"> -->
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="center center" fxFlex="60" class="flex-gap">
+        <div>
+            <button *ngIf="username != ''" color="primary" mat-raised-button >Login</button>
+        </div>
+        <mat-divider [inset]="true"></mat-divider>
+        <button mat-raised-button color="primary" [matMenuTriggerFor]="userMenu">{{TextForButton}}</button>
+        <mat-menu #userMenu="matMenu" class="my-menu">
+            <button style="text-align: center" class="my-menu" color="primary" *ngFor="let accounts of accounts" (click)="SetUserName(accounts.name)"
+                    mat-menu-item>{{accounts.name}}</button>
+
+        </mat-menu>
+    </div>
+    <div fxFlex="20" class="side-card side-temp">
+        <!--<img mat-card-image class="side-card-img" src="../../assets/Simple-Chevron-Stripe-Pattern-Orange.png" alt="Pretty"> -->
+    </div>
+
+
+
 </div>
-<div>
-    <button mat-button  [matMenuTriggerFor]="userMenu">MenuForUsers</button>
-    <mat-menu #userMenu="matMenu">
-        <button *ngFor="let accounts of accounts" (click)="SetUserName(accounts.name)" mat-menu-item>{{accounts.name}}</button>
 
-    </mat-menu>
+<div style="text-align: center">
+    <h1>INSERT FOOTER COMPONENT HERE</h1>
 </div>
-
-
-
-
-<p>{{username}}</p>
-
-

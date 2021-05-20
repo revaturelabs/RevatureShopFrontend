@@ -27,6 +27,7 @@
               "src/assets"
             ],
             "styles": [
+                "src/customTheme.scss",
               "src/styles.css"
             ],
             "scripts": []
@@ -94,7 +95,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+
+              "src/styles.css",
+                "src/customTheme.scss"
             ],
             "scripts": []
           }
@@ -103,4 +106,6 @@
     }
   },
   "defaultProject": "RevatureShopFrontend"
+
+
 }

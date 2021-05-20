@@ -7,7 +7,8 @@ export interface Accounts {
     type : STATUS;
 
 }
-enum STATUS {
+
+export enum STATUS {
     User,
     Admin,
 }

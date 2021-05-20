@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Accounts} from './accounts';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+//import {HttpClientModule} from "@angular/common/http";
 import { catchError, retry } from 'rxjs/operators';
 
 
