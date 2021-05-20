@@ -8,18 +8,27 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 
+const MaterialComp = [
+    MatMenuModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDividerModule,
+]
+
+
 @NgModule({
 
-    imports: [
 
-        MatMenuModule,
-        BrowserAnimationsModule,
-        MatSelectModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatDividerModule,
+    imports: [
+        MaterialComp
+
 
     ],
+    exports:[
+        MaterialComp
+    ]
 
 })
 export class MaterialModules {
