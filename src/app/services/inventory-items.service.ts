@@ -31,6 +31,8 @@ export class InventoryItemsService {
 
   inventoryItems : InventoryItem[] = [];
 
+  
+
   constructor() { 
     this.inventoryItems = [new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
         19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg" ),
@@ -51,6 +53,32 @@ export class InventoryItemsService {
         new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
         19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
         new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg")];
+        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
+      
+        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
+        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg" ),
+        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
+        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
+        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
+        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
+        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
+        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
+        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
+        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
+        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
+        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
+        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
+        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
+        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
+        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
+        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
+        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
+        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
+        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg")
+      ];
   }
+
+
+
+
 }

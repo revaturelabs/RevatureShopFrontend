@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { UserInventoryPageComponent } from './components/user-inventory-page/user-inventory-page.component';
 import { AdminInventoryPageComponent } from './components/admin-inventory-page/admin-inventory-page.component';
 import { CartComponent } from './components/cart/cart.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { CartComponent } from './components/cart/cart.component';
         HttpClientModule,
         BrowserAnimationsModule,
         MaterialModules,
-        AppRoutingModule
+        AppRoutingModule,
+        NgbModule
     ],
     providers: [],
     bootstrap: [AppComponent]

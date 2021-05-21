@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { InventoryItemsService } from '../../services/inventory-items.service';
+import { Router } from '@angular/router';
+import { InventoryItem, InventoryItemsService } from '../INVENTORY_ITEMS_SERVICE/inventory-items.service';
 
 @Component({
   selector: 'app-user-inventory-page',
@@ -8,7 +9,15 @@ import { InventoryItemsService } from '../../services/inventory-items.service';
 })
 export class UserInventoryPageComponent implements OnInit {
 
-  constructor(private _inventoryItemsService : InventoryItemsService) { }
+  inventoryItemsFiltered : InventoryItem[] = [];
+  page = 1;
+  pageSize = 12;
+
+
+  constructor(private _inventoryItemsService : InventoryItemsService,
+    private router : Router) {
+
+   }
 
   ngOnInit(): void {
 
@@ -18,4 +27,8 @@ export class UserInventoryPageComponent implements OnInit {
     return this._inventoryItemsService;
   }
 
+  pageSelected() {
+    console.log("PAGE CHANGED");
+    window.scrollTo(0,0);
+  }
 }
