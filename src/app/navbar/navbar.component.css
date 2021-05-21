@@ -1,0 +1,11 @@
+.navbar-brand {
+    width: 120px;
+}
+
+nav {
+    background: white;
+}
+
+.nav-item:hover {
+    color: #F26925;
+}
