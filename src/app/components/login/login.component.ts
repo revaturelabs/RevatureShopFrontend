@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {GetDummyUsersService} from "../get-dummy-users.service";
-import {Accounts, STATUS} from '../accounts';
+import {Account} from "../../services/account";
+import {Accounts, STATUS} from '../../accounts';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
     public username : string = '';
     accounts : Accounts[] = Array<{id: number, name: string, type: STATUS}>();
 
-  constructor(private dummies: GetDummyUsersService) {}
+  constructor(private dummies: Account) {}
 
   ngOnInit(): void {
 

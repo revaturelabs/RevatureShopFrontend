@@ -4,7 +4,7 @@ import { LoginComponent } from './login.component';
 import {DebugElement} from "@angular/core";
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import {By} from "@angular/platform-browser";
-import {GetDummyUsersService} from "../get-dummy-users.service";
+import {Account} from "../../services/account";
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -16,7 +16,7 @@ describe('LoginComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
         imports: [HttpClientTestingModule],
-        providers: [GetDummyUsersService]
+        providers: [Account]
 
     })
 

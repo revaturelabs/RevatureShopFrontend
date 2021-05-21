@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { UserInventoryPageComponent } from './user-inventory-page/user-inventory-page.component';
+import { UserInventoryPageComponent } from './components/user-inventory-page/user-inventory-page.component';
 
 
 const routes : Routes = [

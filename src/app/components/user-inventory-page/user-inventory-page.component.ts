@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InventoryItemsService } from '../INVENTORY_ITEMS_SERVICE/inventory-items.service';
+import { InventoryItemsService } from '../../services/inventory-items.service';
 
 @Component({
   selector: 'app-user-inventory-page',

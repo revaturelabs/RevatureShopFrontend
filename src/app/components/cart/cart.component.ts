@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpService, shoppingCart, StockItem} from "../http.service";
+import {HttpService, shoppingCart, StockItem} from "../../services/http.service";
 import { LoginComponent } from '../login/login.component';
 import {newArray} from "@angular/compiler/src/util";
 
