@@ -3,17 +3,17 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import {HttpClientModule} from '@angular/common/http';
 import { MatMenuModule} from '@angular/material/menu';
 
-import { Account } from './account';
+import { AccountService } from './account.service';
 
 describe('GetDummyUsersService', () => {
-  let service: Account;
+  let service: AccountService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        providers: [Account]
+        providers: [AccountService]
     });
-    service = TestBed.inject(Account);
+    service = TestBed.inject(AccountService);
 
   });
 

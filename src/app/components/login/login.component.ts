@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Account} from "../../services/account";
-import {Accounts, STATUS} from '../../accounts';
+import {AccountService, Account, STATUS} from "../../services/account.service";
 
 @Component({
   selector: 'app-login',
@@ -11,9 +10,9 @@ export class LoginComponent implements OnInit {
 
     public TextForButton : string = 'Please Select a User'
     public username : string = '';
-    accounts : Accounts[] = Array<{id: number, name: string, type: STATUS}>();
+    accounts : Account[] = Array<{id: number, name: string, type: STATUS}>();
 
-  constructor(private dummies: Account) {}
+  constructor(private dummies: AccountService) {}
 
   ngOnInit(): void {
 
