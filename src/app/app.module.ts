@@ -5,6 +5,7 @@ import {AppComponent} from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserInventoryPageComponent } from './user-inventory-page/user-inventory-page.component';
 import { AdminInventoryPageComponent } from './admin-inventory-page/admin-inventory-page.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { AdminInventoryPageComponent } from './admin-inventory-page/admin-invent
     ],
     imports: [
         BrowserModule,
-        AppRoutingModule
+        AppRoutingModule,
+        NgbModule
     ],
     providers: [],
     bootstrap: [AppComponent]
