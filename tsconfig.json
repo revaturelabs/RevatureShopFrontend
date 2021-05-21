@@ -26,5 +26,10 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+    "include": [
+        "**/*.spec.ts",
+        "**/*.d.ts",
+        "**/*.ts"
+    ]
 }

@@ -16,5 +16,8 @@
     src: url('./assets/fonts/Futura-Std-Medium.otf') format('opentype');
 }
 body {
-    font-family: 'FuturaBook';
+    margin: 0;
+    font-family: 'FuturaBook', sans-serif;
 }
+
+html, body { height: 100%; }

@@ -1,0 +1,45 @@
+.container {
+    min-height: 90%;
+
+    width: 100%;
+}
+.flex-gap {
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: 6px;
+    width: 20em;
+}
+.flex-gap > div {
+    margin: 5em;
+}
+button{
+    width: 300px;
+    height: 100px;
+    line-height: 100px;
+
+}
+.orange{
+    background-color: #f26925;
+}
+.blue{
+    background-color: #72a4c1;
+}
+.my-menu{
+    width: 300px;
+}
+.side-card-img{
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
+}
+.side-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: black;
+}
+side-temp
+{
+
+}
