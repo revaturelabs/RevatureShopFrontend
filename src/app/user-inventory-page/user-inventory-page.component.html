@@ -1,18 +1,72 @@
-<p>user-inventory-page works!</p>
+
+
+<div class="title-and-inventory-grid" style="margin-top: 200px;">
+
+    
+        <div class="inventoryTitle-Filters">
+            
+            <div class="inventory-title" style="margin-left:0.2%;">
+                Men's Shirts
+            </div>
+            
+        </div>
 
 
 
 
-<div class="flex-container">
-  <div></div>
-  <div></div>
-  <div></div>  
-  <div></div>
-  <div style="align-self: center;"></div>
-  
-  
+
+        <div class = "filters" >
+          
+            <div class="btn-group">
+                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: white; color:black;">
+                  Sort by
+                </button>
+                <ul class="dropdown-menu">
+                  <li  style="margin-left: 10px;">Price (ascending)</li>
+                  <li  style="margin-left: 10px;">Price (descending)</li>
+                  <li  style="margin-left: 10px;">Title</li>
+
+                </ul>
+              </div>
+
+              <div class="form-check" style="margin-left: 25px;">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                <label class="form-check-label" for="flexCheckDefault">
+                  In Stock
+                </label>
+              </div>
+              <div class="form-check" style="margin-left: 12px;">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked">
+                  Out of stock
+                </label>
+              </div>
+              
+
+        </div>
+
+
+
+
+
+
+
+        <div class="inventory-grid" style="margin-top: 5px;" >
+            
+                
+                    <div *ngFor="let item of this.inventoryItemsService.inventoryItems" class="card" style="text-overflow: ellipsis; width: 280px; text-align: center;">
+                        <img class="card-img-top" src="../assets/images/white_t-shirt_1.jpg" alt="Item image" style=" text-align: center; max-width: 100%; height: 230px; object-fit:contain;">
+                        <div class="card-body" style="text-align: center;">
+                        <h4 class="card-title title two-line-text">Super Awesome Item title goes right here a a a a a a  </h4>
+                        <p class="card-text price" style="margin-top: 6px;">$119.99</p>
+                        <p class="card-text model">19GHT-KRV</p>
+                        
+                        </div>
+                    </div>
+                
+                
+        </div>
 </div>
-
 
 
 

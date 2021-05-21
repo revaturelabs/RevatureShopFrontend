@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { InventoryItemsService } from '../INVENTORY_ITEMS_SERVICE/inventory-items.service';
 
 @Component({
   selector: 'app-user-inventory-page',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserInventoryPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _inventoryItemsService : InventoryItemsService) { }
 
   ngOnInit(): void {
+
+  }
+
+  get inventoryItemsService() {
+    return this._inventoryItemsService;
   }
 
 }
