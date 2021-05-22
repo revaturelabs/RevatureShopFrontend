@@ -91,6 +91,16 @@ export class CheckoutComponent {
 
   constructor(private fb: FormBuilder) {}
 
+    ngOnInit() {
+        this.firstFormGroup = this.fb.group({
+            firstName: ['', Validators.required],
+            lastName:['',Validators.required]
+        });
+        this.secondFormGroup = this.fb.group({
+            secondCtrl: ['', Validators.required]
+        });
+    }
+
   onSubmit(): void {
     alert('Thanks!');
   }
