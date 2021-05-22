@@ -11,9 +11,11 @@ export class LoginComponent implements OnInit {
 
     public TextForButton: string = 'Please Select a User'
     public username: string = '';
-    accounts: Account[] = Array<{ id: number, name: string, type: STATUS }>();
+    // @ts-ignore
+    public account :Account;
+    accounts: Account[] = Array<{ id: number, name: string, points:number,type: STATUS }>();
 
-    constructor(private dummies: AccountService, private router: Router) {
+    constructor(private log: AccountService, private router: Router) {
 
     }
 
@@ -24,16 +26,21 @@ export class LoginComponent implements OnInit {
         this.accounts[0] = {
             id: 1,
             name: 'Jim',
+            points: 4,
             type: STATUS.Admin
         }
     }
 
-    public setUserName(name: string) {
-        this.username = name;
-        this.TextForButton = this.username + " is selected for login";
+    public setUserName( incAccount:Account) {
+        this.account = incAccount;
+        this.username = this.account.name;
+        this.TextForButton = this.account.name + " is selected for login";
+
+
     }
 
     public login() {
+        this.log.currentUser = this.account;
         this.router.navigateByUrl("/category");
     }
 }

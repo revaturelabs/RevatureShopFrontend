@@ -10,6 +10,9 @@ import { UserInventoryPageComponent } from './components/user-inventory-page/use
 import { AdminInventoryPageComponent } from './components/admin-inventory-page/admin-inventory-page.component';
 import { CartComponent } from './components/cart/cart.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {CheckoutComponent} from "./components/checkout/checkout.component";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 
 
 @NgModule({
@@ -18,16 +21,19 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         LoginComponent,
         CartComponent,
         UserInventoryPageComponent,
-        AdminInventoryPageComponent
+        AdminInventoryPageComponent,
+        CheckoutComponent,
+
 
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
-        BrowserAnimationsModule,
         MaterialModules,
         AppRoutingModule,
-        NgbModule
+        NgbModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: [],
     bootstrap: [AppComponent]

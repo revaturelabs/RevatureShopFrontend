@@ -7,6 +7,7 @@ import { catchError, retry } from 'rxjs/operators';
 export interface Account {
     id: number;
     name: string;
+    points : number;
     type : STATUS;
 }
 export enum STATUS {
@@ -19,6 +20,8 @@ export enum STATUS {
 })
 export class AccountService {
 // /api/accounts/all
+    // @ts-ignore
+    currentUser:Account;
   constructor( private http: HttpClient) { }
 
     public getAccounts(): Observable<Account[]> {
