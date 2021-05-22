@@ -1,0 +1,103 @@
+
+
+.title-and-inventory-grid {
+
+    display: flex;
+    flex-direction: column;
+
+    /* min and max width */
+    max-width: 1180px;
+    min-width: 570px;
+    
+    /* Margins */
+    margin-left: 20%;
+    margin-top: 10px;
+
+}
+
+.inventoryTitle-Filters {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.inventory-title {
+
+    font-size: 32px;
+    margin-left: 25px;
+
+}
+
+.filters {
+    display: flex;
+    flex-direction: row;
+    align-items:flex-end;
+    
+    margin-left: 2px;
+     margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+.inventory-grid {
+
+  display: flex;
+  flex-direction: row;
+  
+  flex-wrap: wrap;
+  margin-top: 5px;
+}
+
+.inventory-grid > div {
+  
+  margin: 0.15%;
+  
+  border: solid;
+  
+  border-width: 1px;
+  border-radius: 0.20em;
+  border-color: rgb(201, 201, 201);
+  
+  min-width:280px;
+  
+  height:385px;
+  
+}
+
+
+.one-line-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+ }
+
+ .two-line-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+
+    
+    width: 85%;
+    margin: 0 auto;
+ }
+
+
+
+
+ /*
+ PAGINATION STYLING
+ */
+
+
+ ngb-pagination ::ng-deep ul > li:not(.active) > a {
+    background-color: rgb(255, 255, 255) !important;
+    border-color: rgb(255,255,255) !important;
+}
+
+ngb-pagination ::ng-deep ul > li.active > a {
+    background-color: rgb(245, 90, 0) !important;
+    border-color: rgb(245, 90, 0) !important;
+}

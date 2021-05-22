@@ -2,35 +2,32 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {AppComponent} from './app.component';
-import {LoginComponent} from "./login/login.component";
+import {LoginComponent} from "./components/login/login.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MaterialModules} from './materialModules';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatCardModule } from '@angular/material/card';
-import { ReactiveFormsModule } from '@angular/forms'
+import {MaterialModules} from './materialModules'
+import { AppRoutingModule } from './app-routing.module';
+import { UserInventoryPageComponent } from './components/user-inventory-page/user-inventory-page.component';
+import { AdminInventoryPageComponent } from './components/admin-inventory-page/admin-inventory-page.component';
+import { CartComponent } from './components/cart/cart.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
     declarations: [
         AppComponent,
         LoginComponent,
-        CheckoutComponent
+        CartComponent,
+        UserInventoryPageComponent,
+        AdminInventoryPageComponent
+
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
         BrowserAnimationsModule,
         MaterialModules,
-        MatInputModule,
-        MatButtonModule,
-        MatSelectModule,
-        MatRadioModule,
-        MatCardModule,
-        ReactiveFormsModule,
-
+        AppRoutingModule,
+        NgbModule
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -23,6 +23,16 @@ const MaterialComp = [
 ]
 
 
+const MaterialComp = [
+    MatMenuModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDividerModule,
+]
+
+
 @NgModule({
 
 
