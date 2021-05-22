@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InventoryItem, InventoryItemsService } from '../INVENTORY_ITEMS_SERVICE/inventory-items.service';
+import { InventoryItem, InventoryItemsService } from '../../services/inventory-items.service';
 
 @Component({
   selector: 'app-admin-inventory-page',
@@ -11,7 +11,7 @@ export class AdminInventoryPageComponent implements OnInit {
   inventoryItemsFiltered : InventoryItem[] = [];
   page = 1;
   pageSize = 12;
-  
+
   constructor(private _inventoryItemsService : InventoryItemsService) { }
 
   ngOnInit(): void {
