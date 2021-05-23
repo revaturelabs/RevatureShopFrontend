@@ -4,12 +4,14 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {LoginComponent} from "./login/login.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MaterialModules} from './materialModules'
+import {MaterialModules} from './materialModules';
+import { CartComponent } from './cart/cart.component'
 
 @NgModule({
     declarations: [
         AppComponent,
-        LoginComponent
+        LoginComponent,
+        CartComponent
     ],
     imports: [
         BrowserModule,
