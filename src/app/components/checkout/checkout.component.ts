@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StatesService,state} from "../../services/states.service";
 import {Account, AccountService, STATUS} from "../../services/account.service";
-import {CartComponent} from "../cart/cart.component";
-import {LoginComponent} from "../login/login.component";
+import {checkOutInfo, CheckoutService} from "../../services/checkout.service";
+
 
 @Component({
   selector: 'app-checkout',
@@ -30,18 +30,18 @@ export class CheckoutComponent {
     ],
     moreInfo: [null]
   });
-
-  hasUnitNumber = false;
-
   states :state[]= [];
     account: Account;
     pointsAfterMath: number = 0;
 
 //WHAT GETS USED HERE WILL HAVE TO BE REFACTORED LATER WHEN WE CLEAN THIS UP
-  constructor(private fb: FormBuilder, private ss:StatesService, private as:AccountService) {
+  constructor(private fb: FormBuilder, private ss:StatesService, private as:AccountService, private co:CheckoutService) {
       this.states = ss.states;
       //THIS WILL WORK ONCE USER IS LOGGED IN, USING DUMMY DATA UNTIL THEN
       //this.account = as.currentUser;
+
+      //NEED ACCESS TO CART SO I CAN DO SUBTRACTION OF COST OF ITEMS AND CURRENT POINTS
+      //SHOULD BE STORED IN POINTSAFTERMATH FIELD
       this.account  = {
           id: 1,
           name: 'Jim',
@@ -66,10 +66,20 @@ export class CheckoutComponent {
         this.thirdFormGroup = this.fb.group({
             moreInfo:null,
         })
-
+        //NOT EXACTLY SURE IF THIS WORKS THIS WAY,
+        // HOPEFULLY THESE FORMS OVERWRITE THE CORRECT INFORMATION IN THE SERVICE OBJECT
+        this.firstFormGroup.valueChanges.subscribe(form => {
+            this.co.checkOutInfo = form;
+        })
+        this.secondFormGroup.valueChanges.subscribe(form => {
+            this.co.checkOutInfo = form;
+        })
+        this.thirdFormGroup.valueChanges.subscribe(form => {
+            this.co.checkOutInfo = form;
+        })
     }
+    Checkout() {
 
-  onSubmit(): void {
-    alert('Thanks!');
-  }
+        //NEEDS ROUTING TO CONFIRMATION PAGE HERE
+    }
 }
