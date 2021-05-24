@@ -2,13 +2,13 @@
 
 <div class="title-and-inventory-grid" style="margin-top: 200px;" name="top">
 
-    
+
         <div class="inventoryTitle-Filters">
-            
+
             <div class="inventory-title" style="margin-left:0.2%;">
                 Men's Shirts
             </div>
-            
+
         </div>
 
 
@@ -16,7 +16,7 @@
 
 
         <div class = "filters" >
-          
+
             <div class="btn-group">
                 <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: white; color:black;">
                   Sort by
@@ -41,7 +41,7 @@
                   Out of stock
                 </label>
               </div>
-              
+
 
         </div>
 
@@ -52,24 +52,25 @@
 
 
         <div class="inventory-grid" style="margin-top: 5px;" >
-            
-                
-                    <div *ngFor="let item of this.inventoryItemsService.inventoryItems  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize"
-                     class="card" style="text-overflow: ellipsis; width: 280px; text-align: center;">
 
-                        <img class="card-img-top" src="../assets/images/white_t-shirt_1.jpg" alt="Item image" style=" text-align: center; max-width: 100%; height: 230px; object-fit:contain;">
+
+                    <div *ngFor="let item of this.inventoryItemsService.inventoryItems  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize"
+                     class="card" style="text-overflow: ellipsis; width: 280px; text-align: center;" type="button" data-bs-toggle="modal" data-bs-target="#itemModal">
+
+                        <img class="card-img-top" src = "{{item.imageURL}}" alt="Item image" style=" text-align: center; max-width: 100%; height: 230px; object-fit:contain;">
                         <div class="card-body" style="text-align: center;">
-                      
+
                             <h5 class="card-title title two-line-text">{{item.title}}</h5>
                             <p class="card-text price" style="margin-top: 15px;">${{item.price}}</p>
                             <p class="card-text model">19GHT-KRV</p>
-                        
-                        </div>
 
+                        </div>
+                        <app-item-modal [src]="item.imageURL" [description]="item.description"></app-item-modal>
                     </div>
-                
-                
+
+
         </div>
+
 
         <ngb-pagination [collectionSize]="this.inventoryItemsService.inventoryItems.length" [(page)]="page" aria-label="Custom pagination"
                         (pageChange)="pageSelected()" style="margin-top: 30px; margin-left: 4px;" >

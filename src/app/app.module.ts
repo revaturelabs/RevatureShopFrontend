@@ -10,6 +10,7 @@ import { UserInventoryPageComponent } from './components/user-inventory-page/use
 import { AdminInventoryPageComponent } from './components/admin-inventory-page/admin-inventory-page.component';
 import { CartComponent } from './components/cart/cart.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ItemModalComponent } from './components/item-modal/item-modal.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         LoginComponent,
         CartComponent,
         UserInventoryPageComponent,
-        AdminInventoryPageComponent
+        AdminInventoryPageComponent,
+        ItemModalComponent
 
     ],
     imports: [
