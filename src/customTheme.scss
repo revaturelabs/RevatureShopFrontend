@@ -1,6 +1,10 @@
 @use '~@angular/material' as mat;
 @import '~@angular/material/theming';
-@include mat.core();
+
+$custom-typography: mat.define-typography-config(
+    $font-family: 'FuturaBook'
+);
+@include mat.core($custom-typography);
 
 $default-palette-primary: (
     50: #fff3e1,
@@ -67,5 +71,7 @@ $default-theme: mat.define-light-theme((
 
     )
 ));
+
+
 @include mat.all-component-themes($default-theme);
 //@include angular-material-theme($default-theme);
