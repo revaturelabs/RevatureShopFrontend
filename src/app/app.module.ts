@@ -11,6 +11,9 @@ import { AdminInventoryPageComponent } from './components/admin-inventory-page/a
 import { CartComponent } from './components/cart/cart.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ItemModalComponent } from './components/item-modal/item-modal.component';
+import {CheckoutComponent} from "./components/checkout/checkout.component";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 
 
 @NgModule({
@@ -19,6 +22,8 @@ import { ItemModalComponent } from './components/item-modal/item-modal.component
         LoginComponent,
         CartComponent,
         UserInventoryPageComponent,
+        AdminInventoryPageComponent,
+        CheckoutComponent,
         AdminInventoryPageComponent,
         ItemModalComponent
 
@@ -29,7 +34,9 @@ import { ItemModalComponent } from './components/item-modal/item-modal.component
         BrowserAnimationsModule,
         MaterialModules,
         AppRoutingModule,
-        NgbModule
+        NgbModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: [],
     bootstrap: [AppComponent]
