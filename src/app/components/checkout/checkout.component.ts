@@ -38,16 +38,16 @@ export class CheckoutComponent {
   constructor(private fb: FormBuilder, private ss:StatesService, private as:AccountService, private co:CheckoutService) {
       this.states = ss.states;
       //THIS WILL WORK ONCE USER IS LOGGED IN, USING DUMMY DATA UNTIL THEN
-      //this.account = as.currentUser;
+      this.account = as.account;
 
       //NEED ACCESS TO CART SO I CAN DO SUBTRACTION OF COST OF ITEMS AND CURRENT POINTS
       //SHOULD BE STORED IN POINTSAFTERMATH FIELD
-      this.account  = {
+      /*this.account  = {
           id: 1,
           name: 'Jim',
           points: 4,
           type: STATUS.Admin
-      }
+      }*/
   }
 
     ngOnInit() {

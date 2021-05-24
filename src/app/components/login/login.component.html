@@ -20,7 +20,7 @@
         <mat-menu #userMenu="matMenu" class="my-menu">
             <button style="text-align: center" class="my-menu" color="primary" *ngFor="let account of accounts"
                     (click)="setUserName(account)"
-                    mat-menu-item>{{account.name}}</button>
+                    mat-menu-item>{{account.email}}</button>
         </mat-menu>
     </div>
     <div fxFlex="20" class="side-card side-temp">

@@ -1,32 +1,68 @@
-import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-//import {HttpClientModule} from "@angular/common/http";
-import { catchError, retry } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {Observable, of} from 'rxjs';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {CookieService} from "ngx-cookie";
 
 export interface Account {
     id: number;
-    name: string;
-    points : number;
-    type : STATUS;
+    email: string;
+    points: number;
+    type: STATUS;
 }
+
 export enum STATUS {
     User,
     Admin,
 }
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AccountService {
-// /api/accounts/all
-    // @ts-ignore
-    currentUser:Account;
-  constructor( private http: HttpClient) { }
+    private endpoint: string = "http://localhost:8000/api/account/";
 
-    public getAccounts(): Observable<Account[]> {
-        return this.http.get<Account[]>("/api/accounts/all")
+    //@ts-ignore
+    private _account: Account;
+
+    constructor(private http: HttpClient, private cookies: CookieService) {
     }
 
+    public getDummyAccounts(): Observable<Account[]> {
+        return this.http.get<Account[]>(this.endpoint + "all")
+    }
 
+    loadAccount(): Observable<Account> {
+        if (this._account) {
+            return of(this._account);
+        }
+
+        const email = this.cookies.get("email");
+
+        if (email) {
+            return new Observable<Account>((observer) => this.login(email, () => observer.next(this._account)));
+        }
+
+        return of(this._account);
+    }
+
+    login(email: string, callback: () => void): void {
+        const body = new HttpParams()
+            .set('email', email);
+
+        this.http.post<Account>(this.endpoint + 'dummylogin',
+            body.toString(),
+            {
+                headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+            }
+        ).subscribe(account => {
+            this._account = account;
+
+            this.cookies.put("email", account.email, {expires: new Date(Date.now() + 604800000)});
+            callback();
+        });
+    }
+
+    get account(): Account {
+        return this._account;
+    }
 }

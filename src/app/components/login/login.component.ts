@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AccountService, Account, STATUS} from "../../services/account.service";
+import {AccountService, Account} from "../../services/account.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -8,39 +8,26 @@ import {Router} from "@angular/router";
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
     public TextForButton: string = 'Please Select a User'
     public username: string = '';
     // @ts-ignore
-    public account :Account;
-    accounts: Account[] = Array<{ id: number, name: string, points:number,type: STATUS }>();
+    public account: Account;
+    accounts: Account[] = [];
 
-    constructor(private log: AccountService, private router: Router) {
-
+    constructor(private accountService: AccountService, private router: Router) {
     }
 
     ngOnInit(): void {
-
-
-        //this.dummies.getAccounts().subscribe( data => this.accounts = data);
-        this.accounts[0] = {
-            id: 1,
-            name: 'Jim',
-            points: 4,
-            type: STATUS.Admin
-        }
+        this.accountService.getDummyAccounts().subscribe(data => this.accounts = data);
     }
 
-    public setUserName( incAccount:Account) {
+    public setUserName(incAccount: Account) {
         this.account = incAccount;
-        this.username = this.account.name;
-        this.TextForButton = this.account.name + " is selected for login";
-
-
+        this.username = this.account.email;
+        this.TextForButton = this.account.email + " is selected for login";
     }
 
-    public login() {
-        this.log.currentUser = this.account;
-        this.router.navigateByUrl("/category");
+    login() {
+        this.accountService.login(this.account.email, () => this.router.navigateByUrl("/category"));
     }
 }
