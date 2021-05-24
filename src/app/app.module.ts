@@ -15,6 +15,7 @@ import {CheckoutComponent} from "./components/checkout/checkout.component";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
     declarations: [
@@ -25,8 +26,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         AdminInventoryPageComponent,
         CheckoutComponent,
         AdminInventoryPageComponent,
-        ItemModalComponent
-
+        ItemModalComponent,
+        AppComponent,
+        NavbarComponent
     ],
     imports: [
         BrowserModule,
