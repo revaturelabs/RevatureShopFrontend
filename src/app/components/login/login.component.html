@@ -1,36 +1,23 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-<div style="text-align: center">
-    <h1>INSERT HEADER COMPONENT HERE</h1>
-</div>
+<div class="container">
+    <div class="row jumbotron">
+        <img src="./assets/images/rev-logo.png" alt="">
+        <h1 class="d-flex justify-content-evenly" ><p>Swag</p><p>Shop</p></h1>
 
-<div class="container" fxLayoutAlign="center">
-
-    <div fxFlex="20" class="side-card side-temp">
-        <!--if u use this background image u r fired -->
-        <!--<img mat-card-image class="side-card-img" src="../../assets/Simple-Chevron-Stripe-Pattern-Orange.png" alt="Pretty"> -->
     </div>
-
-    <div fxLayout="column" fxLayoutAlign="center center" fxFlex="60" class="flex-gap">
-        <div>
-            <button *ngIf="username != ''" color="primary" mat-raised-button (click)="login()">Login</button>
-        </div>
-        <mat-divider [inset]="true"></mat-divider>
-        <button mat-raised-button color="primary" [matMenuTriggerFor]="userMenu">{{TextForButton}}</button>
-        <mat-menu #userMenu="matMenu" class="my-menu">
-            <button style="text-align: center" class="my-menu" color="primary" *ngFor="let account of accounts"
+    <div class="row gy-5">
+        <div class="dropdown col-md-4">
+            <button class="btn dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown"
+                    aria-expanded="false">{{TextForButton}}</button>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                <li *ngFor="let account of accounts"
                     (click)="setUserName(account)"
-                    mat-menu-item>{{account.name}}</button>
-        </mat-menu>
+                ><p class="dropdown-item">{{account.name}}</p></li>
+            </ul>
+        </div>
     </div>
-    <div fxFlex="20" class="side-card side-temp">
-        <!--this 1 too -->
-        <!--<img mat-card-image class="side-card-img" src="../../assets/Simple-Chevron-Stripe-Pattern-Orange.png" alt="Pretty"> -->
+    <div class="row mt-5">
+        <div *ngIf="username != ''" class="col-md-4">
+            <button class="btn col-4" type="button" id="loginBtn" (click)="login()">Login</button>
+        </div>
     </div>
-
-
-</div>
-
-<div style="text-align: center">
-    <h1>INSERT FOOTER COMPONENT HERE</h1>
 </div>
