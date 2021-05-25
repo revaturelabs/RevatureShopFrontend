@@ -2,22 +2,32 @@ import { Injectable } from '@angular/core';
 
 export class InventoryItem {
 
-  id : string;
-  title : string;
-  description : string;
-  price : number;
-  numberInStock : number;
+  id : number;
+  itemName : string;
+  itemPrice : number;
+  quantity : number;
   category : string;
-  imageURL : string
+  description : string;
 
-  constructor(id : string, title : string, descritption : string, price : number, numberInStock : number, category : string, imageURL : string) {
+  imageURL : string;
+
+
+
+  // FOR ADMIN-PAGE: Each list item has a text box to update the quantity: This is the textbox-input associated with that list item, not the quantity used above
+  updateQuantityInput : string = '';
+
+  constructor(id : number, itemName : string, itemPrice : number, quantity : number, category : string, description : string) {
     this.id = id;
-    this.title = title;
-    this.description = descritption;
-    this.price = price;
-    this.numberInStock = numberInStock;
+    this.itemName = itemName;
+    this.itemPrice = itemPrice;
+    this.quantity = quantity;
     this.category = category;
-    this.imageURL = imageURL;
+    this.description = description;
+
+    this.imageURL = "";
+
+    
+    
   }
 
 }
@@ -34,47 +44,9 @@ export class InventoryItemsService {
   
 
   constructor() { 
-    this.inventoryItems = [new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg" ),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
-      
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg" ),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg"),
-        new InventoryItem("10000", "Men's White T-shirt", "Impress all of your friends with your brand new white t-shirt!",
-        19.99, 100, "Men Shirt", "../assets/images/white_t-shirt_1.jpg")
+    this.inventoryItems = [
+
+
       ];
   }
 

@@ -16,6 +16,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 import { NavbarComponent } from './navbar/navbar.component';
+import { AdminItemModalComponent } from './components/admin-item-modal/admin-item-modal.component';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { NavbarComponent } from './navbar/navbar.component';
         CheckoutComponent,
         AdminInventoryPageComponent,
         ItemModalComponent,
+        AdminItemModalComponent,
         AppComponent,
         NavbarComponent
     ],
