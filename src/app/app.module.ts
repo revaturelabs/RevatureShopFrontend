@@ -15,6 +15,7 @@ import {CheckoutComponent} from "./components/checkout/checkout.component";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NavbarComponent} from './navbar/navbar.component';
 import {CookieModule} from "ngx-cookie";
+import { AdminItemModalComponent } from './components/admin-item-modal/admin-item-modal.component';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import {CookieModule} from "ngx-cookie";
         CheckoutComponent,
         AdminInventoryPageComponent,
         ItemModalComponent,
+        AdminItemModalComponent,
         AppComponent,
         NavbarComponent
     ],
