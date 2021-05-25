@@ -68,10 +68,8 @@ $default-theme: mat.define-light-theme((
     color: (
         primary: $my-primary,
         accent: $my-accent,
-
     )
 ));
-
 
 @include mat.all-component-themes($default-theme);
 //@include angular-material-theme($default-theme);

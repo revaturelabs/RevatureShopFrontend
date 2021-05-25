@@ -19,7 +19,7 @@ export enum STATUS {
     providedIn: 'root'
 })
 export class AccountService {
-    private endpoint: string = "http://localhost:8000/api/account/";
+    private endpoint: string = "http://localhost:9001/accountsms/api/account/";
 
     //@ts-ignore
     private _account: Account;

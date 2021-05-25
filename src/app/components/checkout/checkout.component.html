@@ -55,7 +55,7 @@
                             </mat-error>
                         </mat-form-field>
                         <mat-form-field class="full-width">
-                            <input matInput #postalCode maxlength="5" placeholder="Postal Code" type="number " maxlength="10"
+                            <input matInput #postalCode minlength="5" placeholder="Postal Code" type="number" maxlength="10"
                                    formControlName="postalCode">
                             <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
                         </mat-form-field>
@@ -72,7 +72,7 @@
                         <textarea matInput formControlName="moreInfo"></textarea>
                     </mat-form-field>
                     <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext (click) = "Checkout()">Checkout</button>
+                    <button mat-button matStepperNext (click) = "checkout()">Checkout</button>
                 </mat-step>
             </mat-vertical-stepper>
         </mat-card-content>
