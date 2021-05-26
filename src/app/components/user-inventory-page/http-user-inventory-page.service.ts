@@ -10,7 +10,7 @@ export class HttpUserInventoryPageService {
 
   
   
-   baseServerURL = "http://localhost:9020";
+   baseServerURL = "http://localhost:9001/inventoryms/";
 
   httpHeaders: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   httpOptionsJSON = { headers: this.httpHeaders, withCredentials: true };
