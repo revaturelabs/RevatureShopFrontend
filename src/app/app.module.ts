@@ -16,6 +16,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NavbarComponent} from './navbar/navbar.component';
 import {CookieModule} from "ngx-cookie";
 import { AdminItemModalComponent } from './components/admin-item-modal/admin-item-modal.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,8 @@ import { AdminItemModalComponent } from './components/admin-item-modal/admin-ite
         ItemModalComponent,
         AdminItemModalComponent,
         AppComponent,
-        NavbarComponent
+        NavbarComponent,
+        PageNotFoundComponent
     ],
     imports: [
         BrowserModule,

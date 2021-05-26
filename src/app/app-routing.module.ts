@@ -5,13 +5,15 @@ import {LoginComponent} from "./components/login/login.component";
 import {CheckoutComponent} from "./components/checkout/checkout.component";
 import {AuthGuard} from "./auth.guard";
 import {CartComponent} from "./components/cart/cart.component";
+import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
 
 const routes: Routes = [
     {path: 'category', component: UserInventoryPageComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
     {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard]},
     {path: 'cart', component: CartComponent, canActivate: [AuthGuard]},
-    {path: '', pathMatch: 'full', redirectTo: 'login'}
+    {path: '', pathMatch: 'full', redirectTo: 'login'},
+    {path: '**', component : PageNotFoundComponent}
 ]
 
 @NgModule({
