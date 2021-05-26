@@ -1,14 +1,13 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {StatesService,state} from "../../services/states.service";
-import {Account, AccountService, STATUS} from "../../services/account.service";
-import {checkOutInfo, CheckoutService} from "../../services/checkout.service";
-
+import {StatesService, state} from "../../services/states.service";
+import {Account, AccountService} from "../../services/account.service";
+import {CheckoutService} from "../../services/checkout.service";
 
 @Component({
-  selector: 'app-checkout',
-  templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css']
+    selector: 'app-checkout',
+    templateUrl: './checkout.component.html',
+    styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent {
     // @ts-ignore
@@ -18,35 +17,29 @@ export class CheckoutComponent {
     // @ts-ignore
     thirdFormGroup: FormGroup;
 
-  addressForm = this.fb.group({
-    company: null,
-    firstName: [null, Validators.required],
-    lastName: [null, Validators.required],
-    address: [null, Validators.required],
-    city: [null, Validators.required],
-    state: [null, Validators.required],
-    postalCode: [null, Validators.compose([
-      Validators.required, Validators.minLength(5), Validators.maxLength(5)])
-    ],
-    moreInfo: [null]
-  });
-  states :state[]= [];
-    account: Account;
+    addressForm = this.fb.group({
+        company: null,
+        firstName: [null, Validators.required],
+        lastName: [null, Validators.required],
+        address: [null, Validators.required],
+        city: [null, Validators.required],
+        state: [null, Validators.required],
+        postalCode: [null, Validators.compose([
+            Validators.required, Validators.minLength(5), Validators.maxLength(5)])
+        ],
+        moreInfo: [null]
+    });
+    states: state[] = [];
     pointsAfterMath: number = 0;
 
-//WHAT GETS USED HERE WILL HAVE TO BE REFACTORED LATER WHEN WE CLEAN THIS UP
-  constructor(private fb: FormBuilder, private ss:StatesService, private as:AccountService, private co:CheckoutService) {
-      this.states = ss.states;
-
-      this.account = as.account;
-
-
-  }
+    constructor(private fb: FormBuilder, private ss: StatesService, private as: AccountService, private co: CheckoutService) {
+        this.states = ss.states;
+    }
 
     ngOnInit() {
         this.firstFormGroup = this.fb.group({
             firstName: ['', Validators.required],
-            lastName:['',Validators.required]
+            lastName: ['', Validators.required]
         });
         this.secondFormGroup = this.fb.group({
             address: ['', Validators.required],
@@ -57,7 +50,7 @@ export class CheckoutComponent {
             ],
         });
         this.thirdFormGroup = this.fb.group({
-            moreInfo:null,
+            moreInfo: null,
         })
         //NOT EXACTLY SURE IF THIS WORKS THIS WAY,
         // HOPEFULLY THESE FORMS OVERWRITE THE CORRECT INFORMATION IN THE SERVICE OBJECT
@@ -71,8 +64,13 @@ export class CheckoutComponent {
             this.co.checkOutInfo = form;
         })
     }
+
     checkout() {
 
         //NEEDS ROUTING TO CONFIRMATION PAGE HERE
+    }
+
+    get account(): Account {
+        return <Account>this.as.account;
     }
 }

@@ -2,17 +2,19 @@ import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {CookieService} from "ngx-cookie";
+import {Router} from "@angular/router";
 
 export interface Account {
     id: number;
     email: string;
+    name: string;
     points: number;
-    type: STATUS;
+    role: Role;
 }
 
-export enum STATUS {
-    User,
-    Admin,
+export enum Role {
+    USER,
+    ADMIN,
 }
 
 @Injectable({
@@ -21,17 +23,16 @@ export enum STATUS {
 export class AccountService {
     private endpoint: string = "http://localhost:9001/accountsms/api/account/";
 
-    //@ts-ignore
-    private _account: Account;
+    private _account: Account | null = null;
 
-    constructor(private http: HttpClient, private cookies: CookieService) {
+    constructor(private http: HttpClient, private cookies: CookieService, private router: Router) {
     }
 
     public getDummyAccounts(): Observable<Account[]> {
         return this.http.get<Account[]>(this.endpoint + "all")
     }
 
-    loadAccount(): Observable<Account> {
+    loadAccount(): Observable<Account | null> {
         if (this._account) {
             return of(this._account);
         }
@@ -39,7 +40,7 @@ export class AccountService {
         const email = this.cookies.get("email");
 
         if (email) {
-            return new Observable<Account>((observer) => this.login(email, () => observer.next(this._account)));
+            return new Observable<Account | null>((observer) => this.login(email, () => observer.next(this._account)));
         }
 
         return of(this._account);
@@ -62,7 +63,14 @@ export class AccountService {
         });
     }
 
-    get account(): Account {
+    logout(): void {
+        this._account = null;
+
+        this.cookies.remove("email");
+        this.router.navigateByUrl("/login");
+    }
+
+    get account(): Account | null {
         return this._account;
     }
 }
