@@ -16,14 +16,14 @@ export class NavbarComponent implements OnInit {
   }
 
   get accountService() {
-    
+
     return this._accountService;
-    
+
   }
 
   signOutButtonClicked() : void {
     console.log("SIGN OUT CLICKED");
-    
+
     this.router.navigate(['/login']);
   }
 }

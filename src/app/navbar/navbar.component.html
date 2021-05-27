@@ -22,7 +22,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" [routerLink]="['/shop','Accessories']">Accessories (category of accessory coming soon)</a></li>
-                        
+
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">More coming soon!</a></li>
                     </ul>
@@ -38,12 +38,12 @@
                         <li><a class="dropdown-item" routerLink="updatestock">Update stock</a></li>
                         <li><a class="dropdown-item" href="#">Create stock item</a></li>
                         <li><a class="dropdown-item" href="#">Edit user points</a></li>
-                        
-                        
+
+
                     </ul>
                 </li>
 
-                
+
                 <li class="nav-item">
                     <a class="nav-link" routerLink="cart">Cart</a>
                 </li>
@@ -54,10 +54,13 @@
                         Account
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="accountOptions">
-                        <li><a class="dropdown-item" (click)="signOutButtonClicked()" onmouseover="" style="cursor: pointer;">Sign out</a></li>
+                        <li><a class="dropdown-item" (click)="accountService.logout()" onmouseover="" style="cursor: pointer;">Sign out</a></li>
                     </ul>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" (click)="accountService.logout()">Logout</a>
+                </li>
             </ul>
         </div>
     </div>
