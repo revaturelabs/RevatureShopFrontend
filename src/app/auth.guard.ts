@@ -17,7 +17,8 @@ export class AuthGuard implements CanActivate {
             map(account => {
                 if (state.url.startsWith("/login")) {
                     if (account) {
-                        this.router.navigateByUrl("/category");
+                        // Replace with landing page once it exists
+                        this.router.navigateByUrl("/home");
                         return false;
                     }
                 } else if (!account) {

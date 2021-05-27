@@ -7,7 +7,7 @@ export interface Account {
     id: number;
     email: string;
     points: number;
-    type: STATUS;
+    role: STATUS;
 }
 
 export enum STATUS {
@@ -65,4 +65,9 @@ export class AccountService {
     get account(): Account {
         return this._account;
     }
+
+    set account(account : Account) {
+        this._account = account;
+    }
+    
 }

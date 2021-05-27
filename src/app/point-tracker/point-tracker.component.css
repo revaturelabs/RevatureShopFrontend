@@ -1,0 +1,46 @@
+.pointTrackerMainBox {
+    
+    
+
+    position: -webkit-sticky;
+    position: sticky;
+    
+    top: 0px;
+    
+    z-index: 2;
+height:0px;
+
+    
+    
+    
+    
+}
+
+.innerStickyBox {
+    position: absolute;
+    
+    right: 0.04%;
+
+
+    
+
+    background-color: rgba(63, 63, 63,0.8);
+    
+    
+    color:rgb(255, 255, 255);
+    font-size: 15px;
+    border-radius: 0.85em;
+    width:70px;
+
+    margin-top:-0.2%;
+    margin-right:0.1%;
+    text-align: center;
+
+    border-style: solid;
+    border-color: rgba(63, 63, 63,0.0) !important;
+    outline-color: black !important;
+
+    border-color: #464646;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 1px rgba(63, 63, 63,0.8);
+
+}

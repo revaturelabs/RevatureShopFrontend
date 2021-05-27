@@ -10,6 +10,7 @@ export class ItemModalComponent implements OnInit {
     @Input() title: string = '';
     @Input() src: string = '';
     @Input() description: string = '';
+    @Input() quantity: number = 0;
 
   constructor() { }
 
