@@ -28,6 +28,6 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        this.accountService.login(this.account.email, () => this.router.navigateByUrl("/shop/Clothing"));
+        this.accountService.login(this.account.email, () => this.router.navigateByUrl("/home"));
     }
 }

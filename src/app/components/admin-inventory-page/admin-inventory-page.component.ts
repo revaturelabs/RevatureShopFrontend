@@ -90,6 +90,7 @@ export class AdminInventoryPageComponent implements OnInit {
       itemsList => {
         console.log("RESPONSE RECEIVED: "+itemsList);
         this.inventoryItemsService.inventoryItems = itemsList;
+        
         this.filterListByStock();
         /*
         *  Set an imageURL for each item since currently, the database does not store an imageURL for an item
