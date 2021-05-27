@@ -18,6 +18,7 @@ import {CookieModule} from "ngx-cookie";
 import { AdminItemModalComponent } from './components/admin-item-modal/admin-item-modal.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PointTrackerComponent } from './point-tracker/point-tracker.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
     declarations: [
@@ -33,7 +34,8 @@ import { PointTrackerComponent } from './point-tracker/point-tracker.component';
         AppComponent,
         NavbarComponent,
         LandingPageComponent,
-        PointTrackerComponent
+        PointTrackerComponent,
+        PageNotFoundComponent
     ],
     imports: [
         BrowserModule,
