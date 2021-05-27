@@ -16,6 +16,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NavbarComponent} from './navbar/navbar.component';
 import {CookieModule} from "ngx-cookie";
 import { AdminItemModalComponent } from './components/admin-item-modal/admin-item-modal.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { PointTrackerComponent } from './point-tracker/point-tracker.component';
 
 @NgModule({
     declarations: [
@@ -29,7 +31,9 @@ import { AdminItemModalComponent } from './components/admin-item-modal/admin-ite
         ItemModalComponent,
         AdminItemModalComponent,
         AppComponent,
-        NavbarComponent
+        NavbarComponent,
+        LandingPageComponent,
+        PointTrackerComponent
     ],
     imports: [
         BrowserModule,

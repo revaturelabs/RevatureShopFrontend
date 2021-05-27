@@ -16,7 +16,8 @@ export class AdminInventoryPageComponent implements OnInit {
   page = 1;
   pageSize = 12;
   selectedItem : InventoryItem = new InventoryItem(1,"",1,1,"","");
-
+  inStockChecked : boolean = true;
+  outOfStockChecked : boolean = true;
 
   constructor(private _inventoryItemsService : InventoryItemsService,
     private router : Router,
@@ -89,6 +90,7 @@ export class AdminInventoryPageComponent implements OnInit {
       itemsList => {
         console.log("RESPONSE RECEIVED: "+itemsList);
         this.inventoryItemsService.inventoryItems = itemsList;
+        this.filterListByStock();
         /*
         *  Set an imageURL for each item since currently, the database does not store an imageURL for an item
         */
@@ -111,4 +113,21 @@ export class AdminInventoryPageComponent implements OnInit {
 
     
   }
+
+  filterListByStock() {
+    
+    /*
+      Filter by stock status
+    */
+    this.inventoryItemsFiltered = this._inventoryItemsService.inventoryItems.filter(element => {
+      return (this.inStockChecked && element.quantity > 0) || (this.outOfStockChecked && element.quantity == 0);
+  });
+    
+
+  
+  }
+
+
+  
+  
 }
