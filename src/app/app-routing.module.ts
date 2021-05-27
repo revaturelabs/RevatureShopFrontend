@@ -16,7 +16,7 @@ const routes: Routes = [
     {path: 'cart', component: CartComponent, canActivate: [AuthGuard]},
     {path: 'updatestock', component: AdminInventoryPageComponent, canActivate: [AuthGuard]},
     {path: 'home', component: LandingPageComponent, canActivate: [AuthGuard]},
-    {path: '', pathMatch: 'full', redirectTo: 'login'}
+    {path: '', pathMatch: 'full', redirectTo: 'login'},
     {path: '', pathMatch: 'full', redirectTo: 'login'},
     {path: '**', component : PageNotFoundComponent}
 ]

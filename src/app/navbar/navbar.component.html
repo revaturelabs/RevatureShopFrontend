@@ -31,7 +31,7 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item dropdown" *ngIf="this.accountService.account && this.accountService.account.role == 1">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="adminOptions" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         ADMIN
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="adminOptions">
@@ -49,8 +49,8 @@
                 </li>
 
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <li class="nav-item dropdown" *ngIf="this.accountService.account">
+                    <a class="nav-link dropdown-toggle" href="#" id="accountOptions" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Account
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="accountOptions">
@@ -58,9 +58,6 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" (click)="accountService.logout()">Logout</a>
-                </li>
             </ul>
         </div>
     </div>

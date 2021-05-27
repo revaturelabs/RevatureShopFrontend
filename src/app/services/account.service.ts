@@ -74,8 +74,4 @@ export class AccountService {
         return this._account;
     }
 
-    set account(account : Account) {
-        this._account = account;
-    }
-
 }
