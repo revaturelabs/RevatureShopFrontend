@@ -10,20 +10,27 @@ import {UserPageService} from "../../services/user-page.service";
 export class UserPageComponent implements OnInit {
     // @ts-ignore
     orderList: Order[];
-    testPoints: PointChange [];
+    table : boolean = true;
+    rowColor: string = "black";
+
 
     constructor(private accountService: AccountService, private userPageService: UserPageService) {
-        this.testPoints = this.accountInfo.pointHistory;
+
     }
 
     ngOnInit(): void {
         // this.orders().subscribe( data => this.orderList = data );
         this.orderList = this.userPageService.orders();
+        this.orderList.sort((one, two) => {return (two.date) - (one.date)})
 
-        console.log(this.orderList);
+
     }
 
     get accountInfo() {
         return <Account>this.accountService.account;
+    }
+
+    showTable() {
+        this.table = !this.table;
     }
 }

@@ -8,12 +8,19 @@
     <div class="card-body text-center">
         <p>
             {{accountInfo.email}}
-            {{accountInfo.points}}
         </p>
+        <p>
+            {{accountInfo.points}} points
+        </p>
+
+        <p>
+            <button (click) = "showTable()"> show table</button>
+        </p>
+
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container" *ngIf="table">
     <table class="table">
         <thead>
         <tr>
@@ -23,10 +30,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let order of testPoints">
+        <tr *ngFor="let order of orderList">
             <td>{{order.date}}</td>
-            <td>{{order.cause}}</td>
-            <td>{{(order.change > 0 ? "+" : "") + order.change}}</td>
+            <td>{{order.description}}</td>
+            <td [ngStyle]="{'color': order.amount > 0 ? 'green' : 'red'}">{{(order.amount > 0 ? "+" : "") + order.amount}}</td>
         </tr>
         </tbody>
     </table>
