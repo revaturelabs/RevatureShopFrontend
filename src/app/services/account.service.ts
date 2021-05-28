@@ -3,7 +3,6 @@ import {Observable, of} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {CookieService} from "ngx-cookie";
 import {Router} from "@angular/router";
-import {Order} from "./user-page.service";
 
 export interface Account {
     id: number;
@@ -11,12 +10,18 @@ export interface Account {
     name: string;
     points: number;
     role: Role;
-    pointsHistory: Order;
+    pointHistory: PointChange[];
 }
 
 export enum Role {
     USER,
     ADMIN,
+}
+
+export interface PointChange {
+    cause: string;
+    change: number;
+    date: Date;
 }
 
 @Injectable({
@@ -75,5 +80,4 @@ export class AccountService {
     get account(): Account | null {
         return this._account;
     }
-
 }
