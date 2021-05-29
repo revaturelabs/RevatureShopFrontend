@@ -19,7 +19,9 @@ import { AdminItemModalComponent } from './components/admin-item-modal/admin-ite
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PointTrackerComponent } from './point-tracker/point-tracker.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { AdminNewinventoryPageComponent } from './components/admin-newinventory-page/admin-newinventory-page.component';
+import { AdminNewInventoryPageComponent } from './components/admin-new-inventory-page/admin-newinventory-page.component';
+import {MatIconModule} from "@angular/material/icon";
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 @NgModule({
     declarations: [
@@ -37,7 +39,7 @@ import { AdminNewinventoryPageComponent } from './components/admin-newinventory-
         LandingPageComponent,
         PointTrackerComponent,
         PageNotFoundComponent,
-        AdminNewinventoryPageComponent
+        AdminNewInventoryPageComponent,
     ],
     imports: [
         BrowserModule,
@@ -48,7 +50,9 @@ import { AdminNewinventoryPageComponent } from './components/admin-newinventory-
         AppRoutingModule,
         NgbModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatIconModule,
+        MaterialFileInputModule
     ],
     providers: [],
     bootstrap: [AppComponent]

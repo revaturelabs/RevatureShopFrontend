@@ -5,7 +5,10 @@ import {Observable, of} from 'rxjs';
 
 export interface StockItem {
     itemName: string,
-    itemPrice: number
+    itemPrice: number,
+    quantity: number,
+    category: string,
+    description: string
 }
 
 export interface shoppingCart{

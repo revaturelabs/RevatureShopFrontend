@@ -1,0 +1,59 @@
+<div class="title-and-inventory-grid" style="margin-top: 70px; text-align: center;" name="top">
+<h3 style="margin-left: 28px;;">ADMIN</h3>
+<div class="holding-container">
+    <mat-card mat-typography class="">
+        <mat-card-content style="text-align-all: center">
+            <mat-vertical-stepper [linear]="true" style="background-color: mediumaquamarine;" #stepper>
+                <mat-step [stepControl]="itemForm" >
+                    <form [formGroup]="itemForm">
+                        <ng-template matStepLabel >Enter the New Item Information Here</ng-template>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Item Name" formControlName="itemName" required>
+
+                            <mat-error *ngIf="itemForm.controls['itemName'].hasError('required')">
+                                Item name is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Item Price" formControlName="itemPrice" required>
+                            <mat-error *ngIf="itemForm.controls['itemPrice'].hasError('required')">
+                                Item Price is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Item Quantity" formControlName="quantity" required>
+                            <mat-error *ngIf="itemForm.controls['quantity'].hasError('required')">
+                                Quantity is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Item Category" formControlName="category" required>
+                            <mat-error *ngIf="itemForm.controls['category'].hasError('required')">
+                                Category is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Item Description" formControlName="description" required>
+                            <mat-error *ngIf="itemForm.controls['description'].hasError('required')">
+                                Description is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="full-width">
+                            <ngx-mat-file-input placeholder="Inventory Item Image" [formControl]="fileControl" [multiple]="multiple" [accept]="accept">
+                            </ngx-mat-file-input>
+                        </mat-form-field>
+                        <div>
+                            <button mat-button matStepperNext>Submit New Stock Item</button>
+                        </div>
+                    </form>
+                </mat-step>
+            </mat-vertical-stepper>
+        </mat-card-content>
+    </mat-card>
+</div>
+</div>
