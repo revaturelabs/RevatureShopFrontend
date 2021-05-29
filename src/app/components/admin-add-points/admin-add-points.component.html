@@ -1,7 +1,23 @@
-<div class="input-group flex-nowrap">
 
-    <input type="text" class="form-control" placeholder="User email here">
-</div>
-<div>
-    <input type="number" class="form-control" placeholder="Amount">
+<div class="container" fxLayout="column" fxLayoutAlign="center">
+    <div class="input-group flex-nowrap">
+
+
+
+        <input type="text" class="form-control" placeholder="User email here" [(ngModel)]="email">
+    </div>
+    <br>
+    <div>
+        <input type="number" class="form-control" placeholder="Amount" [(ngModel)]="order.amount">
+
+    </div>
+    <br>
+    <div>
+        <input type="text" class="form-control" placeholder="Description" [(ngModel)]="order.description">
+
+    </div>
+    <br>
+    <div  fxLayoutAlign="center">
+        <button type="button" class="btn btn-primary" (click)="updatePoints()" >Submit</button>
+    </div>
 </div>

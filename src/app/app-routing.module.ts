@@ -9,6 +9,7 @@ import {UserPageComponent} from "./components/user-page/user-page.component";
 import {LandingPageComponent} from "./landing-page/landing-page.component";
 import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
 import {AdminInventoryPageComponent} from "./components/admin-inventory-page/admin-inventory-page.component";
+import {AdminAddPointsComponent} from "./components/admin-add-points/admin-add-points.component";
 
 const routes: Routes = [
     {path: 'shop/:category', component: UserInventoryPageComponent, canActivate: [AuthGuard]},
@@ -18,6 +19,7 @@ const routes: Routes = [
     {path: 'updatestock', component: AdminInventoryPageComponent, canActivate: [AuthGuard]},
     {path: 'home', component: LandingPageComponent, canActivate: [AuthGuard]},
     {path: 'user', component: UserPageComponent, canActivate:[AuthGuard]},
+    {path: 'points', component : AdminAddPointsComponent, canActivate:[AuthGuard]},
     {path: '', pathMatch: 'full', redirectTo: 'login'},
     {path: '**', component : PageNotFoundComponent}
 ]
