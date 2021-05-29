@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav *ngIf="accountService.account"  class="navbar navbar-expand-lg navbar-light" style="border-bottom:solid; border-radius: 0.1em; border-color: rgb(224, 224, 224);">
     <div class="container-fluid">
         <a routerLink="/home"><img class="navbar-brand" src="./assets/rev-logo.png"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
