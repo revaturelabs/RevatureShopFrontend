@@ -12,7 +12,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class AdminNewInventoryPageComponent implements OnInit {
 
-
+    private itemConvert: InventoryItem;
     itemForm = this.fb.group({
 
         itemName: [null, Validators.required],
@@ -23,15 +23,15 @@ export class AdminNewInventoryPageComponent implements OnInit {
         imageURL: [null, Validators.required]
 
     });
-    fileControl: any;
-    multiple: any;
-    accept: any;
-    color: any;
+    fileForm = this.fb.group({
+        file:['', Validators.required]
+    });
 
 
-  constructor(private fb: FormBuilder,private _inventoryItemsService : InventoryItemsService,
-              private router : Router,
-              private httpUserInventoryService : HttpUserInventoryPageService, private http: HttpClient ) { }
+
+  constructor(private fb: FormBuilder, private router : Router, private http: HttpClient, inventoryService: InventoryItemsService ) {
+     this.itemConvert = new InventoryItem(0,'',0,0,'','');
+  }
 
   ngOnInit(): void {
 
@@ -42,5 +42,21 @@ export class AdminNewInventoryPageComponent implements OnInit {
     addNewItem(itemForm: FormGroup) {
 
 
-    }
+        this.itemConvert.itemName = itemForm.value.itemName;
+        this.itemConvert.itemPrice = itemForm.value.itemPrice;
+        this.itemConvert.quantity = itemForm.value.quantity;
+        this.itemConvert.category = itemForm.value.category;
+        this.itemConvert.description = itemForm.value.description;
+        this.itemConvert.imageURL = '';
+
+        let url = "http:localhost:90001/inventoryms/api/inventory/stockitem/new";
+
+        this.http.put<boolean>(url,{},{ params: { // @ts-ignore
+                item: this.itemConvert, file : this.fileForm.value.file}}).subscribe(data =>{
+            alert(data);
+        });
+
+        }
+
+
 }

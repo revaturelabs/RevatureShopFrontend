@@ -26,8 +26,8 @@ export class InventoryItem {
 
     this.imageURL = "";
 
-    
-    
+
+
   }
 
 }
@@ -41,9 +41,9 @@ export class InventoryItemsService {
 
   inventoryItems : InventoryItem[] = [];
 
-  
 
-  constructor() { 
+
+  constructor() {
     this.inventoryItems = [
 
 
