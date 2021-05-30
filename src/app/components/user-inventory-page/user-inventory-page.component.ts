@@ -17,7 +17,7 @@ export class UserInventoryPageComponent implements OnInit {
   pageSize = 12;
   selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "");
   inStockChecked : boolean = true;
-  outOfStockChecked : boolean = true;
+  outOfStockChecked : boolean = false;
 
   constructor(private _inventoryItemsService : InventoryItemsService,
     private router : Router,
