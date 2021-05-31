@@ -61,7 +61,7 @@
                  [ngClass]="{'inStockItem' : item.quantity > 0, 'outOfStockItem' : item.quantity == 0}" >
                 
                   <div class="imageContainer" style="overflow: hidden;">
-                    <img class="card-img-top" src = "{{item.imageURL}}" alt="Item image" 
+                    <img class="card-img-top" src = "{{itemImagesURL+'/'+item.id}}" alt="Item image" 
                       type="button" data-bs-toggle="modal" data-bs-target="#itemModal" (click)="itemClicked(item)">
                   </div>
 
@@ -106,13 +106,14 @@
 </div>
 
 
-<app-admin-item-modal [title]="this.selectedItem.itemName" [src]="this.selectedItem.imageURL" [description]="this.selectedItem.description"></app-admin-item-modal>
+<app-admin-item-modal [title]="this.selectedItem.itemName" [src]="this.selectedItem.imageURL" 
+[description]="this.selectedItem.description" [id]="this.selectedItem.id"></app-admin-item-modal>
 
 <br>
 <br>
 
 
-
+<!-- -->
 
 
 

@@ -88,7 +88,7 @@ export class AdminNewInventoryPageComponent implements OnInit {
 
             console.log("Item ID as string = "+newItemID);
 
-            data.append('id', newItemID.toString());
+            data.append('id', "2");
             data.append('image', this.imageFileToUpload);
             // {observe: 'response'} at end
             this.http.put<boolean>(newImageURL,data,{observe: 'response'}).subscribe(data =>{

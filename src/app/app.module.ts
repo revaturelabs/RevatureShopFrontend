@@ -25,7 +25,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 
 
-
+export var itemImagesURL : string = "s3://revature-swag-shop-images";
 
 
 @NgModule({
