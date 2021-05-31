@@ -4,6 +4,7 @@ import {StatesService, state} from "../../services/states.service";
 import {Account, AccountService} from "../../services/account.service";
 import {CheckoutService} from "../../services/checkout.service";
 import {Router} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
     selector: 'app-checkout',
@@ -11,6 +12,7 @@ import {Router} from "@angular/router";
     styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent {
+
     // @ts-ignore
     firstFormGroup: FormGroup;
     // @ts-ignore
