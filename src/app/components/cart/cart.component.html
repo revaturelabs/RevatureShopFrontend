@@ -1,7 +1,7 @@
 <div class="container bg-light">
     <div class="row item-row" *ngFor="let cartItem of cartItems">
         <div class="col-1 center-column">
-            <input class="quantity" type="number" min="1" max="99" [defaultValue]="cartItem.cartQuantity">
+            <input class="quantity" type="number" min="1" max="99" [value]="getCartQuantity(cartItem.itemName)" (change)="updateCartQuantity($event, cartItem.itemName)">
 <!--            <p>{{cartItem.cartQuantity}}</p>-->
         </div>
         <div class="col-2 center-column">

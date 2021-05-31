@@ -15,8 +15,6 @@ interface Cart {
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-
-
     cartItems: any[];
     userCart: Cart;
 
@@ -51,6 +49,21 @@ export class CartComponent implements OnInit {
             return "../assets/images/socks_1.jpg";
         }
         return '';
+    }
+
+    getCartQuantity(itemName: string): number {
+      if(this.hasKey(this.userCart.stockItemMap, itemName)) {
+          return this.userCart.stockItemMap[itemName];
+      }
+      return 0;
+    }
+
+    updateCartQuantity(event: Event, itemName: string): void {
+        if(this.hasKey(this.userCart.stockItemMap, itemName)) {
+            // @ts-ignore
+            this.userCart.stockItemMap[itemName] = event.target.value;
+        }
+        this.httpCartService.updateCart(this.userCart);
     }
 
     removeCartItem(itemName: string): void {
