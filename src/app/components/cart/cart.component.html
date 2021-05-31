@@ -1,30 +1,31 @@
- <div class="container bg-light">
-    <div class="row item-row">
+<div class="container bg-light">
+    <div class="row item-row" *ngFor="let cartItem of cartItems">
         <div class="col-1 center-column">
-            <input class="quantity" type="number" min="1" max="99" [defaultValue]="1">
+            <input class="quantity" type="number" min="1" max="99" [defaultValue]="cartItem.cartQuantity">
+<!--            <p>{{cartItem.cartQuantity}}</p>-->
         </div>
         <div class="col-2 center-column">
-            <img src="https://www.chatelaine.com/wp-content/uploads/2019/04/white-t-shirt-aritzia.jpg" class="w-75 h-75">
+            <img [src]="getItemImage(cartItem.itemName)" class="w-75 h-75">
         </div>
         <div class="col-9">
-            <div class="row link-row mt-3 justify-content-sm-between">
-                <a href="#" class="item-link"><p>White shirt</p></a>
-                <p class="item-link mr-3">$193.23</p>
+            <div class="row link-row mt-3 justify-content-between">
+                <a href="#" class="item-link w-auto"><p>{{cartItem.itemName}}</p></a>
+                <p class="item-link mr-3 w-auto">{{cartItem.itemPrice}}</p>
             </div>
             <div class="row">
-                <p class="item-desc">Lorem ipsum dolor sit amet. This is a description of a white t-shirt. Wow, can you believe how much they're charging for a white shirt?</p>
+                <p class="item-desc">{{cartItem.description}}</p>
             </div>
-            <div class="row delete-row">
-                <a href="#">Delete item</a>
+            <div class="row delete-row mb-3">
+                <a (click)="removeCartItem(cartItem.itemName)" routerLink="/cart">Delete item</a>
             </div>
         </div>
+        <hr>
     </div>
-    <hr>
-    <div class="row justify-content-end">
-        <p class="mr-3">Total: $193.23</p>
+    <div class="row">
+        <p class="mr-3 text-right">total price</p>
     </div>
     <div class="row justify-content-end">
-        <a class="btn btn-primary btn-lg my-3 mx-3" routerLink="/checkout">Checkout</a>
+        <a class="btn btn-primary btn-lg my-3 mx-3 w-25" routerLink="/checkout">Checkout</a>
     </div>
 </div>
 
