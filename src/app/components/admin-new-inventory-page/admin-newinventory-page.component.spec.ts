@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminNewinventoryPageComponent } from './admin-newinventory-page.component';
+import { AdminNewInventoryPageComponent } from './admin-newinventory-page.component';
 
 describe('AdminNewinventoryPageComponent', () => {
-  let component: AdminNewinventoryPageComponent;
-  let fixture: ComponentFixture<AdminNewinventoryPageComponent>;
+  let component: AdminNewInventoryPageComponent;
+  let fixture: ComponentFixture<AdminNewInventoryPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminNewinventoryPageComponent ]
+      declarations: [ AdminNewInventoryPageComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminNewinventoryPageComponent);
+    fixture = TestBed.createComponent(AdminNewInventoryPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

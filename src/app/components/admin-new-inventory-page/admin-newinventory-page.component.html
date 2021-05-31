@@ -1,57 +1,94 @@
-<div class="title-and-inventory-grid" style="margin-top: 70px; text-align: center;" name="top">
-<div class="holding-container" style="display: inline-block; justify-content: center; width:25%;">
-    <mat-card mat-typography class="">
-        <mat-card-content style="border:solid; border-color: rgb(124,124,124);">
-            <mat-vertical-stepper [linear]="true"  style=" display: inline-block; justify-content: center; width:75%;" #stepper>
-                <mat-step [stepControl]="itemForm" >
-                    <form [formGroup]="itemForm">
-                        <ng-template matStepLabel >Enter the New Item Information Here</ng-template>
-                        <mat-form-field class="full-width" style="width:90%; margin-right: 200px">
-                            <input matInput placeholder="Item Name" formControlName="itemName" required>
 
-                            <mat-error *ngIf="itemForm.controls['itemName'].hasError('required')">
-                                Item name is <strong>required</strong>
-                            </mat-error>
-                        </mat-form-field>
 
-                        <mat-form-field class="full-width" style="width:90%; margin-right: 200px">
-                            <input matInput placeholder="Item Price" formControlName="itemPrice" required>
-                            <mat-error *ngIf="itemForm.controls['itemPrice'].hasError('required')">
-                                Item Price is <strong>required</strong>
-                            </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field class="full-width" style="width:90%; margin-right: 200px">
-                            <input matInput placeholder="Item Quantity" formControlName="quantity" required>
-                            <mat-error *ngIf="itemForm.controls['quantity'].hasError('required')">
-                                Quantity is <strong>required</strong>
-                            </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field class="full-width" style="width:90%; margin-right: 200px">
-                            <input matInput placeholder="Item Category" formControlName="category" required>
-                            <mat-error *ngIf="itemForm.controls['category'].hasError('required')">
-                                Category is <strong>required</strong>
-                            </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field class="full-width" style="width:90%; margin-right: 200px">
-                            <input matInput placeholder="Item Description" formControlName="description" required>
-                            <mat-error *ngIf="itemForm.controls['description'].hasError('required')">
-                                Description is <strong>required</strong>
-                            </mat-error>
-                        </mat-form-field>
-                        <br>
-                        <mat-form-field class="full-width" style="width:90%; margin-right: 200px" [formGroup]="fileForm">
-                            <ngx-mat-file-input placeholder="Inventory Item Image" formControlName="file"></ngx-mat-file-input>
-                        </mat-form-field>
-                        <div>
-                            <button mat-button matStepperNext style="width:90%; margin-right: 200px" (click) = addNewItem(itemForm)>Submit New Stock Item</button>
-                        </div>
-                    </form>
-                </mat-step>
-            </mat-vertical-stepper>
-        </mat-card-content>
-    </mat-card>
+<div *ngIf="!itemFinishedBeingCreated" style="text-align: center; margin-top: 50px;">
+    <h5>ADMIN</h5>
+    <h1>Create an Item</h1>
 </div>
+
+<div *ngIf="!itemFinishedBeingCreated" style="max-width: 600px; margin: 0 auto; margin-top: 20px;">
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Title</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" [(ngModel)]="title">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="description"></textarea>
+    </div>
+
+    <div class="display:flex; justify-content:center;">
+    
+        
+
+        <div style="display: flex; justify-content: space-between;">
+            
+            <div class="mb-3" style="width:300px;">
+                <label for="exampleFormControlInput1" class="form-label" style="margin-top:0px;">Category</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" [(ngModel)]="category">
+            </div>
+
+            
+            
+            <select class="selectPicker" id="genderSelector" [(ngModel)]="gender" style="display: block; border-radius: 4px; width:165px; height:40px; margin-top: 31px; margin-right: 25px;">
+
+                <option>---- Select gender ----</option>
+                <option>None</option>
+                <option>Men's</option>
+                <option>Women's</option>
+            
+            </select>
+
+        </div>
+        
+
+    </div>
+
+    
+      
+
+    <div style="display: flex; margin-top: 10px; justify-content: space-between;">
+        <div class="mb-3" style="width:44%;" >
+            <label for="exampleFormControlInput1" class="form-label " style="margin-top:7px;">Price (RevCoins)</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" style="margin-left: 0px;" [(ngModel)]="price">
+        </div>
+    
+        <div class="mb-3" style="width:44%; margin-left: 75px;">
+            <label for="exampleFormControlInput1" class="form-label" style="margin-top:7px;">Quantity</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" style="margin-left: 0px;" [(ngModel)]="quantity">
+        </div>
+    </div>
+
+    
+    
+
+    
+
+      <app-file-uploader  [imageUploadProgress]="imageUploadProgress" (fileSelectedEvent)="setFileSelected($event)" ></app-file-uploader>
+
+
+      <!-- Custom Button for Create Item-->
+      <div style="display: flex; justify-content: center;">
+        <input #imageInput
+            id="createItemButton"
+           hidden
+           (click)="addNewItem()">
+  
+        <label class="buttonLabel" for="createItemButton" style="margin-top: 20px;"  >Create!</label>
+      </div>
+
+      <div *ngIf="missingInput" style="text-align: center; color:red">Missing input fields</div>
+</div>
+
+
+
+
+
+<div *ngIf="itemFinishedBeingCreated" style="margin-top: 200px;">
+    <div style="display:flex; justify-content: center;">
+        <img src="../assets/images/GreenCheckCircle2.png" style="width: 150px;">
+        <h1 style="text-align: center; color: rgb(0, 80, 0);">
+            Item successfully created
+        </h1>
+    </div>
+    <a [routerLink]="" (click)="refresh();" style="display:block; text-align: center;">Create another item</a>
+    <a [routerLink]="['/updatestock']" style="display:block; text-align: center;">View all inventory items</a>
 </div>

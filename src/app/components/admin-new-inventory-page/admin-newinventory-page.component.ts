@@ -13,20 +13,24 @@ import {HttpClient} from "@angular/common/http";
 export class AdminNewInventoryPageComponent implements OnInit {
 
     private itemConvert: InventoryItem;
-    itemForm = this.fb.group({
+    
+    itemFinishedBeingCreated : boolean = false;
 
-        itemName: [null, Validators.required],
-        itemPrice: [null, Validators.required],
-        quantity: [null, Validators.required],
-        category: [null, Validators.required],
-        description: [null, Validators.required],
-        imageURL: [null, Validators.required]
 
-    });
-    fileForm = this.fb.group({
-        file:['', Validators.required]
-    });
 
+    title: string = "";
+    description: string = "";
+    category: string = "";
+    gender: string = "---- Select gender ----";
+    price: number = 0;
+    quantity: number = 0;
+
+    missingInput = false; 
+
+    imageFileToUpload!: File;
+
+
+    imageUploadProgress : string = "";
 
 
   constructor(private fb: FormBuilder, private router : Router, private http: HttpClient, inventoryService: InventoryItemsService ) {
@@ -39,24 +43,82 @@ export class AdminNewInventoryPageComponent implements OnInit {
 
 
 
-    addNewItem(itemForm: FormGroup) {
+    addNewItem() : void {
 
 
-        this.itemConvert.itemName = itemForm.value.itemName;
-        this.itemConvert.itemPrice = itemForm.value.itemPrice;
-        this.itemConvert.quantity = itemForm.value.quantity;
-        this.itemConvert.category = itemForm.value.category;
-        this.itemConvert.description = itemForm.value.description;
-        this.itemConvert.imageURL = '';
+      console.log("ADD NEW ITEM FUNCTION.");
+        
+        if (!this.title
+          || !this.price
+          || !this.quantity
+          || !this.category
+          || !this.description
+          || !this.imageFileToUpload  
+          || !(this.gender == "Men's" || this.gender == "Women's" || this.gender == "None") ) {
+            console.log("    mIsSiNg iNpUt!!!!");
+            this.missingInput = true;
+            return;
+          
+        }
 
-        let url = "http:localhost:90001/inventoryms/api/inventory/stockitem/new";
+        this.missingInput = false;
+        
+        this.itemConvert.itemName = this.title;
+        this.itemConvert.itemPrice = this.price;
+        this.itemConvert.quantity = this.quantity;
+        this.itemConvert.description = this.description;
+        if (this.gender == "Men's" || this.gender == "Women's") {
+          this.itemConvert.category = this.gender + " " + this.category;
+        }
+        else {
+          this.itemConvert.category = this.category;
+        }
 
-        this.http.put<boolean>(url,{},{ params: { // @ts-ignore
-                item: this.itemConvert, file : this.fileForm.value.file}}).subscribe(data =>{
-            alert(data);
+        let newItemURL = "http://localhost:9001/inventoryms/api/inventory/stockitem/new";
+        let newImageURL = "http://localhost:9001/inventoryms/api/inventory/stockitem/update/addimage";
+
+
+        //  upload the InventoryItem
+        this.imageUploadProgress = "Uploading image..."
+        this.http.put<boolean>(newItemURL,this.itemConvert).subscribe(newItemID =>{
+          console.log("UPLOAD NEW ITEM RESPONSE RECEIVED. resp = "+newItemID);
+  
+            // then upload each image
+            const data = new FormData();
+
+            console.log("Item ID as string = "+newItemID);
+
+            data.append('id', newItemID.toString());
+            data.append('image', this.imageFileToUpload);
+            // {observe: 'response'} at end
+            this.http.put<boolean>(newImageURL,data,{observe: 'response'}).subscribe(data =>{
+
+                console.log("RESPONSE FOR IMG UPLOAD RECEIVED");
+                this.imageUploadProgress = "Image successfully uploaded";
+                this.itemFinishedBeingCreated = true;
+
+            });
+
         });
 
+
+        
+
+        
+
         }
+
+
+        setFileSelected(imageFile : File) {
+          this.imageFileToUpload = imageFile;
+          console.log("NEW FILE TO UPLOAD!: Name = "+this.imageFileToUpload.name);
+        }
+
+
+
+        refresh(): void {
+          window.location.reload();
+      }
 
 
 }

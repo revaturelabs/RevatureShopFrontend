@@ -18,10 +18,12 @@ export class AdminInventoryPageComponent implements OnInit {
   selectedItem : InventoryItem = new InventoryItem(1,"",1,1,"","");
   inStockChecked : boolean = true;
   outOfStockChecked : boolean = true;
+  
 
   constructor(private _inventoryItemsService : InventoryItemsService,
     private router : Router,
     private httpUserInventoryService : HttpUserInventoryPageService) {
+      
 
    }
 
@@ -62,7 +64,7 @@ export class AdminInventoryPageComponent implements OnInit {
               if (couldUpdate) {
 
                 // Being lazy for now, fetching all inventory items again upon successfully updating an item quantity
-                // This will auto update inventoryItemsService.inventoryItems and therefore update the appearance
+                // This will auto update inventoryItemsService.inventoryItems and therefore update the displayed list of items
                 this.fetchInventoryItemsFromServer();
 
 
@@ -127,6 +129,8 @@ export class AdminInventoryPageComponent implements OnInit {
 
   
   }
+
+  
 
 
   

@@ -22,6 +22,11 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { AdminNewInventoryPageComponent } from './components/admin-new-inventory-page/admin-newinventory-page.component';
 import {MatIconModule} from "@angular/material/icon";
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
+
+
+
+
 
 @NgModule({
     declarations: [
@@ -40,6 +45,9 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
         PointTrackerComponent,
         PageNotFoundComponent,
         AdminNewInventoryPageComponent,
+        FileUploaderComponent
+        
+        
     ],
     imports: [
         BrowserModule,

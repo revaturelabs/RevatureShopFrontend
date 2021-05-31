@@ -25,6 +25,7 @@
     "@ng-bootstrap/ng-bootstrap": "^9.1.1",
     "aws-sdk": "^2.918.0",
     "bootstrap": "^4.5.0",
+    "ng2-file-upload": "^1.4.0",
     "ngx-cookie": "^5.0.2",
     "ngx-material-file-input": "^2.1.1",
     "popper.js": "^1.16.1",
