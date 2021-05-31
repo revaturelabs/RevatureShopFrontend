@@ -43,6 +43,10 @@ export class HttpCartService {
         this.http.post('http://localhost:9001/commercems/commerce/removefromcart', itemDto, this.httpOptionsJSON).subscribe();
     }
 
+    updateCart(cart: any) {
+        this.http.post('http://localhost:9001/commercems/commerce/savecart', cart, this.httpOptionsJSON).subscribe();
+    }
+
     // getInventoryItemsByCategory(category: string) : Observable<InventoryItem[]> {
     //
     //     var items: Observable<InventoryItem[]> =  this.http.post<InventoryItem[]>(this.baseServerURL + "/api/inventory/view/category", category,  this.httpOptionsTEXT);
