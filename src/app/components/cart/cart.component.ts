@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {HttpService} from "../../services/http.service";
 import { HttpCartService } from "./http-cart.service";
@@ -21,7 +21,7 @@ export class CartComponent implements OnInit {
     totalPrice:number;
 
   constructor(private http: HttpClient, private httpCartService: HttpCartService) {
-      this.cartItems = [];
+      this.cartItems = new Array<InventoryItem>();
       this.userCart = {
           "cartId": 0,
           "myShopper": "",
@@ -31,18 +31,35 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.cartItems = [];
+      this.loadCart();
+  }
+
+  loadCart(){
       this.totalPrice=0;
       this.httpCartService.getCart('parkert77@gmail.com').subscribe((cart) => {
           this.userCart = cart;
           Object.keys(cart.stockItemMap).forEach((itemName) => {
               this.httpCartService.getItemByName(itemName).subscribe((item) => {
+                  item.imageURL="";
                   this.cartItems.push(item);
                   this.totalPrice += item.itemPrice * this.getCartQuantity(item.itemName);
-              })
+              });
+
           });
       });
+
+
+
   }
+
+  updatePrice(){
+      console.log(this.cartItems);
+      this.totalPrice=0;
+    for(let i = 0; i < this.cartItems.length; i++){
+        this.totalPrice += this.cartItems[i].itemPrice  * this.getCartQuantity(this.cartItems[i].itemName);
+    }
+  }
+
 
 
     getItemImage(itemName: string): string{
@@ -69,17 +86,19 @@ export class CartComponent implements OnInit {
         if(this.hasKey(this.userCart.stockItemMap, itemName)) {
             // @ts-ignore
             this.userCart.stockItemMap[itemName] = event.target.value;
+            this.updatePrice();
         }
         this.httpCartService.updateCart(this.userCart);
-        this.ngOnInit();
+
     }
 
     removeCartItem(itemName: string): void {
         if (this.hasKey(this.userCart.stockItemMap, itemName)) {
             delete this.userCart.stockItemMap[itemName]// works fine!
+            this.updatePrice();
         }
         this.httpCartService.updateCart(this.userCart);
-        this.ngOnInit();
+
     }
 
     hasKey<O>(obj: O, key: PropertyKey): key is keyof O {
