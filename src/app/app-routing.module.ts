@@ -8,6 +8,7 @@ import {CartComponent} from "./components/cart/cart.component";
 import { AdminInventoryPageComponent } from './components/admin-inventory-page/admin-inventory-page.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
+import {CheckoutConfirmationPageComponent} from "./components/checkout-confirmation-page/checkout-confirmation-page.component";
 
 const routes: Routes = [
     {path: 'shop/:category', component: UserInventoryPageComponent, canActivate: [AuthGuard]},
@@ -16,6 +17,7 @@ const routes: Routes = [
     {path: 'cart', component: CartComponent, canActivate: [AuthGuard]},
     {path: 'updatestock', component: AdminInventoryPageComponent, canActivate: [AuthGuard]},
     {path: 'home', component: LandingPageComponent, canActivate: [AuthGuard]},
+    {path: 'confirmCheckout', component: CheckoutConfirmationPageComponent, canActivate: [AuthGuard] },
     {path: '', pathMatch: 'full', redirectTo: 'login'},
     {path: '', pathMatch: 'full', redirectTo: 'login'},
     {path: '**', component : PageNotFoundComponent}

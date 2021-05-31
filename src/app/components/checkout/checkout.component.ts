@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StatesService, state} from "../../services/states.service";
 import {Account, AccountService} from "../../services/account.service";
 import {CheckoutService} from "../../services/checkout.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-checkout',
@@ -32,7 +33,7 @@ export class CheckoutComponent {
     states: state[] = [];
     pointsAfterMath: number = 0;
 
-    constructor(private fb: FormBuilder, private ss: StatesService, private as: AccountService, private co: CheckoutService) {
+    constructor(private fb: FormBuilder, private ss: StatesService, private as: AccountService, private co: CheckoutService, private router: Router) {
         this.states = ss.states;
     }
 
@@ -66,8 +67,8 @@ export class CheckoutComponent {
     }
 
     checkout() {
+    this.router.navigate(['confirmCheckout']).then(r =>{});
 
-        //NEEDS ROUTING TO CONFIRMATION PAGE HERE
     }
 
     get account(): Account {

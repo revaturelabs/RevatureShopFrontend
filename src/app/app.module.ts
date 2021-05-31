@@ -19,6 +19,7 @@ import { AdminItemModalComponent } from './components/admin-item-modal/admin-ite
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PointTrackerComponent } from './point-tracker/point-tracker.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { CheckoutConfirmationPageComponent } from './components/checkout-confirmation-page/checkout-confirmation-page.component';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
         NavbarComponent,
         LandingPageComponent,
         PointTrackerComponent,
-        PageNotFoundComponent
+        PageNotFoundComponent,
+        CheckoutConfirmationPageComponent
     ],
     imports: [
         BrowserModule,
