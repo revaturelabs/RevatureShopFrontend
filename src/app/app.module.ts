@@ -20,6 +20,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PointTrackerComponent } from './point-tracker/point-tracker.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CheckoutConfirmationPageComponent } from './components/checkout-confirmation-page/checkout-confirmation-page.component';
+import { AdminAddPointsComponent } from './components/admin-add-points/admin-add-points.component';
+import { UserPageComponent } from './components/user-page/user-page.component';
 
 @NgModule({
     declarations: [
@@ -34,6 +36,9 @@ import { CheckoutConfirmationPageComponent } from './components/checkout-confirm
         AdminItemModalComponent,
         AppComponent,
         NavbarComponent,
+        AdminAddPointsComponent,
+        UserPageComponent,
+        PointTrackerComponent,
         LandingPageComponent,
         PointTrackerComponent,
         PageNotFoundComponent,

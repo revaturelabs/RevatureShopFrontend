@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="card text-center" fxFlexAlign="center">
+        <h2 class="card-header">
+            User information
+        </h2>
+
+    </div>
+    <div class="card-body text-center">
+        <p>
+            {{accountInfo.email}}
+        </p>
+        <p>
+            {{accountInfo.points}} points
+        </p>
+
+        <p>
+            <button (click) = "showTable()"> show table</button>
+        </p>
+
+    </div>
+</div>
+
+<div class="container" *ngIf="table">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Description</th>
+            <th scope="col">Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let order of orderList">
+            <td>{{order.date}}</td>
+            <td>{{order.description}}</td>
+            <td [ngStyle]="{'color': order.amount > 0 ? 'green' : 'red'}">{{(order.amount > 0 ? "+" : "") + order.amount}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
