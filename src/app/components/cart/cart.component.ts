@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {HttpService} from "../../services/http.service";
 import { HttpCartService } from "./http-cart.service";
+import {InventoryItem} from "../../services/inventory-items.service";
 
 interface Cart {
     "cartId": number,
@@ -15,8 +16,9 @@ interface Cart {
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-    cartItems: any[];
+    cartItems: Array<InventoryItem>;
     userCart: Cart;
+    totalPrice:number;
 
   constructor(private http: HttpClient, private httpCartService: HttpCartService) {
       this.cartItems = [];
@@ -25,18 +27,23 @@ export class CartComponent implements OnInit {
           "myShopper": "",
           stockItemMap: {}
       }
+      this.totalPrice=0;
   }
 
   ngOnInit(): void {
+      this.cartItems = [];
+      this.totalPrice=0;
       this.httpCartService.getCart('parkert77@gmail.com').subscribe((cart) => {
           this.userCart = cart;
           Object.keys(cart.stockItemMap).forEach((itemName) => {
               this.httpCartService.getItemByName(itemName).subscribe((item) => {
                   this.cartItems.push(item);
+                  this.totalPrice += item.itemPrice;
               })
           });
       });
   }
+
 
     getItemImage(itemName: string): string{
         if (itemName.includes("Hat")) {
@@ -64,6 +71,7 @@ export class CartComponent implements OnInit {
             this.userCart.stockItemMap[itemName] = event.target.value;
         }
         this.httpCartService.updateCart(this.userCart);
+        this.ngOnInit();
     }
 
     removeCartItem(itemName: string): void {
@@ -71,6 +79,7 @@ export class CartComponent implements OnInit {
             delete this.userCart.stockItemMap[itemName]// works fine!
         }
         this.httpCartService.updateCart(this.userCart);
+        this.ngOnInit();
     }
 
     hasKey<O>(obj: O, key: PropertyKey): key is keyof O {
