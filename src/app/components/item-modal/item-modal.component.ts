@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpItemModalService} from "./http-item-modal.service";
+import {AccountService} from "../../services/account.service";
 
 @Component({
   selector: 'app-item-modal',
@@ -12,8 +13,12 @@ export class ItemModalComponent implements OnInit {
     @Input() src: string = '';
     @Input() description: string = '';
     @Input() quantity: number = 0;
+    loggedShopper: string = '';
 
-  constructor(private httpItemModalService: HttpItemModalService) {
+  constructor(private httpItemModalService: HttpItemModalService, private accountsService: AccountService) {
+      this.accountsService.loadAccount().subscribe(data =>{
+         this.loggedShopper = <string>data?.email;
+      });
   }
 
   ngOnInit(): void {
@@ -21,7 +26,7 @@ export class ItemModalComponent implements OnInit {
 
   addToCart(): void {
       this.httpItemModalService.getItemByName(this.title).subscribe((item) => {
-          this.httpItemModalService.addItemToCart(item, 'parkert77@gmail.com');
+          this.httpItemModalService.addItemToCart(item, this.loggedShopper);
       });
       // @ts-ignore
       document.getElementById("btnRapper").setAttribute('class', 'col-6');

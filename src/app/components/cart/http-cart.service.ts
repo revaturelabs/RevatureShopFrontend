@@ -27,8 +27,9 @@ export class HttpCartService {
 
     }
 
-    getCart(usename: string): Observable<any> {
-        return this.http.get('http://localhost:9001/commercems/commerce/myCart/parkert77@gmail.com');
+    getCart(username: string): Observable<any> {
+        console.log(username);
+        return this.http.get('http://localhost:9001/commercems/commerce/myCart/'+username);
     }
 
     removeItemFromCart(item: any) {
@@ -63,4 +64,7 @@ export class HttpCartService {
     //     return couldUpdate;
     // }
 
+    checkoutCart(userCart: any) {
+        this.http.post('http://localhost:9001/commercems/commerce/checkoutcart', userCart, this.httpOptionsJSON).subscribe();
+    }
 }

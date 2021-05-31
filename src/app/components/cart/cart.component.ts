@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import {HttpService} from "../../services/http.service";
 import { HttpCartService } from "./http-cart.service";
 import {InventoryItem} from "../../services/inventory-items.service";
+import {AccountService} from "../../services/account.service";
+import {Router} from "@angular/router";
 
 interface Cart {
     "cartId": number,
@@ -19,8 +21,9 @@ export class CartComponent implements OnInit {
     cartItems: Array<InventoryItem>;
     userCart: Cart;
     totalPrice:number;
+    loggedShopper: string = '';
 
-  constructor(private http: HttpClient, private httpCartService: HttpCartService) {
+  constructor(private http: HttpClient, private httpCartService: HttpCartService, private accountsService: AccountService, private router: Router) {
       this.cartItems = new Array<InventoryItem>();
       this.userCart = {
           "cartId": 0,
@@ -31,12 +34,15 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+      this.accountsService.loadAccount().subscribe(data=>{
+          this.loggedShopper=<string>data?.email;
+      });
       this.loadCart();
   }
 
   loadCart(){
       this.totalPrice=0;
-      this.httpCartService.getCart('parkert77@gmail.com').subscribe((cart) => {
+      this.httpCartService.getCart(this.loggedShopper).subscribe((cart) => {
           this.userCart = cart;
           Object.keys(cart.stockItemMap).forEach((itemName) => {
               this.httpCartService.getItemByName(itemName).subscribe((item) => {
@@ -103,5 +109,19 @@ export class CartComponent implements OnInit {
 
     hasKey<O>(obj: O, key: PropertyKey): key is keyof O {
         return key in obj
+    }
+
+    checkout() {
+        this.accountsService.loadAccount().subscribe(data=>{
+        // @ts-ignore
+            if (data?.points < this.totalPrice){
+                alert('You do not have enough point for this purchase!');
+                return;
+            }
+            else{
+                this.httpCartService.checkoutCart(this.userCart);
+                this.router.navigate(['/checkout']).then();
+            }
+        });
     }
 }
