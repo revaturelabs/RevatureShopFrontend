@@ -38,7 +38,7 @@ export class CartComponent implements OnInit {
           Object.keys(cart.stockItemMap).forEach((itemName) => {
               this.httpCartService.getItemByName(itemName).subscribe((item) => {
                   this.cartItems.push(item);
-                  this.totalPrice += item.itemPrice;
+                  this.totalPrice += item.itemPrice * this.getCartQuantity(item.itemName);
               })
           });
       });

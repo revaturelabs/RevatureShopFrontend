@@ -23,6 +23,12 @@ export class ItemModalComponent implements OnInit {
       this.httpItemModalService.getItemByName(this.title).subscribe((item) => {
           this.httpItemModalService.addItemToCart(item, 'parkert77@gmail.com');
       });
+      // @ts-ignore
+      document.getElementById("customAlert").style.display = 'block';
   }
 
+    closeCustomAlert() {
+        // @ts-ignore
+        document.getElementById("customAlert").style.display = 'none';
+    }
 }
