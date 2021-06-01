@@ -80,6 +80,7 @@ export class AccountService {
     }
 
     get account(): Account | null {
+
         return this._account;
     }
 }
