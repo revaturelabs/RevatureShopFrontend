@@ -2,6 +2,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {InventoryItem} from 'src/app/services/inventory-items.service';
+import {Cart} from "./cart.component";
+import {waitForAsync} from "@angular/core/testing";
 
 @Injectable({
     providedIn: 'root'
@@ -28,7 +30,6 @@ export class HttpCartService {
     }
 
     getCart(username: string): Observable<any> {
-        console.log(username);
         return this.http.get('http://localhost:9001/commercems/commerce/myCart/'+username);
     }
 
@@ -65,6 +66,7 @@ export class HttpCartService {
     // }
 
     checkoutCart(userCart: any) {
-        this.http.post('http://localhost:9001/commercems/commerce/checkoutcart', userCart, this.httpOptionsJSON).subscribe();
+        this.http.post('http://localhost:9001/commercems/commerce/checkoutcart', userCart, this.httpOptionsJSON);
     }
+
 }

@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StatesService, state} from "../../services/states.service";
-import {Account, AccountService} from "../../services/account.service";
+import {Account, AccountService, PointChange} from "../../services/account.service";
 import {CheckoutService} from "../../services/checkout.service";
 import {Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
+import {HttpCartService} from "../cart/http-cart.service";
+import {Cart} from "../cart/cart.component";
 
 @Component({
     selector: 'app-checkout',
@@ -34,9 +35,29 @@ export class CheckoutComponent {
     });
     states: state[] = [];
     pointsAfterMath: number = 0;
+    loggedShopper: string='';
+    checkoutCart: Cart;
 
-    constructor(private fb: FormBuilder, private ss: StatesService, private as: AccountService, private co: CheckoutService, private router: Router) {
+    constructor(private fb: FormBuilder, private ss: StatesService, private as: AccountService, private cs: HttpCartService, private co: CheckoutService, private router: Router) {
         this.states = ss.states;
+        this.loggedShopper=<string>this.as.account?.email;
+        this.checkoutCart = {
+            "cartId": 0,
+            "myShopper": "",
+            stockItemMap: {}
+        }
+        this.cs.getCart(this.loggedShopper).subscribe(cart=>{
+            this.checkoutCart=cart;
+            Object.keys(this.checkoutCart.stockItemMap).forEach((itemName) => {
+                let price:number=0;
+                this.cs.getItemByName(itemName).subscribe((item) => {
+                    item.imageURL="";
+                    // @ts-ignore
+                    price += item.itemPrice * this.checkoutCart.stockItemMap[item.itemName];
+                    this.pointsAfterMath=<number>this.as.account?.points-price;
+                });
+        });
+    });
     }
 
     ngOnInit() {
@@ -69,6 +90,13 @@ export class CheckoutComponent {
     }
 
     checkout() {
+        let change: PointChange = {
+            "cause": 'Purchase from shop',
+            "change": this.pointsAfterMath,
+            "date": new Date()
+        };
+        this.as.updatePoints(change);
+        this.cs.checkoutCart(this.checkoutCart);
     this.router.navigate(['confirmCheckout']).then(r =>{});
 
     }

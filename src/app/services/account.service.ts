@@ -82,4 +82,12 @@ export class AccountService {
     get account(): Account | null {
         return this._account;
     }
+
+    updatePoints(change:PointChange){
+    this.http.post(this.endpoint+'/points/'+this._account?.email,{});
+    }
+
+    loadOrders(){
+        this.http.get('http:localhost:9001/commercems/commerce/myOrderHistory/'+this._account?.email,{});
+    }
 }
