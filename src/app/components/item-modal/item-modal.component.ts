@@ -13,6 +13,9 @@ export class ItemModalComponent implements OnInit {
     @Input() src: string = '';
     @Input() description: string = '';
     @Input() quantity: number = 0;
+    @Input() id : number = 0;
+
+    itemImagesURL : string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
     loggedShopper: string = '';
 
   constructor(private httpItemModalService: HttpItemModalService, private accountsService: AccountService) {

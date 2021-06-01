@@ -6,11 +6,13 @@
             <mat-card-subtitle>Your points after transaction: {{pointsAfterMath}}</mat-card-subtitle>
 
         </mat-card-header>
-        <mat-card-content>
-            <mat-vertical-stepper [linear]="true" #stepper>
-                <mat-step [stepControl]="firstFormGroup">
+        <mat-card-content >
+            <mat-vertical-stepper [linear]="true" #stepper >
+                <mat-step [stepControl]="firstFormGroup" >
                     <form [formGroup]="firstFormGroup">
+                        <mat-card-header style= "background-color: orange; width:100px;">
                         <ng-template matStepLabel>Enter name for order</ng-template>
+                        </mat-card-header >
                         <mat-form-field class="full-width">
                             <input matInput placeholder="First name" formControlName="firstName" required>
 

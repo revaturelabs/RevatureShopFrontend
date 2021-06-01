@@ -19,6 +19,14 @@ import { AdminItemModalComponent } from './components/admin-item-modal/admin-ite
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PointTrackerComponent } from './point-tracker/point-tracker.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AdminNewInventoryPageComponent } from './components/admin-new-inventory-page/admin-newinventory-page.component';
+import {MatIconModule} from "@angular/material/icon";
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
+
+
+export var itemImagesURL : string = "s3://revature-swag-shop-images";
+
 import { CheckoutConfirmationPageComponent } from './components/checkout-confirmation-page/checkout-confirmation-page.component';
 import { AdminAddPointsComponent } from './components/admin-add-points/admin-add-points.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
@@ -42,6 +50,9 @@ import { UserPageComponent } from './components/user-page/user-page.component';
         LandingPageComponent,
         PointTrackerComponent,
         PageNotFoundComponent,
+        AdminNewInventoryPageComponent,
+        FileUploaderComponent,
+        PageNotFoundComponent,
         CheckoutConfirmationPageComponent
     ],
     imports: [
@@ -53,7 +64,9 @@ import { UserPageComponent } from './components/user-page/user-page.component';
         AppRoutingModule,
         NgbModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatIconModule,
+        MaterialFileInputModule
     ],
     providers: [],
     bootstrap: [AppComponent]

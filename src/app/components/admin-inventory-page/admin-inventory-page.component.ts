@@ -18,10 +18,13 @@ export class AdminInventoryPageComponent implements OnInit {
   selectedItem : InventoryItem = new InventoryItem(1,"",1,1,"","");
   inStockChecked : boolean = true;
   outOfStockChecked : boolean = true;
+  
+  itemImagesURL : string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
 
   constructor(private _inventoryItemsService : InventoryItemsService,
     private router : Router,
     private httpUserInventoryService : HttpUserInventoryPageService) {
+      
 
    }
 
@@ -55,26 +58,20 @@ export class AdminInventoryPageComponent implements OnInit {
     var newQuantityInt = parseInt(newQuantity);
     if (!isNaN(newQuantityInt)) {
       if (newQuantityInt >= 0) {
+
         this,this.httpUserInventoryService.updateInventoryItemQuantity(inventoryItemToBeUpdated, newQuantityInt).subscribe(
           (couldUpdate) => {
-            
-              console.log("UPDATE QUANTITY RESPONSE RECEIVED: "+couldUpdate);
-              if (couldUpdate) {
+            if (couldUpdate) {
 
                 // Being lazy for now, fetching all inventory items again upon successfully updating an item quantity
-                // This will auto update inventoryItemsService.inventoryItems and therefore update the appearance
+                // This will auto update inventoryItemsService.inventoryItems and therefore update the displayed list of items
                 this.fetchInventoryItemsFromServer();
-
 
               }
               else {
 
-
-
               }
-
-              
-            
+ 
           }
         )
       }
@@ -127,6 +124,8 @@ export class AdminInventoryPageComponent implements OnInit {
 
   
   }
+
+  
 
 
   
