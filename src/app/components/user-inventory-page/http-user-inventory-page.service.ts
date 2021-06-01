@@ -8,8 +8,8 @@ import { InventoryItem } from 'src/app/services/inventory-items.service';
 })
 export class HttpUserInventoryPageService {
 
-  
-  
+
+
    baseServerURL = "http://localhost:9001/inventoryms/";
 
   httpHeadersJSON: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
@@ -33,7 +33,7 @@ export class HttpUserInventoryPageService {
 
    getInventoryItemsByCategory(category: string) : Observable<InventoryItem[]> {
 
-      var items: Observable<InventoryItem[]> =  this.http.post<InventoryItem[]>(this.baseServerURL + "/api/inventory/view/category", category,  this.httpOptionsTEXT);
+      var items: Observable<InventoryItem[]> =  this.http.post<InventoryItem[]>(this.baseServerURL + "/api/inventory/view/itemsbycategory", category,  this.httpOptionsTEXT);
       return items;
 
    }
@@ -43,7 +43,7 @@ export class HttpUserInventoryPageService {
       var updatedInventoryItem = {"id": inventoryItem.id, "itemName": inventoryItem.itemName, "itemPrice": inventoryItem.itemPrice, "quantity": newQuantity, "category": inventoryItem.category, "description": inventoryItem.description};
 
       var couldUpdate: Observable<boolean> = this.http.put<boolean>(this.baseServerURL + "/api/inventory/stockitem/update/quantity", updatedInventoryItem, this.httpOptionsJSON);
-      
+
       return couldUpdate;
 
    }

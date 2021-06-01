@@ -1,7 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {FileSelectDirective, FileUploader} from "ng2-file-upload";
 import { Observable } from 'rxjs';
 
 
@@ -32,30 +30,30 @@ export class FileUploaderComponent implements OnInit {
   @Output() fileSelectedEvent = new EventEmitter<File>();
 
 
-  
+
   constructor(private http: HttpClient) {
-    
+
 
    }
 
   ngOnInit(): void {
-    
+
   }
 
- 
+
 
 uploadFile(data: FormData): Observable<boolean> {
 
   var httpHeadersJSON: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   var httpOptionsJSON = { headers: httpHeadersJSON, withCredentials: true };
-    
+
   var aRequest = this.http.put<boolean>(this.baseServerURL + "/api/inventory/stockitem/update/addimage",
                                                   data, httpOptionsJSON);
 
   return aRequest;
 }
 
-  
+
 processFile(imageInput: any) {
   const file: File = imageInput.files[0];
 
@@ -77,9 +75,9 @@ processFile(imageInput: any) {
 
     /* Generate Image preview */
     var reader = new FileReader();
-    reader.readAsDataURL(file); 
-    reader.onload = (_event) => { 
-      this.imagePreviewURL = reader.result; 
+    reader.readAsDataURL(file);
+    reader.onload = (_event) => {
+      this.imagePreviewURL = reader.result;
     }
 
 
@@ -87,14 +85,14 @@ processFile(imageInput: any) {
 
   }
   else if (file && !(file.type == "image/png" || file.type == "image/jpeg" || file.type == "image/jpg")) {
-    
+
     this.currentImageUploadedNAME = "";
     this.imageUploadMessage = "Please enter a proper image format. (JPG, PNG)";
     this.imageFormatError = true;
     this.imageUploadFinished = false;
     this.xVisible = false;
     this.imagePreviewURL = "";
-    
+
   }
 
 }
@@ -108,5 +106,5 @@ removeImageToBeUploaded() : void {
   this.xVisible = false;
   this.imagePreviewURL = "";
 }
-  
+
 }
