@@ -29,9 +29,9 @@
     </div>
     <div class="row justify-content-end">
         <span class="row justify-content-end" data-bs-toggle="tooltip" title="You don't have enough points!">
-        <button class="btn btn-primary btn-lg my-3 mx-3 w-25"  disabled  *ngIf="shopperPoints<totalPrice">Checkout</button>
+        <button class="btn btn-primary btn-lg my-3 mx-3 w-25"  disabled  *ngIf="shopperPoints<totalPrice">Proceed to Checkout</button>
         </span>
-        <button class="btn btn-primary btn-lg my-3 mx-3 w-25" *ngIf="shopperPoints>totalPrice" (click) = "checkout()">Checkout</button>
+        <button class="btn btn-primary btn-lg my-3 mx-3 w-25" *ngIf="shopperPoints>=totalPrice" (click) = "checkout()">Proceed to Checkout</button>
     </div>
 </div>
 
