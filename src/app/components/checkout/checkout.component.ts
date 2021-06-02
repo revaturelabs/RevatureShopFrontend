@@ -96,7 +96,7 @@ export class CheckoutComponent {
             "date": new Date()
         };
         this.as.updatePoints(change);
-        this.cs.checkoutCart(this.checkoutCart);
+        this.cs.checkoutCart(this.checkoutCart).subscribe(()=>{});
     this.router.navigate(['confirmCheckout']).then(r =>{});
 
     }

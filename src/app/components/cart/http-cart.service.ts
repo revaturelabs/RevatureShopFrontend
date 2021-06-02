@@ -65,8 +65,8 @@ export class HttpCartService {
     //     return couldUpdate;
     // }
 
-    checkoutCart(userCart: any) {
-        this.http.post('http://localhost:9001/commercems/commerce/checkoutcart', userCart, this.httpOptionsJSON);
+    checkoutCart(userCart: any): Observable<any> {
+       return this.http.post('http://localhost:9001/commercems/commerce/checkoutcart', userCart, this.httpOptionsJSON);
     }
 
 }
