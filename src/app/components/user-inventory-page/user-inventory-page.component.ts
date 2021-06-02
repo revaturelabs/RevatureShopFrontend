@@ -64,32 +64,9 @@ export class UserInventoryPageComponent implements OnInit {
           this.filterListByStock();
 
           /*
-          *  Set an imageURL for each item since currently, the database does not store an imageURL for an item
-          */
-          this.inventoryItemsService.inventoryItems.forEach( item => {
-            item.imageURL = "../assets/images/white_t-shirt_1.jpg";
-            if (item.itemName.includes("Hat")) {
-              item.imageURL = "../assets/images/revitup_hat.png";
-            }
-            else if (item.itemName.includes("Like A Boss")) {
-              item.imageURL = "../assets/images/codelikeaboss_t-shirt.png";
-            }
-            else if (item.itemName.includes("Socks")) {
-              item.imageURL = "../assets/images/socks_1.jpg";
-            }
-
-
-          });
-
-
-
-          /*
             FILTERING
           */
             //this.inventoryItemsFiltered
-
-
-
 
         }
       )
