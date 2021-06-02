@@ -4,6 +4,7 @@ import {Order} from "../../services/user-page.service";
 
 import {FormBuilder, Validators} from "@angular/forms";
 import {AccountService} from "../../services/account.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -24,7 +25,7 @@ export class AdminAddPointsComponent implements OnInit {
 
 
 
-    constructor(public pointService: AdminAddPointsService,private fb: FormBuilder, private as: AccountService) {
+    constructor(public pointService: AdminAddPointsService,private fb: FormBuilder, private as: AccountService,private router: Router) {
     }
 
     ngOnInit(): void {
@@ -42,13 +43,15 @@ export class AdminAddPointsComponent implements OnInit {
         // @ts-ignore
         this.order.change = this.change;
         // @ts-ignore
-        console.log(this.email);
-        console.log(this.order);
+
         this.pointService.modifyPoints(this.email, this.order).subscribe(data =>  this.resetField(),error => this.handleError(error));
 
         if (this.as.account?.email== this.email){
             // @ts-ignore
+
             this.as.account.points += this.change;
+            this.as.login(this.email, () => this.router.navigateByUrl("/home"));
+
         }
     }
     handleError(error: any) {

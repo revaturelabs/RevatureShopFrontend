@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, pipe} from "rxjs";
 import {AccountService} from "./account.service";
 import { from } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {map, toArray} from 'rxjs/operators';
 
 export interface Order {
     change: number;
@@ -61,10 +61,10 @@ export class UserPageService {
 
     history(): Observable<Order[]> {
         console.log(this.accountService.account);
+
         // @ts-ignore
         this.email = this.accountService.account.email;
-        // @ts-ignore
-        this.previousOrders = this.accountService.account?.pointHistory;
+
         this.transactions = this.http.get <Order[]> (this.accountURL + '/pointHistory/' + this.id);
 
 
@@ -77,8 +77,13 @@ export class UserPageService {
 
     }
 
-    orders(): Observable<Order[]>{
+    orders(): Order[]{
         // @ts-ignore
+
+       // return this.http.get <Order[]> (this.accountURL + '/pointHistory/' + this.id).subscribe(data => {
+            //console.log(data);
+            //return data;
+        //});
         return this.accountService.account?.pointHistory ;
     }
 }

@@ -11,7 +11,7 @@ import {map, toArray} from "rxjs/operators";
 })
 export class UserPageComponent implements OnInit {
     // @ts-ignore
-    orderList: Observable<Order[]>;
+    orderList: Order[];
     // @ts-ignore
     historyList: Observable<Order[]>;
     table : boolean = false;
@@ -26,11 +26,13 @@ export class UserPageComponent implements OnInit {
     ngOnInit(): void {
         // this.orders().subscribe( data => this.orderList = data );
         this.orderList = this.userPageService.orders();
+        //console.log(this.orderList);
 
 
 
-        this.historyList = merge(this.userPageService.history(),this.userPageService.orders());
-
+       // this.historyList = merge(this.userPageService.history(),this.userPageService.orders());
+        //this.historyList = this.userPageService.history();
+        //console.log(this.historyList);
         // this.historyList = this.historyList
 
             // .pipe(map(results => results.sort((one, two) => { // @ts-ignore

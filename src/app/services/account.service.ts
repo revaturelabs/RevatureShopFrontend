@@ -3,7 +3,7 @@ import {Observable, of} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {CookieService} from "ngx-cookie";
 import {Router} from "@angular/router";
-import {Order} from "./user-page.service";
+import {Order, UserPageService} from "./user-page.service";
 
 
 export interface Account {
@@ -70,6 +70,7 @@ export class AccountService {
             this.cookies.put("email", account.email, {expires: new Date(Date.now() + 604800000)});
             callback();
         });
+
     }
 
     logout(): void {

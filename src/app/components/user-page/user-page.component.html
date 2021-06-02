@@ -16,7 +16,7 @@
 
     </div>
 </div>
-
+<!--
 <div class="container">
     <table class="table">
         <thead>
@@ -28,6 +28,27 @@
         </thead>
         <tbody >
         <tr  *ngFor="let order of historyList | async">
+
+            <td>{{order.date}}</td>
+            <td>{{order.cause}}</td>
+            <td [ngStyle]="{'color': order.change > 0 ? 'green' : 'red'}">{{(order.change > 0 ? "+" : "") + order.change}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+-->
+
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Description</th>
+            <th scope="col">Amount</th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr  *ngFor="let order of orderList">
 
             <td>{{order.date}}</td>
             <td>{{order.cause}}</td>
