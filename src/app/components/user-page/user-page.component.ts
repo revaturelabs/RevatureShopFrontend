@@ -46,9 +46,6 @@ export class UserPageComponent implements OnInit {
         return <Account>this.accountService.account;
     }
 
-    showTable() {
-        this.table = !this.table;
-    }
 
 
 
