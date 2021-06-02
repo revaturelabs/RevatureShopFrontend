@@ -69,7 +69,7 @@ export class UserPageService {
 
         // @ts-ignore
          return this.transactions.pipe(map(value => {
-             return value.map(each => ({cause:'Purchase', change : each.purchaseAmount, date: each.purchaseDate}))
+             return value.map(each => ({cause:'Shop Purchase', change : -each.purchaseAmount, date: each.purchaseDate}))
 
         }));
 

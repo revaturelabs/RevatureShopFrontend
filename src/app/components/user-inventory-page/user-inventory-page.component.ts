@@ -35,15 +35,15 @@ export class UserInventoryPageComponent implements OnInit {
 
     this.route.params.subscribe(params => {
 
-      
+
       let category = params['category'];
       this.categoryOfItems = category;
       this.fetchItemListByCategory(category);
     })
-    
-    
 
- 
+
+
+
 
 
   }
@@ -54,22 +54,22 @@ export class UserInventoryPageComponent implements OnInit {
 
   fetchItemListByCategory(category: string) {
 
-    if (category) {
-    
+    if (category != 'Catalog') {
+
       this.httpUserInventoryService.getInventoryItemsByCategory( category.toString() ).subscribe(
 
         itemsList => {
           console.log("RESPONSE RECEIVED: "+itemsList);
           this.inventoryItemsService.inventoryItems = itemsList;
           this.filterListByStock();
-      
+
           /*
           *  Set an imageURL for each item since currently, the database does not store an imageURL for an item
           */
           this.inventoryItemsService.inventoryItems.forEach( item => {
-            item.imageURL = "../assets/images/white_t-shirt_1.jpg"; 
+            item.imageURL = "../assets/images/white_t-shirt_1.jpg";
             if (item.itemName.includes("Hat")) {
-              item.imageURL = "../assets/images/revitup_hat.png";  
+              item.imageURL = "../assets/images/revitup_hat.png";
             }
             else if (item.itemName.includes("Like A Boss")) {
               item.imageURL = "../assets/images/codelikeaboss_t-shirt.png";
@@ -77,13 +77,13 @@ export class UserInventoryPageComponent implements OnInit {
             else if (item.itemName.includes("Socks")) {
               item.imageURL = "../assets/images/socks_1.jpg";
             }
-            
-            
+
+
           });
 
 
 
-          /* 
+          /*
             FILTERING
           */
             //this.inventoryItemsFiltered
@@ -95,12 +95,18 @@ export class UserInventoryPageComponent implements OnInit {
       )
 
     }
+    else{
+        this.httpUserInventoryService.getAllInventoryItems().subscribe(itemsList=>{
+            this.inventoryItemsService.inventoryItems = itemsList;
+            this.filterListByStock();
+        });
+    }
   }
 
   itemClicked(selectedItem : InventoryItem) {
     console.log("ITEM CLICKED")
     this.selectedItem = selectedItem;
-    
+
   }
 
   pageSelected() {
@@ -109,15 +115,15 @@ export class UserInventoryPageComponent implements OnInit {
   }
 
   filterListByStock() {
-    
+
     /*
       Filter by stock status
     */
     this.inventoryItemsFiltered = this._inventoryItemsService.inventoryItems.filter(element => {
       return (this.inStockChecked && element.quantity > 0) || (this.outOfStockChecked && element.quantity == 0);
   });
-    
 
-  
+
+
   }
 }
