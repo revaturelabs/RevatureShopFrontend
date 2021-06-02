@@ -52,6 +52,7 @@ export class CheckoutService {
             }
         ).subscribe(account => {
             this.as._account = account;
+            console.log(account);
 
 
         });
