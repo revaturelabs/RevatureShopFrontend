@@ -91,7 +91,8 @@ export class CheckoutComponent {
 
     checkout() {
         this.cs.checkoutCart(this.checkoutCart).subscribe(()=>{});
-        this.as.login(<string>this.as.account?.email, ()=>{});
+        // @ts-ignore
+        this.as.account.points = this.pointsAfterMath;
     this.router.navigate(['confirmCheckout']).then(r =>{});
 
     }
