@@ -26,6 +26,7 @@ export class AdminNewInventoryPageComponent implements OnInit {
     quantity: number = 0;
 
     missingInput = false; 
+    itemNameAlreadyExists = false;
 
     imageFileToUpload!: File;
 
@@ -45,8 +46,6 @@ export class AdminNewInventoryPageComponent implements OnInit {
 
     addNewItem() : void {
 
-
-      console.log("ADD NEW ITEM FUNCTION.");
         
         if (!this.title
           || !this.price
@@ -80,17 +79,17 @@ export class AdminNewInventoryPageComponent implements OnInit {
 
         //  upload the InventoryItem
         this.imageUploadProgress = "Uploading image..."
-        this.http.put<boolean>(newItemURL,this.itemConvert).subscribe(newItemID =>{
-          console.log("UPLOAD NEW ITEM RESPONSE RECEIVED. resp = "+newItemID);
-  
+        this.http.put<number>(newItemURL,this.itemConvert).subscribe(newItemID =>{
+
+            // newItemID is -1 if item name already exists
+            if (newItemID == -1) {
+              this.itemNameAlreadyExists = true;
+              this.imageUploadProgress = "";
+              return;
+            }
             // then upload each image
             const data = new FormData();
 
-            console.log("Item ID as string = "+newItemID);
-
-            //data.append('id', newItemID.toString());
-
-            /* FOR HARD-UPLOADING SOME IMAGES FOR OUR DATA BATCH */
             data.append('id', newItemID.toString());
 
             data.append('image', this.imageFileToUpload);
@@ -100,6 +99,7 @@ export class AdminNewInventoryPageComponent implements OnInit {
                 console.log("RESPONSE FOR IMG UPLOAD RECEIVED");
                 this.imageUploadProgress = "Image successfully uploaded";
                 this.itemFinishedBeingCreated = true;
+
 
             });
 
@@ -114,15 +114,12 @@ export class AdminNewInventoryPageComponent implements OnInit {
 
 
 
-
+        /* FOR HARD-UPLOADING SOME IMAGES FOR OUR DATA BATCH */
         uploadImageAlone() {
 
-          console.log("ADD NEW ITEM FUNCTION.");
-        
           if (
               !this.imageFileToUpload  
             ) {
-              console.log("    mIsSiNg iNpUt!!!!");
               this.missingInput = true;
               return;
             
@@ -130,27 +127,19 @@ export class AdminNewInventoryPageComponent implements OnInit {
   
           this.missingInput = false;
           
-  
-          
           let newImageURL = "http://localhost:9001/inventoryms/api/inventory/stockitem/update/addimage";
   
   
           //  upload the InventoryItem
           this.imageUploadProgress = "Uploading image..."
           
-          
               // then upload each image
               const data = new FormData();
-  
-              
-  
-              //data.append('id', newItemID.toString());
-  
-              /* FOR HARD-UPLOADING SOME IMAGES FOR OUR DATA BATCH */
-              data.append('id', "30");
+      
+              data.append('id', "2");
   
               data.append('image', this.imageFileToUpload);
-              // {observe: 'response'} at end
+              
               this.http.put<boolean>(newImageURL,data,{observe: 'response'}).subscribe(data =>{
   
                   console.log("RESPONSE FOR IMG UPLOAD RECEIVED");
@@ -160,14 +149,10 @@ export class AdminNewInventoryPageComponent implements OnInit {
               });
   
           
-  
-
-          
         }
 
         setFileSelected(imageFile : File) {
           this.imageFileToUpload = imageFile;
-          console.log("NEW FILE TO UPLOAD!: Name = "+this.imageFileToUpload.name);
         }
 
 

@@ -35,10 +35,11 @@ export class UserInventoryPageComponent implements OnInit {
 
     this.route.params.subscribe(params => {
 
-
       let category = params['category'];
+      console.log("Loading Inventory List for Category = "+category);
       this.categoryOfItems = category;
       this.fetchItemListByCategory(category);
+
     })
 
 

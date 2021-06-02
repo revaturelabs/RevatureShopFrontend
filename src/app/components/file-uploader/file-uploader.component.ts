@@ -58,14 +58,13 @@ processFile(imageInput: any) {
   const file: File = imageInput.files[0];
 
   if (file) {
-    console.log("file.name = "+file.name+".  file.type = "+file.type);
+
   }
   if (!file) {
     this.currentImageUploadedNAME = "";
   }
 
   if (file && (file.type == "image/png" || file.type == "image/jpeg" || file.type == "image/jpg")) {
-    console.log("Valid image");
     /*   VALID IMAGE   */
     this.currentImageUploadedNAME = file.name;
     this.imageUploadMessage = file.name;
