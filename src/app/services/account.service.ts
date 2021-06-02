@@ -30,9 +30,9 @@ export interface PointChange {
     providedIn: 'root'
 })
 export class AccountService {
-    private endpoint: string = "http://localhost:9001/accountsms/api/account/";
+    endpoint: string = "http://localhost:9001/accountsms/api/account/";
 
-    private _account: Account | null = null;
+    _account: Account | null = null;
 
     constructor(private http: HttpClient, private cookies: CookieService, private router: Router) {
     }
