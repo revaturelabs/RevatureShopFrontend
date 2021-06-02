@@ -88,7 +88,11 @@ export class AdminNewInventoryPageComponent implements OnInit {
 
             console.log("Item ID as string = "+newItemID);
 
-            data.append('id', "2");
+            //data.append('id', newItemID.toString());
+
+            /* FOR HARD-UPLOADING SOME IMAGES FOR OUR DATA BATCH */
+            data.append('id', newItemID.toString());
+
             data.append('image', this.imageFileToUpload);
             // {observe: 'response'} at end
             this.http.put<boolean>(newImageURL,data,{observe: 'response'}).subscribe(data =>{
@@ -108,6 +112,58 @@ export class AdminNewInventoryPageComponent implements OnInit {
 
         }
 
+
+
+
+        uploadImageAlone() {
+
+          console.log("ADD NEW ITEM FUNCTION.");
+        
+          if (
+              !this.imageFileToUpload  
+            ) {
+              console.log("    mIsSiNg iNpUt!!!!");
+              this.missingInput = true;
+              return;
+            
+          }
+  
+          this.missingInput = false;
+          
+  
+          
+          let newImageURL = "http://localhost:9001/inventoryms/api/inventory/stockitem/update/addimage";
+  
+  
+          //  upload the InventoryItem
+          this.imageUploadProgress = "Uploading image..."
+          
+          
+              // then upload each image
+              const data = new FormData();
+  
+              
+  
+              //data.append('id', newItemID.toString());
+  
+              /* FOR HARD-UPLOADING SOME IMAGES FOR OUR DATA BATCH */
+              data.append('id', "30");
+  
+              data.append('image', this.imageFileToUpload);
+              // {observe: 'response'} at end
+              this.http.put<boolean>(newImageURL,data,{observe: 'response'}).subscribe(data =>{
+  
+                  console.log("RESPONSE FOR IMG UPLOAD RECEIVED");
+                  this.imageUploadProgress = "Image successfully uploaded";
+                  this.itemFinishedBeingCreated = true;
+  
+              });
+  
+          
+  
+
+          
+        }
 
         setFileSelected(imageFile : File) {
           this.imageFileToUpload = imageFile;

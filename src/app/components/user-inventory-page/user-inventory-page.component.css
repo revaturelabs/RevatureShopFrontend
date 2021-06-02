@@ -17,7 +17,7 @@
     flex-direction: column;
 
     /* min and max width */
-    max-width: 1180px;
+    max-width: 1235px;
     min-width: 342px;
 
     /* Margins */
@@ -31,7 +31,7 @@
 
 .title-and-inventory-grid {
 
-    width: 1135px;
+    width: 1235px;
 
 }
 
@@ -39,7 +39,7 @@
 .title-and-inventory-grid {
 
 
-    width: 850px;
+    width: 880px;
 
 
 }
@@ -129,7 +129,7 @@
   border-radius: 0.20em;
   border-color: rgb(95, 95, 95);
   background-color: rgb(244, 247, 253);
-  width: 276px;
+  width: 270px;
   height:405px;
   text-overflow: ellipsis;
   text-align: center;
