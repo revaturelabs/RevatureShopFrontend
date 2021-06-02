@@ -29,11 +29,12 @@
             <th scope="col">Amount</th>
         </tr>
         </thead>
-        <tbody>
-        <tr *ngFor="let order of orderList">
+        <tbody >
+        <tr  *ngFor="let order of historyList | async">
+
             <td>{{order.date}}</td>
-            <td>{{order.description}}</td>
-            <td [ngStyle]="{'color': order.amount > 0 ? 'green' : 'red'}">{{(order.amount > 0 ? "+" : "") + order.amount}}</td>
+            <td>{{order.cause}}</td>
+            <td [ngStyle]="{'color': order.change > 0 ? 'green' : 'red'}">{{(order.change > 0 ? "+" : "") + order.change}}</td>
         </tr>
         </tbody>
     </table>

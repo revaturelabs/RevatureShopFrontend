@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AccountService} from "./account.service";
+import { from } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface Order {
     change: number;
@@ -9,14 +11,22 @@ export interface Order {
     cause: string;
 }
 
+export interface purchaseHistory {
+    myShopper : string;
+    purchaseDate : Date;
+    itemName : string;
+    itemQuantity : number;
+    itemPrice : number;
+    purchaseAmount : number;
+}
 @Injectable({
     providedIn: 'root'
 })
 export class UserPageService {
     // @ts-ignore
-    orderList: Order[] = []
+    orderList: purchaseHistory[] = []
     // @ts-ignore
-    transactions: Observable<Order[]>;
+    transactions: Observable<purchaseHistory[]>;
     // @ts-ignore
     previousOrders: Order[];
     commerceURL: string = 'http://localhost:9001/commercems/commerce';
@@ -41,28 +51,33 @@ export class UserPageService {
         {change: -3000, date: new Date(), cause: ""},
         {change: 30, date: new Date(), cause: ""},
     ];
+    // @ts-ignore
+    private order: Order;
 
     constructor(private http: HttpClient, private accountService: AccountService) {
     }
 
-    orders(): Order[] {
+    history(): Observable<Order[]> {
         console.log(this.accountService.account);
         // @ts-ignore
         this.email = this.accountService.account.email;
         // @ts-ignore
         this.previousOrders = this.accountService.account?.pointHistory;
-        this.transactions = this.http.get<Order[]>(this.accountURL + '/myOrderHistory/' + this.email);
+        this.transactions = this.http.get <purchaseHistory[]> (this.commerceURL + '/myOrderHistory/' + this.email);
+
+
+
         // @ts-ignore
-        //this.pointChanges = this.accountService.account.pointsHistory;
+         return this.transactions.pipe(map(value => {
+             return value.map(each => ({cause:'Purchase', change : each.purchaseAmount, date: each.purchaseDate}))
 
-        this.transactions.subscribe(data => this.orderList = data);
+        }));
 
-        //this.orderList.concat(this.previousOrders);
 
-        this.orderList = this.orderList.concat(this.temp1);
-        this.orderList = this.orderList.concat(this.temp2);
-        console.log(this.orderList);
+    }
 
-        return this.orderList;
+    orders(): Observable<Order[]>{
+        // @ts-ignore
+        return this.accountService.account?.pointHistory ;
     }
 }

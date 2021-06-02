@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountService, Account, PointChange} from "../../services/account.service";
-import {UserPageService} from "../../services/user-page.service";
+import {Order, purchaseHistory, UserPageService} from "../../services/user-page.service";
+import {Observable, merge, from, pipe} from "rxjs";
+import {map, toArray} from "rxjs/operators";
 
 @Component({
     selector: 'app-user-page',
@@ -9,9 +11,12 @@ import {UserPageService} from "../../services/user-page.service";
 })
 export class UserPageComponent implements OnInit {
     // @ts-ignore
-    orderList: Order[];
-    table : boolean = true;
+    orderList: Observable<Order[]>;
+    // @ts-ignore
+    historyList: Observable<Order[]>;
+    table : boolean = false;
     rowColor: string = "black";
+    isLoaded: boolean = false;
 
 
     constructor(private accountService: AccountService, private userPageService: UserPageService) {
@@ -21,8 +26,19 @@ export class UserPageComponent implements OnInit {
     ngOnInit(): void {
         // this.orders().subscribe( data => this.orderList = data );
         this.orderList = this.userPageService.orders();
-        this.orderList.sort((one, two) => {return (two.date) - (one.date)})
 
+
+
+        this.historyList = merge(this.userPageService.history(),this.userPageService.orders());
+
+        // this.historyList = this.historyList
+
+            // .pipe(map(results => results.sort((one, two) => { // @ts-ignore
+            // return (one.change) - (two.change)  })));
+
+
+        //this.orderList.sort((one, two) => { // @ts-ignore
+           // return (two.date) - (one.date)})
 
     }
 
@@ -33,4 +49,7 @@ export class UserPageComponent implements OnInit {
     showTable() {
         this.table = !this.table;
     }
+
+
+
 }
