@@ -26,12 +26,13 @@ export class UserPageService {
     // @ts-ignore
     orderList: purchaseHistory[] = []
     // @ts-ignore
-    transactions: Observable<purchaseHistory[]>;
+    transactions: Observable<Order[]>;
     // @ts-ignore
     previousOrders: Order[];
     commerceURL: string = 'http://localhost:9001/commercems/commerce';
-    accountURL: string = 'http://localhost:9001/commercems/commerce';
+    accountURL: string = 'http://localhost:9001/accountsms/api/account';
     email: string = '';
+    id: number = 0;
     // @ts-ignore
     temp1: Order[] = [
         {change: -30, date: new Date('Fri, 01 Jan 1971 00:00:00 GMT'), cause: ""},
@@ -55,6 +56,7 @@ export class UserPageService {
     private order: Order;
 
     constructor(private http: HttpClient, private accountService: AccountService) {
+        this.id = <number>this.accountService.account?.id;
     }
 
     history(): Observable<Order[]> {
@@ -63,14 +65,13 @@ export class UserPageService {
         this.email = this.accountService.account.email;
         // @ts-ignore
         this.previousOrders = this.accountService.account?.pointHistory;
-        this.transactions = this.http.get <purchaseHistory[]> (this.commerceURL + '/myOrderHistory/' + this.email);
+        this.transactions = this.http.get <Order[]> (this.accountURL + '/pointHistory/' + this.id);
 
 
 
         // @ts-ignore
          return this.transactions.pipe(map(value => {
-             return value.map(each => ({cause:'Shop Purchase', change : -each.purchaseAmount, date: each.purchaseDate}))
-
+             return value.map(each => ({cause: each.cause, change : each.change, date: each.date}))
         }));
 
 

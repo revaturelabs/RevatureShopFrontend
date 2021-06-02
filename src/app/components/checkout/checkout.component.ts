@@ -90,13 +90,8 @@ export class CheckoutComponent {
     }
 
     checkout() {
-        let change: PointChange = {
-            "cause": 'Purchase from shop',
-            "change": this.pointsAfterMath,
-            "date": new Date()
-        };
-        this.as.updatePoints(change);
         this.cs.checkoutCart(this.checkoutCart).subscribe(()=>{});
+        this.as.login(<string>this.as.account?.email, ()=>{});
     this.router.navigate(['confirmCheckout']).then(r =>{});
 
     }
@@ -104,4 +99,6 @@ export class CheckoutComponent {
     get account(): Account {
         return <Account>this.as.account;
     }
+
+
 }
