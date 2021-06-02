@@ -22,7 +22,7 @@ export class CartComponent implements OnInit {
     totalPrice:number;
     loggedShopper: string = '';
     shopperPoints: number = 0;
-
+    itemImagesURL : string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
 
   constructor(private http: HttpClient, private httpCartService: HttpCartService, private accountsService: AccountService, private router: Router) {
       this.cartItems = new Array<InventoryItem>();
@@ -70,17 +70,9 @@ export class CartComponent implements OnInit {
 
 
 
-    getItemImage(itemName: string): string{
-        if (itemName.includes("Hat")) {
-            return "../assets/images/revitup_hat.png";
-        }
-        else if (itemName.includes("Like A Boss")) {
-            return "../assets/images/codelikeaboss_t-shirt.png";
-        }
-        else if (itemName.includes("Socks")) {
-            return "../assets/images/socks_1.jpg";
-        }
-        return '';
+    getItemImage(item: InventoryItem): string{
+        
+        return this.itemImagesURL + '/' + item.id;
     }
 
     getCartQuantity(itemName: string): number {
