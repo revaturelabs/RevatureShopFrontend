@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AccountService, Account, PointChange} from "../../services/account.service";
-import {Order, purchaseHistory, UserPageService} from "../../services/user-page.service";
-import {Observable, merge, from, pipe} from "rxjs";
-import {map, toArray} from "rxjs/operators";
+import {AccountService, Account} from "../../services/account.service";
+import {Order, UserPageService} from "../../services/user-page.service";
 
 @Component({
     selector: 'app-user-page',
@@ -11,42 +9,18 @@ import {map, toArray} from "rxjs/operators";
 })
 export class UserPageComponent implements OnInit {
     // @ts-ignore
-    orderList: Observable<Order[]>;
-    // @ts-ignore
     historyList: Order[];
-    table : boolean = false;
-    rowColor: string = "black";
-    isLoaded: boolean = false;
-
 
     constructor(private accountService: AccountService, private userPageService: UserPageService) {
-
     }
 
     ngOnInit(): void {
-        // this.orders().subscribe( data => this.orderList = data );
-        //this.orderList = this.userPageService.orders();
-
-
-
-        //this.historyList = merge(this.userPageService.history(),this.userPageService.orders());
-        this.historyList = this.userPageService.orders();
-        // this.historyList = this.historyList
-
-            // .pipe(map(results => results.sort((one, two) => { // @ts-ignore
-            // return (one.change) - (two.change)  })));
-
-
-        //this.orderList.sort((one, two) => { // @ts-ignore
-           // return (two.date) - (one.date)})
-
+        this.userPageService.history().subscribe(history => {
+            this.historyList = history.map(each => ({cause: each.cause, change: each.change, date: each.date}))
+        });
     }
 
     get accountInfo() {
         return <Account>this.accountService.account;
     }
-
-
-
-
 }
