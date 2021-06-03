@@ -13,7 +13,7 @@ export interface Order {
     providedIn: 'root'
 })
 export class UserPageService {
-    accountURL: string = 'http://localhost:9001/accountsms/api/account';
+    accountURL: string = "http://" + window.location.hostname + ":9001/accountsms/api/account";
 
     constructor(private http: HttpClient, private accountService: AccountService) {
     }

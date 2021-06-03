@@ -145,7 +145,7 @@ export class AdminNewInventoryPageComponent implements OnInit {
 
           this.missingInput = false;
 
-          let newImageURL = "http://localhost:9001/inventoryms/api/inventory/stockitem/update/addimage";
+          let newImageURL = "http://" + window.location.hostname + ":9001/inventoryms/api/inventory/stockitem/update/addimage";
 
 
           //  upload the InventoryItem
