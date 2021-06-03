@@ -93,7 +93,7 @@ export class CheckoutComponent {
         this.cs.checkoutCart(this.checkoutCart).subscribe(()=>{});
         // @ts-ignore
         this.as.account.points = this.pointsAfterMath;
-
+       this.cs.totalItems = 0;
     this.router.navigate(['confirmCheckout']).then(r =>{});
 
     }

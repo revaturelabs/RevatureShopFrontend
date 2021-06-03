@@ -39,9 +39,11 @@
               title="You don't have enough points!">
         <button class="btn btn-primary btn-lg my-3 mx-3 w-25" disabled *ngIf="isDisabled">Proceed to Checkout</button>
         </span>
+        <span class="row justify-content-end">
         <button class="btn btn-primary btn-lg my-3 mx-3 w-25" *ngIf="!isDisabled" (click)="checkout()">Proceed to
             Checkout
         </button>
+            </span>
     </div>
 </div>
 
