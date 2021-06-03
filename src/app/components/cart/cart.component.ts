@@ -107,12 +107,16 @@ export class CartComponent implements OnInit {
     }
 
     get isDisabled(): boolean {
+        let btn = document.getElementById("btnMessage");
+
         if (this.shopperPoints < this.totalPrice) {
-            // @ts-ignore
-            document.getElementById("btnMessage").setAttribute("title", "You don't have enough points!");
+            if (btn) {
+                btn.setAttribute("title", "You don't have enough points!");
+            }
         } else if (this.httpCartService.totalItems == 0) {
-            // @ts-ignore
-            document.getElementById("btnMessage").setAttribute("title", "You cannot check out an empty cart");
+            if (btn) {
+                btn.setAttribute("title", "You cannot check out an empty cart");
+            }
         }
 
         return this.shopperPoints < this.totalPrice || this.httpCartService.totalItems == 0
