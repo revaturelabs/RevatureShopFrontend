@@ -1,9 +1,7 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { InventoryItem, InventoryItemsService } from '../../services/inventory-items.service'
 import { HttpUserInventoryPageService } from '../user-inventory-page/http-user-inventory-page.service';
-
 
 @Component({
   selector: 'app-admin-inventory-page',

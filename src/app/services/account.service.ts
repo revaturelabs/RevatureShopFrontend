@@ -3,7 +3,7 @@ import {Observable, of} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {CookieService} from "ngx-cookie";
 import {Router} from "@angular/router";
-import {Order, UserPageService} from "./user-page.service";
+import {Order} from "./user-page.service";
 
 
 export interface Account {

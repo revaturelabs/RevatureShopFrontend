@@ -15,7 +15,7 @@ import {Router} from "@angular/router";
 export class AdminAddPointsComponent implements OnInit {
 
     // @ts-ignore
-    myform : formGroup;
+    myform: formGroup;
     order: Order = {
         cause: '',
         change: 0,
@@ -23,58 +23,67 @@ export class AdminAddPointsComponent implements OnInit {
     };
     errorMessage: boolean = false;
 
-
-
-    constructor(public pointService: AdminAddPointsService,private fb: FormBuilder, private as: AccountService,private router: Router) {
+    constructor(public pointService: AdminAddPointsService, private fb: FormBuilder, private as: AccountService, private router: Router) {
     }
 
     ngOnInit(): void {
         this.myform = this.fb.group({
-            email : ['', Validators.required],
-            change : [0, Validators.required],
-            cause : ['', Validators.required]
+            email: ['', Validators.required],
+            change: [0, Validators.required],
+            cause: ['', Validators.required]
         })
     }
 
     updatePoints() {
-
         // @ts-ignore
         this.order.cause = this.cause;
         // @ts-ignore
         this.order.change = this.change;
         // @ts-ignore
 
-        this.pointService.modifyPoints(this.email, this.order).subscribe(data =>  {
-            if (this.as.account?.email== this.email){
+        this.pointService.modifyPoints(this.email, this.order).subscribe(data => {
+            if (this.as.account?.email == this.email) {
                 // @ts-ignore
-
                 this.as.account.points += this.change;
                 // @ts-ignore
-                this.as.login(this.email,()=>{});
-
+                this.as.login(this.email, () => {
+                });
             }
             this.resetField()
-        },error => this.handleError(error));
-
-
+        }, error => this.handleError(error));
     }
-    handleError(error: any) {
 
+    handleError(error: any) {
         this.myform.reset();
         this.errorMessage = true;
     }
 
     private resetField() {
-        // @ts-ignore
-        document.getElementById("addedAlert").setAttribute("class", "alert alert-warning alert-dismissible fade show")
+        let aAlert = document.getElementById("addedAlert");
+
+        if (aAlert) {
+            aAlert.setAttribute("class", "alert alert-warning alert-dismissible fade show");
+        }
+
         this.myform.reset();
         setTimeout(() => {
-            // @ts-ignore
-            document.getElementById("addedAlert").setAttribute("class", "alert alert-warning alert-dismissible fade")
+            let aAlert = document.getElementById("addedAlert");
+
+            if (aAlert) {
+                aAlert.setAttribute("class", "alert alert-warning alert-dismissible fade");
+            }
         }, 5000);
     }
 
-    get email(){return this.myform.get('email').value;}
-    get cause(){return this.myform.get('cause').value;}
-    get change(){return this.myform.get('change').value;}
+    get email() {
+        return this.myform.get('email').value;
+    }
+
+    get cause() {
+        return this.myform.get('cause').value;
+    }
+
+    get change() {
+        return this.myform.get('change').value;
+    }
 }

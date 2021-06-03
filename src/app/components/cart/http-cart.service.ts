@@ -3,14 +3,13 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {InventoryItem} from 'src/app/services/inventory-items.service';
 import {Cart} from "./cart.component";
-import {waitForAsync} from "@angular/core/testing";
 
 @Injectable({
     providedIn: 'root'
 })
 export class HttpCartService {
 
-    totalItems: number =0;
+    totalItems: number = 0;
 
     baseServerURL = "http://" + window.location.hostname + ":9001/commercems/";
 
@@ -19,35 +18,21 @@ export class HttpCartService {
     httpOptionsJSON = {headers: this.httpHeadersJSON, withCredentials: true};
     httpOptionsTEXT = {headers: this.httpHeadersTEXT, withCredentials: true};
 
-
     constructor(private http: HttpClient) {
-
     }
 
     getItemByName(itemName: string): Observable<InventoryItem> {
         // var items: Observable<InventoryItem[]> =  this.http.get<InventoryItem[]>(this.baseServerURL + "/api/inventory/view", this.httpOptionsJSON);
-        return this.http.get<InventoryItem>('http://localhost:9001/inventoryms/api/inventory/get/item/name?itemName=' + itemName);
+        return this.http.get<InventoryItem>("http://" + window.location.hostname + ":9001/inventoryms/api/inventory/get/item/name?itemName=" + itemName);
 
     }
 
     getCart(username: string): Observable<any> {
-        return this.http.get('http://localhost:9001/commercems/commerce/myCart/'+username);
-    }
-
-    removeItemFromCart(item: any) {
-        const itemDto = JSON.stringify({
-            myshopper: 'parkert77@gmail.com',
-            itemName: item.itemName,
-            itemPrice: item.itemPrice,
-            cartQuantity: 1,
-            category: item.category,
-            description: item.description
-        });
-        this.http.post('http://localhost:9001/commercems/commerce/removefromcart', itemDto, this.httpOptionsJSON).subscribe();
+        return this.http.get("http://" + window.location.hostname + ":9001/commercems/commerce/myCart/" + username);
     }
 
     updateCart(cart: Cart) {
-        this.http.post('http://localhost:9001/commercems/commerce/savecart', cart, this.httpOptionsJSON).subscribe((data)=>{
+        this.http.post("http://" + window.location.hostname + ":9001/commercems/commerce/savecart", cart, this.httpOptionsJSON).subscribe((data) => {
             this.updateItemNumber(data)
         });
     }
@@ -67,8 +52,8 @@ export class HttpCartService {
     //
     //     return couldUpdate;
     // }
-    updateItemNumber(cart:Object): number{
-        this.totalItems=0;
+    updateItemNumber(cart: Object): number {
+        this.totalItems = 0;
         let myCart: Cart = <Cart>cart;
         Object.keys(myCart.stockItemMap).forEach((itemName) => {
             // @ts-ignore
@@ -78,7 +63,6 @@ export class HttpCartService {
     }
 
     checkoutCart(userCart: any): Observable<any> {
-       return this.http.post('http://localhost:9001/commercems/commerce/checkoutcart', userCart, this.httpOptionsJSON);
+        return this.http.post("http://" + window.location.hostname + ":9001/commercems/commerce/checkoutcart", userCart, this.httpOptionsJSON);
     }
-
 }
