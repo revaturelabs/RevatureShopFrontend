@@ -77,7 +77,7 @@ export class UserPageService {
 
     }
 
-    orders(): Observable<Order[]>{
+    orders(): Order[]{
         // @ts-ignore
         return this.accountService.account?.pointHistory ;
     }

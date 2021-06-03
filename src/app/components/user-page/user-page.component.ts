@@ -13,7 +13,7 @@ export class UserPageComponent implements OnInit {
     // @ts-ignore
     orderList: Observable<Order[]>;
     // @ts-ignore
-    historyList: Observable<Order[]>;
+    historyList: Order[];
     table : boolean = false;
     rowColor: string = "black";
     isLoaded: boolean = false;
@@ -25,12 +25,12 @@ export class UserPageComponent implements OnInit {
 
     ngOnInit(): void {
         // this.orders().subscribe( data => this.orderList = data );
-        this.orderList = this.userPageService.orders();
+        //this.orderList = this.userPageService.orders();
 
 
 
-        this.historyList = merge(this.userPageService.history(),this.userPageService.orders());
-
+        //this.historyList = merge(this.userPageService.history(),this.userPageService.orders());
+        this.historyList = this.userPageService.orders();
         // this.historyList = this.historyList
 
             // .pipe(map(results => results.sort((one, two) => { // @ts-ignore

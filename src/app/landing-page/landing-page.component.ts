@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AccountService} from "../services/account.service";
 
 @Component({
   selector: 'app-landing-page',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private as : AccountService) {
+      // @ts-ignore
+      as.getUserInfo(as.account.email)
+  }
 
   ngOnInit(): void {
   }
