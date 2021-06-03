@@ -90,7 +90,10 @@ export class CheckoutComponent {
     }
 
     checkout() {
-        this.cs.checkoutCart(this.checkoutCart).subscribe(()=>{});
+        this.cs.checkoutCart(this.checkoutCart).subscribe(()=>{
+
+            this.as.account && this.as.getUserInfo(this.as.account.email);
+        });
         // @ts-ignore
         this.as.account.points = this.pointsAfterMath;
        this.cs.totalItems = 0;
