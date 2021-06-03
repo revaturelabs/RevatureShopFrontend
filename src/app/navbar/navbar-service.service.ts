@@ -28,12 +28,12 @@ export class NavbarServiceService {
         if (catS.includes("SHIRT") || catS.includes("SHIRTS") ||
         catS.includes("PANT") || catS.includes("PANTS") ||
         catS.includes("HAT") || catS.includes("HATS") ||
-        catS.includes("TANK-TOPS") || catS.includes("TANK-TOPS") ||
+        catS.includes("TANK-TOP") || catS.includes("TANK-TOPS") ||
         catS.includes("SWEATER") || catS.includes("SWEATERS") ||
-        catS.includes("GLOVE") || catS.includes("GLOVS") ||
-        catS.includes("SOCK") || catS.includes("SOCs") ||
-        catS.includes("MITTEN") || catS.includes("MITTEs") ||
-        catS.includes("UNDERWEAR") || catS.includes("UNDERWEArs") ||
+        catS.includes("GLOVE") || catS.includes("GLOVES") ||
+        catS.includes("SOCK") || catS.includes("SOCKS") ||
+        catS.includes("MITTEN") || catS.includes("MITTENS") ||
+        catS.includes("UNDERWEAR") || catS.includes("UNDERWEARS") ||
         catS.includes("BOXER") || catS.includes("BOXERS") ||
         catS.includes("TIE") || catS.includes("TIES") ||
         catS.includes("HAT") || catS.includes("HATS") ||
