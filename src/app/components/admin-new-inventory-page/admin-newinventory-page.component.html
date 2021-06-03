@@ -22,8 +22,8 @@
         <div style="display: flex; justify-content: space-between;">
             
             <div class="mb-3" style="width:300px;">
-                <label for="exampleFormControlInput1" class="form-label" style="margin-top:0px;">Category</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" [(ngModel)]="category">
+                <label for="exampleFormControlInput2" class="form-label" style="margin-top:0px;">Category</label>
+                <input type="text" class="form-control" id="exampleFormControlInput2" [(ngModel)]="category">
             </div>
 
             
@@ -76,6 +76,8 @@
       </div>
 
       <div *ngIf="missingInput" style="text-align: center; color:red">Missing input fields</div>
+      <div *ngIf="itemNameAlreadyExists" style="text-align: center; color:red">An item with that name already exists</div>
+      <div *ngIf="priceOrQuantityError" style="text-align: center; color:red">Price and quantity cannot be negative</div>
 </div>
 
 

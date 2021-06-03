@@ -4,6 +4,7 @@ import {InventoryItem, InventoryItemsService} from "../../services/inventory-ite
 import {Router} from "@angular/router";
 import {HttpUserInventoryPageService} from "../user-inventory-page/http-user-inventory-page.service";
 import {HttpClient} from "@angular/common/http";
+import { NavbarServiceService } from 'src/app/navbar/navbar-service.service';
 
 @Component({
   selector: 'app-admin-newinventory-page',
@@ -26,6 +27,8 @@ export class AdminNewInventoryPageComponent implements OnInit {
     quantity: number = 0;
 
     missingInput = false;
+    itemNameAlreadyExists = false;
+    priceOrQuantityError : boolean = false;
 
     imageFileToUpload!: File;
 
@@ -33,7 +36,8 @@ export class AdminNewInventoryPageComponent implements OnInit {
     imageUploadProgress : string = "";
 
 
-  constructor(private fb: FormBuilder, private router : Router, private http: HttpClient, inventoryService: InventoryItemsService ) {
+  constructor(private fb: FormBuilder, private router : Router, private http: HttpClient, inventoryService: InventoryItemsService,
+    private navbarService : NavbarServiceService ) {
      this.itemConvert = new InventoryItem(0,'',0,0,'','');
   }
 
@@ -46,8 +50,6 @@ export class AdminNewInventoryPageComponent implements OnInit {
     addNewItem() : void {
 
 
-      console.log("ADD NEW ITEM FUNCTION.");
-
         if (!this.title
           || !this.price
           || !this.quantity
@@ -55,13 +57,20 @@ export class AdminNewInventoryPageComponent implements OnInit {
           || !this.description
           || !this.imageFileToUpload
           || !(this.gender == "Men's" || this.gender == "Women's" || this.gender == "None") ) {
-            console.log("    mIsSiNg iNpUt!!!!");
+            this.priceOrQuantityError = false;
             this.missingInput = true;
             return;
-
         }
 
+        if (this.price < 0 || this.quantity < 0) {
+          this.priceOrQuantityError = true;
+          this.missingInput = false;
+          return;
+        }
+
+        this.category = this.removeGenderPhraseFromString(this.category);
         this.missingInput = false;
+        this.priceOrQuantityError = false;
 
         this.itemConvert.itemName = this.title;
         this.itemConvert.itemPrice = this.price;
@@ -80,26 +89,37 @@ export class AdminNewInventoryPageComponent implements OnInit {
 
         //  upload the InventoryItem
         this.imageUploadProgress = "Uploading image..."
-        this.http.put<boolean>(newItemURL,this.itemConvert).subscribe(newItemID =>{
-          console.log("UPLOAD NEW ITEM RESPONSE RECEIVED. resp = "+newItemID);
+        this.http.put<number>(newItemURL,this.itemConvert).subscribe(newItemID =>{
 
+            // newItemID is -1 if item name already exists
+            if (newItemID == -1) {
+              this.itemNameAlreadyExists = true;
+              this.imageUploadProgress = "";
+              return;
+            }
             // then upload each image
             const data = new FormData();
 
-            console.log("Item ID as string = "+newItemID);
-
-            //data.append('id', newItemID.toString());
-
-            /* FOR HARD-UPLOADING SOME IMAGES FOR OUR DATA BATCH */
             data.append('id', newItemID.toString());
 
             data.append('image', this.imageFileToUpload);
             // {observe: 'response'} at end
             this.http.put<boolean>(newImageURL,data,{observe: 'response'}).subscribe(data =>{
 
-                console.log("RESPONSE FOR IMG UPLOAD RECEIVED");
                 this.imageUploadProgress = "Image successfully uploaded";
                 this.itemFinishedBeingCreated = true;
+
+                // Since a new category may have been added, reload the nav bar
+                this.navbarService.getAllCategories().subscribe(
+                  categoryList => {
+                    //console.log("CATEGORY LIST RECEIVED = "+categoryList);
+
+                    this.navbarService.categories = categoryList;
+                    this.navbarService.categorizeCategoriesByClothingOrAccessory();
+
+                  }
+                )
+
 
             });
 
@@ -114,15 +134,12 @@ export class AdminNewInventoryPageComponent implements OnInit {
 
 
 
-
+        /* FOR HARD-UPLOADING SOME IMAGES FOR OUR DATA BATCH */
         uploadImageAlone() {
-
-          console.log("ADD NEW ITEM FUNCTION.");
 
           if (
               !this.imageFileToUpload
             ) {
-              console.log("    mIsSiNg iNpUt!!!!");
               this.missingInput = true;
               return;
 
@@ -130,37 +147,25 @@ export class AdminNewInventoryPageComponent implements OnInit {
 
           this.missingInput = false;
 
-
-
-          let newImageURL = "http://" + window.location.hostname + ":9001/inventoryms/api/inventory/stockitem/update/addimage";
+          let newImageURL = "http://localhost:9001/inventoryms/api/inventory/stockitem/update/addimage";
 
 
           //  upload the InventoryItem
           this.imageUploadProgress = "Uploading image..."
 
-
               // then upload each image
               const data = new FormData();
 
-
-
-              //data.append('id', newItemID.toString());
-
-              /* FOR HARD-UPLOADING SOME IMAGES FOR OUR DATA BATCH */
-              data.append('id', "30");
+              data.append('id', "2");
 
               data.append('image', this.imageFileToUpload);
-              // {observe: 'response'} at end
+
               this.http.put<boolean>(newImageURL,data,{observe: 'response'}).subscribe(data =>{
 
-                  console.log("RESPONSE FOR IMG UPLOAD RECEIVED");
                   this.imageUploadProgress = "Image successfully uploaded";
                   this.itemFinishedBeingCreated = true;
 
               });
-
-
-
 
 
         }
@@ -175,6 +180,43 @@ export class AdminNewInventoryPageComponent implements OnInit {
         refresh(): void {
           window.location.reload();
       }
+
+
+
+      removeGenderPhraseFromString(inputString : string) : string {
+
+        let aString : string = inputString;
+
+    // Convert all strings to uppercase
+    // Remote duplicate or nearly duplicate gender phrases
+
+      aString = aString.toLowerCase();
+      aString = aString.replace("womens", '');
+      aString = aString.replace("women's", '');
+      aString = aString.replace("women", '');
+
+      aString = aString.replace("mens",'');
+      aString = aString.replace("men's",'');
+      aString = aString.replace("men",'');
+
+
+      aString = aString.trim();
+      var stringSplit : string[] = aString.split(" ");
+
+      // Now capitalize the first letter of each word
+
+      var returnCategory = "";
+      for(let t = 0; t < stringSplit.length; t++) {
+        stringSplit[t]  = stringSplit[t].charAt(0).toUpperCase() + stringSplit[t].slice(1);
+        if (t != stringSplit.length - 1) {
+          stringSplit[t] = stringSplit[t] + ' ';
+        }
+        returnCategory = returnCategory + stringSplit[t];
+      }
+
+      aString = returnCategory;
+      return aString;
+    }
 
 
 }
