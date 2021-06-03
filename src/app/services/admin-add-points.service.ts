@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class AdminAddPointsService {
-    private endpoint: string = "http://localhost:9001/accountsms/api/account/";
+    private endpoint: string = "http://" + window.location.hostname + ":9001/accountsms/api/account/";
     // @ts-ignore
     private response: Observable<HttpResponse<string>>;
   constructor(private http: HttpClient ) {}

@@ -13,7 +13,7 @@ export class FileUploaderComponent implements OnInit {
 
 
 
-  baseServerURL: string = "http://localhost:9001/inventoryms/";
+  baseServerURL: string = "http://" + window.location.hostname + ":9001/inventoryms/";
   currentImageUploadedNAME : string = '';
 
   imageUploadFinished : boolean = false;

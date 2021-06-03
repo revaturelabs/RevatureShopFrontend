@@ -30,7 +30,7 @@ export interface PointChange {
     providedIn: 'root'
 })
 export class AccountService {
-    endpoint: string = "http://localhost:9001/accountsms/api/account/";
+    endpoint: string = "http://" + window.location.hostname + ":9001/accountsms/api/account/";
 
     _account: Account | null = null;
 

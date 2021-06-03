@@ -10,7 +10,7 @@ export class HttpUserInventoryPageService {
 
 
 
-   baseServerURL = "http://localhost:9001/inventoryms/";
+   baseServerURL = "http://" + window.location.hostname + ":9001/inventoryms/";
 
   httpHeadersJSON: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   httpHeadersTEXT: HttpHeaders = new HttpHeaders({'Content-Type': 'application/text'});

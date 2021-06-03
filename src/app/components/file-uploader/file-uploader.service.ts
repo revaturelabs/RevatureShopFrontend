@@ -8,14 +8,14 @@ import { Observable } from 'rxjs';
 })
 export class FileUploaderService {
 
-  baseServerURL = "http://localhost:9001/inventoryms/";
+  baseServerURL = "http://" + window.location.hostname + ":9001/inventoryms/";
 
   httpHeadersJSON: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   httpOptionsJSON = { headers: this.httpHeadersJSON, withCredentials: true, reportProgress: true};
 
 
-  
-  
+
+
 
 
 
@@ -29,7 +29,7 @@ export class FileUploaderService {
     var request: Observable<HttpEvent<any>> = this.http.post<HttpEvent<any>>(this.baseServerURL + "/api/inventory/stockitem/update/addimage",
                                                   formData, this.httpOptionsJSON);
 
-    
+
     return request;
   }
 

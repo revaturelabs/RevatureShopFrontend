@@ -13,7 +13,7 @@ import {HttpClient} from "@angular/common/http";
 export class AdminNewInventoryPageComponent implements OnInit {
 
     private itemConvert: InventoryItem;
-    
+
     itemFinishedBeingCreated : boolean = false;
 
 
@@ -25,7 +25,7 @@ export class AdminNewInventoryPageComponent implements OnInit {
     price: number = 0;
     quantity: number = 0;
 
-    missingInput = false; 
+    missingInput = false;
 
     imageFileToUpload!: File;
 
@@ -47,22 +47,22 @@ export class AdminNewInventoryPageComponent implements OnInit {
 
 
       console.log("ADD NEW ITEM FUNCTION.");
-        
+
         if (!this.title
           || !this.price
           || !this.quantity
           || !this.category
           || !this.description
-          || !this.imageFileToUpload  
+          || !this.imageFileToUpload
           || !(this.gender == "Men's" || this.gender == "Women's" || this.gender == "None") ) {
             console.log("    mIsSiNg iNpUt!!!!");
             this.missingInput = true;
             return;
-          
+
         }
 
         this.missingInput = false;
-        
+
         this.itemConvert.itemName = this.title;
         this.itemConvert.itemPrice = this.price;
         this.itemConvert.quantity = this.quantity;
@@ -74,15 +74,15 @@ export class AdminNewInventoryPageComponent implements OnInit {
           this.itemConvert.category = this.category;
         }
 
-        let newItemURL = "http://localhost:9001/inventoryms/api/inventory/stockitem/new";
-        let newImageURL = "http://localhost:9001/inventoryms/api/inventory/stockitem/update/addimage";
+        let newItemURL = "http://" + window.location.hostname + ":9001/inventoryms/api/inventory/stockitem/new";
+        let newImageURL = "http://" + window.location.hostname + ":9001/inventoryms/api/inventory/stockitem/update/addimage";
 
 
         //  upload the InventoryItem
         this.imageUploadProgress = "Uploading image..."
         this.http.put<boolean>(newItemURL,this.itemConvert).subscribe(newItemID =>{
           console.log("UPLOAD NEW ITEM RESPONSE RECEIVED. resp = "+newItemID);
-  
+
             // then upload each image
             const data = new FormData();
 
@@ -106,9 +106,9 @@ export class AdminNewInventoryPageComponent implements OnInit {
         });
 
 
-        
 
-        
+
+
 
         }
 
@@ -118,51 +118,51 @@ export class AdminNewInventoryPageComponent implements OnInit {
         uploadImageAlone() {
 
           console.log("ADD NEW ITEM FUNCTION.");
-        
+
           if (
-              !this.imageFileToUpload  
+              !this.imageFileToUpload
             ) {
               console.log("    mIsSiNg iNpUt!!!!");
               this.missingInput = true;
               return;
-            
+
           }
-  
+
           this.missingInput = false;
-          
-  
-          
-          let newImageURL = "http://localhost:9001/inventoryms/api/inventory/stockitem/update/addimage";
-  
-  
+
+
+
+          let newImageURL = "http://" + window.location.hostname + ":9001/inventoryms/api/inventory/stockitem/update/addimage";
+
+
           //  upload the InventoryItem
           this.imageUploadProgress = "Uploading image..."
-          
-          
+
+
               // then upload each image
               const data = new FormData();
-  
-              
-  
+
+
+
               //data.append('id', newItemID.toString());
-  
+
               /* FOR HARD-UPLOADING SOME IMAGES FOR OUR DATA BATCH */
               data.append('id', "30");
-  
+
               data.append('image', this.imageFileToUpload);
               // {observe: 'response'} at end
               this.http.put<boolean>(newImageURL,data,{observe: 'response'}).subscribe(data =>{
-  
+
                   console.log("RESPONSE FOR IMG UPLOAD RECEIVED");
                   this.imageUploadProgress = "Image successfully uploaded";
                   this.itemFinishedBeingCreated = true;
-  
-              });
-  
-          
-  
 
-          
+              });
+
+
+
+
+
         }
 
         setFileSelected(imageFile : File) {

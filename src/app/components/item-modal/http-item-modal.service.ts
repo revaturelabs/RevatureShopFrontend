@@ -9,7 +9,7 @@ import { InventoryItem } from 'src/app/services/inventory-items.service';
 export class HttpItemModalService {
 
 
-    baseServerURL = "http://localhost:9001/commercems/";
+    baseServerURL = "http://" + window.location.hostname + ":9001/commercems/";
 
     httpHeadersJSON: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
     httpHeadersTEXT: HttpHeaders = new HttpHeaders({'Content-Type': 'application/text'});
