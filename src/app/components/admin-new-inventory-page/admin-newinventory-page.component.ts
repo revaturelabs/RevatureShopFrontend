@@ -112,7 +112,6 @@ export class AdminNewInventoryPageComponent implements OnInit {
                 // Since a new category may have been added, reload the nav bar
                 this.navbarService.getAllCategories().subscribe(
                   categoryList => {
-                    //console.log("CATEGORY LIST RECEIVED = "+categoryList);
 
                     this.navbarService.categories = categoryList;
                     this.navbarService.categorizeCategoriesByClothingOrAccessory();
@@ -172,7 +171,6 @@ export class AdminNewInventoryPageComponent implements OnInit {
 
         setFileSelected(imageFile : File) {
           this.imageFileToUpload = imageFile;
-          console.log("NEW FILE TO UPLOAD!: Name = "+this.imageFileToUpload.name);
         }
 
 

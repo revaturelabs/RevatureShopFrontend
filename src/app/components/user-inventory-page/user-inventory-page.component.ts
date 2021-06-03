@@ -38,12 +38,12 @@ export class UserInventoryPageComponent implements OnInit {
 
     // Get shop category (clothing, accessories, etc.)
     //var category = this.route.snapshot.paramMap.get('category');
-    //console.log("User Inventory Page INIT: displaying category: "+category);
+
 
     this.route.params.subscribe(params => {
 
       let category = params['category'];
-      //console.log("Loading Inventory List for Category = "+category);
+
       this.categoryOfItems = category;
       this.fetchItemListByCategory(category);
 
@@ -63,7 +63,6 @@ export class UserInventoryPageComponent implements OnInit {
       this.httpUserInventoryService.getInventoryItemsByCategory( category.toString() ).subscribe(
 
         itemsList => {
-          //console.log("RESPONSE RECEIVED: "+itemsList);
           this.inventoryItemsService.inventoryItems = itemsList;
           this.applyAllFiltering();
         }
@@ -103,13 +102,12 @@ export class UserInventoryPageComponent implements OnInit {
     this.pageSize = this.itemsPerPage*(pageNum - 1);
     window.scrollTo(0,0);
   }
-  
+
   public changePagesize(num: number): void {
   this.itemsPerPage = this.pageSize + num;
 }
 
   applySortFilters() {
-    //console.log("sortMode = "+this.sortMode);
     // Sort By: None is the same as sort by item number (default)
     if (this.sortMode == "id asc") {
         this.inventoryItemsFiltered = this.inventoryItemsFiltered.sort(

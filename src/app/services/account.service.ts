@@ -97,9 +97,6 @@ export class AccountService {
             }
         ).subscribe(account => {
             this._account = account;
-            console.log(account);
-
-
         });
     }
 

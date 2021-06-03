@@ -20,7 +20,6 @@ export class NavbarComponent implements OnInit {
     // Load Categories into the NavBar
     this.navbarService.getAllCategories().subscribe(
       categoryList => {
-        //console.log("CATEGORY LIST RECEIVED = "+categoryList);
 
         this.navbarService.categories = categoryList;
         this.navbarService.categorizeCategoriesByClothingOrAccessory();
