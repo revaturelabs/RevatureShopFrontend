@@ -84,6 +84,24 @@ export class AccountService {
 
         return this._account;
     }
+    getUserInfo(email : string){
+
+
+
+        const body = new HttpParams()
+            .set('email', email);
+        this.http.post<Account>(this.endpoint + 'dummylogin',
+            body.toString(),
+            {
+                headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+            }
+        ).subscribe(account => {
+            this._account = account;
+            console.log(account);
+
+
+        });
+    }
 
 
 

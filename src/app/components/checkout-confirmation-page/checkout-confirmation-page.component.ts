@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NavigationStart, Router} from "@angular/router";
-import {CheckoutService} from "../../services/checkout.service";
+import {AccountService} from "../../services/account.service";
 
 @Component({
   selector: 'app-checkout-confirmation-page',
@@ -9,10 +9,13 @@ import {CheckoutService} from "../../services/checkout.service";
 })
 export class CheckoutConfirmationPageComponent implements OnInit {
 
-  constructor(private router: Router,private co: CheckoutService) { }
+  constructor(private router: Router,private as : AccountService) {
+      // @ts-ignore
+      as.getUserInfo(as.account.email)
+  }
 
   ngOnInit(): void {
-      this.co.getUserInfo();
+
       this.router.events.subscribe(event =>{
           if (event instanceof NavigationStart){
 

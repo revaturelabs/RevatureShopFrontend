@@ -27,7 +27,7 @@
         </tr>
         </thead>
         <tbody >
-        <tr  *ngFor="let order of historyList | async">
+        <tr  *ngFor="let order of historyList">
 
             <td>{{order.date}}</td>
             <td>{{order.cause}}</td>
@@ -47,8 +47,8 @@
             <th scope="col">Amount</th>
         </tr>
         </thead>
-        <tbody >
-        <tr  *ngFor="let order of orderList">
+        <tbody>
+        <tr *ngFor="let order of historyList">
 
             <td>{{order.date}}</td>
             <td>{{order.cause}}</td>
