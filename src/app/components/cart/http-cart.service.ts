@@ -3,7 +3,6 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {InventoryItem} from 'src/app/services/inventory-items.service';
 import {Cart} from "./cart.component";
-import {waitForAsync} from "@angular/core/testing";
 
 @Injectable({
     providedIn: 'root'

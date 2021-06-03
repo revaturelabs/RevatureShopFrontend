@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder} from "@angular/forms";
 import {InventoryItem, InventoryItemsService} from "../../services/inventory-items.service";
 import {Router} from "@angular/router";
-import {HttpUserInventoryPageService} from "../user-inventory-page/http-user-inventory-page.service";
 import {HttpClient} from "@angular/common/http";
 import { NavbarServiceService } from 'src/app/navbar/navbar-service.service';
 
