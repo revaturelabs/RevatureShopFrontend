@@ -10,6 +10,7 @@ import {waitForAsync} from "@angular/core/testing";
 })
 export class HttpCartService {
 
+    totalItems: number =0;
 
     baseServerURL = "http://" + window.location.hostname + ":9001/commercems/";
 
@@ -45,8 +46,10 @@ export class HttpCartService {
         this.http.post('http://localhost:9001/commercems/commerce/removefromcart', itemDto, this.httpOptionsJSON).subscribe();
     }
 
-    updateCart(cart: any) {
-        this.http.post('http://localhost:9001/commercems/commerce/savecart', cart, this.httpOptionsJSON).subscribe();
+    updateCart(cart: Cart) {
+        this.http.post('http://localhost:9001/commercems/commerce/savecart', cart, this.httpOptionsJSON).subscribe((data)=>{
+            this.updateItemNumber(data)
+        });
     }
 
     // getInventoryItemsByCategory(category: string) : Observable<InventoryItem[]> {
@@ -64,6 +67,15 @@ export class HttpCartService {
     //
     //     return couldUpdate;
     // }
+    updateItemNumber(cart:Object): number{
+        this.totalItems=0;
+        let myCart: Cart = <Cart>cart;
+        Object.keys(myCart.stockItemMap).forEach((itemName) => {
+            // @ts-ignore
+            this.totalItems += myCart.stockItemMap[itemName];
+        })
+        return this.totalItems;
+    }
 
     checkoutCart(userCart: any): Observable<any> {
        return this.http.post('http://localhost:9001/commercems/commerce/checkoutcart', userCart, this.httpOptionsJSON);

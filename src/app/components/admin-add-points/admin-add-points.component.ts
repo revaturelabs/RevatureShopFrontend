@@ -44,15 +44,19 @@ export class AdminAddPointsComponent implements OnInit {
         this.order.change = this.change;
         // @ts-ignore
 
-        this.pointService.modifyPoints(this.email, this.order).subscribe(data =>  this.resetField(),error => this.handleError(error));
+        this.pointService.modifyPoints(this.email, this.order).subscribe(data =>  {
+            if (this.as.account?.email== this.email){
+                // @ts-ignore
 
-        if (this.as.account?.email== this.email){
-            // @ts-ignore
+                this.as.account.points += this.change;
+                // @ts-ignore
+                this.as.login(this.email,()=>{});
 
-            this.as.account.points += this.change;
-            this.as.login(this.email, () => this.router.navigateByUrl("/home"));
+            }
+            this.resetField()
+        },error => this.handleError(error));
 
-        }
+
     }
     handleError(error: any) {
 
@@ -61,8 +65,13 @@ export class AdminAddPointsComponent implements OnInit {
     }
 
     private resetField() {
-
+        // @ts-ignore
+        document.getElementById("addedAlert").setAttribute("class", "alert alert-warning alert-dismissible fade show")
         this.myform.reset();
+        setTimeout(() => {
+            // @ts-ignore
+            document.getElementById("addedAlert").setAttribute("class", "alert alert-warning alert-dismissible fade")
+        }, 5000);
     }
 
     get email(){return this.myform.get('email').value;}

@@ -35,6 +35,10 @@ export class ItemModalComponent implements OnInit {
       document.getElementById("btnRapper").setAttribute('class', 'col-6');
       // @ts-ignore
       document.getElementById("customAlert").style.display = 'block';
+      setTimeout(() => {
+          // @ts-ignore
+          this.closeCustomAlert()
+      }, 2000);
   }
 
     closeCustomAlert() {
