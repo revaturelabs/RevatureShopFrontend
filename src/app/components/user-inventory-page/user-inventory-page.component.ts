@@ -14,11 +14,18 @@ export class UserInventoryPageComponent implements OnInit {
 
   categoryOfItems : string = '';
   inventoryItemsFiltered : InventoryItem[] = [];
-  page = 1;
-  pageSize = 12;
+
+  currentPage = 1;
+  itemsPerPage = 12;
+  pageSize: number = 0;
+
   selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "");
   inStockChecked : boolean = true;
   outOfStockChecked : boolean = false;
+
+  sortMode : string = "id asc";
+
+
 
   constructor(private _inventoryItemsService : InventoryItemsService,
     private router : Router,
@@ -36,15 +43,12 @@ export class UserInventoryPageComponent implements OnInit {
     this.route.params.subscribe(params => {
 
       let category = params['category'];
-      console.log("Loading Inventory List for Category = "+category);
+      //console.log("Loading Inventory List for Category = "+category);
       this.categoryOfItems = category;
       this.fetchItemListByCategory(category);
+      this.applySortFilters();
 
     })
-
-
-
-
 
 
   }
@@ -60,15 +64,10 @@ export class UserInventoryPageComponent implements OnInit {
       this.httpUserInventoryService.getInventoryItemsByCategory( category.toString() ).subscribe(
 
         itemsList => {
-          console.log("RESPONSE RECEIVED: "+itemsList);
+          //console.log("RESPONSE RECEIVED: "+itemsList);
           this.inventoryItemsService.inventoryItems = itemsList;
           this.filterListByStock();
-
-          /*
-            FILTERING
-          */
-            //this.inventoryItemsFiltered
-
+          this.applySortFilters();
         }
       )
 
@@ -77,18 +76,17 @@ export class UserInventoryPageComponent implements OnInit {
         this.httpUserInventoryService.getAllInventoryItems().subscribe(itemsList=>{
             this.inventoryItemsService.inventoryItems = itemsList;
             this.filterListByStock();
+            this.applySortFilters();
         });
     }
   }
 
   itemClicked(selectedItem : InventoryItem) {
-    console.log("ITEM CLICKED")
     this.selectedItem = selectedItem;
 
   }
 
   pageSelected() {
-    console.log("PAGE CHANGED");
     window.scrollTo(0,0);
   }
 
@@ -101,7 +99,70 @@ export class UserInventoryPageComponent implements OnInit {
       return (this.inStockChecked && element.quantity > 0) || (this.outOfStockChecked && element.quantity == 0);
   });
 
+  }
 
+
+  public onPageChange(pageNum: number): void {
+    this.pageSize = this.itemsPerPage*(pageNum - 1);
+    window.scrollTo(0,0);
+  }
+  
+  public changePagesize(num: number): void {
+  this.itemsPerPage = this.pageSize + num;
+}
+
+  applySortFilters() {
+    //console.log("sortMode = "+this.sortMode);
+    // Sort By: None is the same as sort by item number (default)
+    if (this.sortMode == "id asc") {
+        this.inventoryItemsFiltered = this.inventoryItemsFiltered.sort(
+          (invItem1, invItem2) => {
+            return invItem1.id - invItem2.id;
+          }
+        )
+    }
+    else if (this.sortMode == "price asc") {
+      this.inventoryItemsFiltered = this.inventoryItemsFiltered.sort(
+        (invItem1, invItem2) => {
+          return invItem1.itemPrice - invItem2.itemPrice;
+        }
+      )
+    }
+    else if (this.sortMode == "price desc") {
+      this.inventoryItemsFiltered = this.inventoryItemsFiltered.sort(
+        (invItem1, invItem2) => {
+          return invItem2.itemPrice - invItem1.itemPrice;
+        }
+      )
+    }
+    else if (this.sortMode == "name asc") {
+      this.inventoryItemsFiltered = this.inventoryItemsFiltered.sort(
+        (invItem1, invItem2) => {
+          if (invItem1.itemName < invItem2.itemName) {
+            return -1;
+          }
+          else if (invItem1.itemName > invItem2.itemName) {
+            return 1;
+          }
+          return 0;
+        }
+      )
+    }
+    else if (this.sortMode == "name desc") {
+      this.inventoryItemsFiltered = this.inventoryItemsFiltered.sort(
+        (invItem1, invItem2) => {
+          if (invItem1.itemName < invItem2.itemName) {
+            return 1;
+          }
+          else if (invItem1.itemName > invItem2.itemName) {
+            return -1;
+          }
+          return 0;
+        }
+      )
+    }
 
   }
+
+
 }

@@ -17,13 +17,19 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
 
+    console.log("");
+    console.log("");
+
     // Load Categories into the NavBar
-    /*this.navbarService.getAllCategories().subscribe(
+    this.navbarService.getAllCategories().subscribe(
       categoryList => {
         //console.log("CATEGORY LIST RECEIVED = "+categoryList);
+
         this.navbarService.categories = categoryList;
+        this.navbarService.categorizeCategoriesByClothingOrAccessory();
+
       }
-    )*/
+    )
 
   }
 

@@ -10,17 +10,13 @@
 
     <div class = "filtersAndTitle">
 
-        <div class="btn-group">
-            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: white; color:black;">
-              Sort by
-            </button>
-            <ul class="dropdown-menu">
-              <li  style="margin-left: 10px;">Price (ascending)</li>
-              <li  style="margin-left: 10px;">Price (descending)</li>
-              <li  style="margin-left: 10px;">Title</li>
-
-            </ul>
-          </div>
+      <select class="form-select" aria-label="Default select example" [(ngModel)]="sortMode" (change)="applySortFilters()" style="border-radius: 4px; width:165px; margin-right: 25px;">
+          <option value="id asc">Sort by</option>
+          <option value="price asc">Price (low to high)</option>
+          <option value="price desc">Price (high to low)</option>
+          <option value="name asc">Item name (A to Z)</option>
+          <option value="name desc">Item name (Z to A)</option>
+      </select>
           
           <div style="display: flex; flex-direction: row-reverse;">
             <div class="form-check" style="margin-right: 20px; margin-left: 12px;">
@@ -56,7 +52,7 @@
     <div class="inventory-grid" style="margin-top: 5px;" >
 
 
-                <div *ngFor="let item of this.inventoryItemsFiltered  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let indexOfelement=index;"
+                <div *ngFor="let item of this.inventoryItemsFiltered  | slice: pageSize | slice: 0:itemsPerPage; let indexOfelement=index;"
                  class="card"
                  [ngClass]="{'inStockItem' : item.quantity > 0, 'outOfStockItem' : item.quantity == 0}" >
                 
@@ -98,8 +94,7 @@
     </div>
 
     
-    <ngb-pagination [collectionSize]="this.inventoryItemsService.inventoryItems.length" [(page)]="page" aria-label="Custom pagination"
-                    (pageChange)="pageSelected()" >
+    <ngb-pagination [collectionSize]="this.inventoryItemsService.inventoryItems.length" #numPages [pageSize]="itemsPerPage" [(page)]="currentPage" (pageChange)="onPageChange(currentPage)" >
         <ng-template ngbPaginationPrevious>Prev</ng-template>
         <ng-template ngbPaginationNext>Next</ng-template>
       </ngb-pagination>

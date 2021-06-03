@@ -13,12 +13,18 @@ import { HttpUserInventoryPageService } from '../user-inventory-page/http-user-i
 export class AdminInventoryPageComponent implements OnInit {
 
   inventoryItemsFiltered : InventoryItem[] = [];
-  page = 1;
-  pageSize = 12;
+  
+  currentPage = 1;
+  itemsPerPage = 12;
+  pageSize: number = 0;
+
   selectedItem : InventoryItem = new InventoryItem(1,"",1,1,"","");
   inStockChecked : boolean = true;
   outOfStockChecked : boolean = true;
-  
+
+  sortMode : string = "id asc";
+
+
   itemImagesURL : string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
 
   constructor(private _inventoryItemsService : InventoryItemsService,
@@ -31,6 +37,7 @@ export class AdminInventoryPageComponent implements OnInit {
   ngOnInit(): void {
  
     this.fetchInventoryItemsFromServer();
+    this.applySortFilters();
 
   }
 
@@ -40,14 +47,12 @@ export class AdminInventoryPageComponent implements OnInit {
 
 
   itemClicked(selectedItem : InventoryItem) {
-    console.log("ITEM CLICKED")
     this.selectedItem = selectedItem;
     
   }
 
 
   pageSelected() {
-    console.log("PAGE CHANGED");
     window.scrollTo(0,0);
   }
 
@@ -66,6 +71,7 @@ export class AdminInventoryPageComponent implements OnInit {
                 // Being lazy for now, fetching all inventory items again upon successfully updating an item quantity
                 // This will auto update inventoryItemsService.inventoryItems and therefore update the displayed list of items
                 this.fetchInventoryItemsFromServer();
+                
 
               }
               else {
@@ -77,7 +83,7 @@ export class AdminInventoryPageComponent implements OnInit {
       }
     }
     else {
-      console.log("Not a number");
+      //console.log("Not a number");
     }
   }
 
@@ -85,31 +91,14 @@ export class AdminInventoryPageComponent implements OnInit {
 
     this.httpUserInventoryService.getAllInventoryItems().subscribe(
       itemsList => {
-        console.log("RESPONSE RECEIVED: "+itemsList);
         this.inventoryItemsService.inventoryItems = itemsList;
         
         this.filterListByStock();
-        /*
-        *  Set an imageURL for each item since currently, the database does not store an imageURL for an item
-        */
-       this.inventoryItemsService.inventoryItems.forEach( item => {
-        item.imageURL = "../assets/images/white_t-shirt_1.jpg"; 
-        if (item.itemName.includes("Hat")) {
-          item.imageURL = "../assets/images/revitup_hat.png";  
-        }
-        else if (item.itemName.includes("Like A Boss")) {
-          item.imageURL = "../assets/images/codelikeaboss_t-shirt.png";
-        }
-        else if (item.itemName.includes("Socks")) {
-          item.imageURL = "../assets/images/socks_1.jpg";
-        }
-         
-       });
-
+        this.applySortFilters();
+      
       }
     )
 
-    
   }
 
   filterListByStock() {
@@ -117,15 +106,75 @@ export class AdminInventoryPageComponent implements OnInit {
     /*
       Filter by stock status
     */
-    this.inventoryItemsFiltered = this._inventoryItemsService.inventoryItems.filter(element => {
-      return (this.inStockChecked && element.quantity > 0) || (this.outOfStockChecked && element.quantity == 0);
-  });
     
-
-  
+      this.inventoryItemsFiltered = this._inventoryItemsService.inventoryItems.filter(element => {
+        return (this.inStockChecked && element.quantity > 0) || (this.outOfStockChecked && element.quantity == 0);
+      });
+    
   }
 
+  public onPageChange(pageNum: number): void {
+    this.pageSize = this.itemsPerPage*(pageNum - 1);
+    window.scrollTo(0,0);
+  }
   
+  public changePagesize(num: number): void {
+  this.itemsPerPage = this.pageSize + num;
+}
+
+    applySortFilters() {
+    //console.log("sortMode = "+this.sortMode);
+    // Sort By: None is the same as sort by item number (default)
+    if (this.sortMode == "id asc") {
+        this.inventoryItemsFiltered = this.inventoryItemsFiltered.sort(
+          (invItem1, invItem2) => {
+            return invItem1.id - invItem2.id;
+          }
+        )
+    }
+    else if (this.sortMode == "price asc") {
+      this.inventoryItemsFiltered = this.inventoryItemsFiltered.sort(
+        (invItem1, invItem2) => {
+          return invItem1.itemPrice - invItem2.itemPrice;
+        }
+      )
+    }
+    else if (this.sortMode == "price desc") {
+      this.inventoryItemsFiltered = this.inventoryItemsFiltered.sort(
+        (invItem1, invItem2) => {
+          return invItem2.itemPrice - invItem1.itemPrice;
+        }
+      )
+    }
+    else if (this.sortMode == "name asc") {
+      this.inventoryItemsFiltered = this.inventoryItemsFiltered.sort(
+        (invItem1, invItem2) => {
+          if (invItem1.itemName < invItem2.itemName) {
+            return -1;
+          }
+          else if (invItem1.itemName > invItem2.itemName) {
+            return 1;
+          }
+          return 0;
+        }
+      )
+    }
+    else if (this.sortMode == "name desc") {
+      this.inventoryItemsFiltered = this.inventoryItemsFiltered.sort(
+        (invItem1, invItem2) => {
+          if (invItem1.itemName < invItem2.itemName) {
+            return 1;
+          }
+          else if (invItem1.itemName > invItem2.itemName) {
+            return -1;
+          }
+          return 0;
+        }
+      )
+    }
+
+  }
+
 
 
   
