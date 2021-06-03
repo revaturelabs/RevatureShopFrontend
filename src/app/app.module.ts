@@ -30,6 +30,7 @@ export var itemImagesURL : string = "s3://revature-swag-shop-images";
 import { CheckoutConfirmationPageComponent } from './components/checkout-confirmation-page/checkout-confirmation-page.component';
 import { AdminAddPointsComponent } from './components/admin-add-points/admin-add-points.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
+import {HttpCartService} from "./components/cart/http-cart.service";
 
 @NgModule({
     declarations: [
@@ -53,7 +54,7 @@ import { UserPageComponent } from './components/user-page/user-page.component';
         AdminNewInventoryPageComponent,
         FileUploaderComponent,
         PageNotFoundComponent,
-        CheckoutConfirmationPageComponent
+        CheckoutConfirmationPageComponent,
     ],
     imports: [
         BrowserModule,

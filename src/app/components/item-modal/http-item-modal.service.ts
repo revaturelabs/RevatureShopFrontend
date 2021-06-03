@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { InventoryItem } from 'src/app/services/inventory-items.service';
+import {HttpCartService} from "../cart/http-cart.service";
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +18,7 @@ export class HttpItemModalService {
     httpOptionsTEXT = {headers: this.httpHeadersTEXT, withCredentials: true};
 
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private cs: HttpCartService) {
 
     }
 
@@ -37,7 +38,7 @@ export class HttpItemModalService {
             "description": item.description
         });
 
-        this.http.put('http://localhost:9001/commercems/commerce/addtocart', itemDto, this.httpOptionsJSON).subscribe();
+        this.http.put('http://localhost:9001/commercems/commerce/addtocart', itemDto, this.httpOptionsJSON).subscribe(()=>{this.cs.totalItems++});
     }
 
 }

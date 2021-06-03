@@ -30,3 +30,7 @@ hr {
 .container {
     border-radius: 0.5rem;
 }
+
+#sadCartWrapper{
+    max-width: 100%;
+}
