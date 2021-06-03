@@ -93,8 +93,7 @@ export class AdminInventoryPageComponent implements OnInit {
       itemsList => {
         this.inventoryItemsService.inventoryItems = itemsList;
         
-        this.filterListByStock();
-        this.applySortFilters();
+        this.applyAllFiltering();
       
       }
     )
@@ -122,7 +121,7 @@ export class AdminInventoryPageComponent implements OnInit {
   this.itemsPerPage = this.pageSize + num;
 }
 
-    applySortFilters() {
+  applySortFilters() {
     //console.log("sortMode = "+this.sortMode);
     // Sort By: None is the same as sort by item number (default)
     if (this.sortMode == "id asc") {
@@ -176,6 +175,10 @@ export class AdminInventoryPageComponent implements OnInit {
   }
 
 
+  applyAllFiltering() {
+    this.filterListByStock();
+    this.applySortFilters();
+  }
 
   
   

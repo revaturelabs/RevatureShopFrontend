@@ -46,7 +46,6 @@ export class UserInventoryPageComponent implements OnInit {
       //console.log("Loading Inventory List for Category = "+category);
       this.categoryOfItems = category;
       this.fetchItemListByCategory(category);
-      this.applySortFilters();
 
     })
 
@@ -66,8 +65,7 @@ export class UserInventoryPageComponent implements OnInit {
         itemsList => {
           //console.log("RESPONSE RECEIVED: "+itemsList);
           this.inventoryItemsService.inventoryItems = itemsList;
-          this.filterListByStock();
-          this.applySortFilters();
+          this.applyAllFiltering();
         }
       )
 
@@ -75,8 +73,7 @@ export class UserInventoryPageComponent implements OnInit {
     else{
         this.httpUserInventoryService.getAllInventoryItems().subscribe(itemsList=>{
             this.inventoryItemsService.inventoryItems = itemsList;
-            this.filterListByStock();
-            this.applySortFilters();
+            this.applyAllFiltering();
         });
     }
   }
@@ -164,5 +161,10 @@ export class UserInventoryPageComponent implements OnInit {
 
   }
 
+
+  applyAllFiltering() {
+    this.filterListByStock();
+    this.applySortFilters();
+  }
 
 }
