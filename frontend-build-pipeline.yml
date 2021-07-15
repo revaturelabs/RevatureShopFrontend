@@ -10,6 +10,10 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- script: |
+    ls
+  displayName: 'test'
+
 # node.js is required to build Angular apps
 - task: NodeTool@0
   inputs:
@@ -26,3 +30,4 @@ steps:
 - script: |
     npx ng test --karmaConfig karma.conf.ci.js
   displayName: 'unit test'
+
