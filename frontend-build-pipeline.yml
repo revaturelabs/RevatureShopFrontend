@@ -28,6 +28,6 @@ steps:
   displayName: 'npm install and build'
 
 - script: |
-    npx ng test --karmaConfig karma.conf.ci.js
+    npx ng test --karmaConfig karma.conf.js
   displayName: 'unit test'
 
