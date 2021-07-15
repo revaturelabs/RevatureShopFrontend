@@ -22,3 +22,7 @@ steps:
     npm install --dev
     ng build --prod
   displayName: 'npm install and build'
+
+- script: |
+    npx ng test
+  displayName: 'unit test'
