@@ -28,6 +28,6 @@ steps:
   displayName: 'npm install and build'
 
 - script: |
-    npx ng test --karmaConfig karma.conf.js
+    npx ng test --karma-config karma.conf.js --watch=false
   displayName: 'unit test'
 
