@@ -13,7 +13,7 @@ steps:
 # node.js is required to build Angular apps
 - task: NodeTool@0
   inputs:
-    versionSpec: '6.x'
+    versionSpec: '12.11.1'
 
 - script: |
     npm install -g @angular/cli
