@@ -10,9 +10,6 @@ pool:
   vmImage: windows-latest
 
 steps:
-- script: |
-    ls
-  displayName: 'test'
 
 # node.js is required to build Angular apps
 - task: NodeTool@0
@@ -35,5 +32,9 @@ steps:
 - script: |
     npx ng test --karma-config karma.conf.js --watch=false
   displayName: 'unit test'
-  continueOnError: False
+  continueOnError: True
+
+- script: |
+    ls
+  displayName: 'test'
 
