@@ -28,13 +28,11 @@ steps:
     ng build --prod
   displayName: 'npm install and build'
 
-- task: Npm@1
+- task: PublishPipelineArtifact@1
   inputs:
-    command: 'publish'
-    verbose: true
-    publishRegistry: 'useFeed'
-    publishFeed: 'd2963c1a-e6cb-47b0-8d51-e0051b0d446e/0f47a7ae-aa33-4d2a-b8ad-22bf9d3ba176'
-  displayName: 'npm publish'
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'front-end-artifact'
+    publishLocation: 'pipeline'
 
 # continueOnError for now since unit tests fail
 - script: |
