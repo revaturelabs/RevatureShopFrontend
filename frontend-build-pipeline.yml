@@ -1,5 +1,7 @@
 trigger:
 - main
+- staging
+- development
 
 pool:
   vmImage: ubuntu-latest
