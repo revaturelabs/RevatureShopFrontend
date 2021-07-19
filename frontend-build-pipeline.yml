@@ -30,6 +30,18 @@ steps:
   displayName: 'Run Unit Tests'
   continueOnError: True
 
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: '1054-daniel-felleman-revature-swag-shop'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: '1054-Daniel-Felleman-Revature-Swag-Shop_RevatureShopFrontend'
+    cliProjectName: 'RevatureShopFrontend'
+    cliSources: '.'
+
+- task: SonarCloudAnalyze@1
+
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(Pipeline.Workspace)/s/dist/RevatureShopFrontend'
