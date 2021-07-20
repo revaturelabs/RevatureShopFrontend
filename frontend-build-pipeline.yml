@@ -18,6 +18,7 @@ steps:
 # probably needed for running the Karma tests
 - script: |
     npm install -g @angular/cli
+    npm ci
     npx ng build --prod
   displayName: 'npm Install and Build'
 
