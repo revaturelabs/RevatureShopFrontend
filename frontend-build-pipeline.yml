@@ -21,7 +21,6 @@ steps:
 # https://stackoverflow.com/questions/50333003/could-not-find-module-angular-devkit-build-angular
 - script: |
     npm install --save-dev @angular-devkit/build-angular
-    npm install -g @angular/cli
     npm install
     ng build --prod
   displayName: 'npm Install and Build'
