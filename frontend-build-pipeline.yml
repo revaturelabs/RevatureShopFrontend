@@ -23,7 +23,6 @@ steps:
 - script: |
     npx ng test --karma-config karma.conf.js --watch=false
   displayName: 'Run Unit Tests'
-  continueOnError: True
 
 - task: SonarCloudPrepare@1
   inputs:
