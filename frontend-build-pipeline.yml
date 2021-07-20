@@ -16,11 +16,8 @@ steps:
 
 # --dev option installs devDependencies from package.json
 # probably needed for running the Karma tests
-#
-# angular-devkit/build-angular
-# https://stackoverflow.com/questions/50333003/could-not-find-module-angular-devkit-build-angular
 - script: |
-    npm install --save-dev @angular-devkit/build-angular
+    npm install -g @angular/cli
     npm install
     ng build --prod
   displayName: 'npm Install and Build'
