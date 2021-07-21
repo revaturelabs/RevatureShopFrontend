@@ -1,0 +1,3 @@
+parameters:
+- name: organization # the name of the repo's organization
+  type: string
