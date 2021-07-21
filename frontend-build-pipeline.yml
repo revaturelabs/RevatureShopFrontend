@@ -7,6 +7,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- template: frontend-build-pipeline-parameters.yml
 
 # Node.js is required to build Angular apps
 - task: NodeTool@0
@@ -28,7 +29,7 @@ steps:
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'SonarCloud'
-    organization: '1054-daniel-felleman-revature-swag-shop'
+    organization: ${{ parameters.organization }}
     scannerMode: 'CLI'
     configMode: 'manual'
     cliProjectKey: '1054-Daniel-Felleman-Revature-Swag-Shop_RevatureShopFrontend'
