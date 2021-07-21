@@ -37,6 +37,7 @@ steps:
 - script: |
     npx ng test --watch=false
   displayName: 'Run Unit Tests'
+  enabled: false
 
 - task: SonarCloudPrepare@1
   inputs:
@@ -47,11 +48,13 @@ steps:
     cliProjectKey: ${{ parameters.sonarCloudProjectKey }}
     cliProjectName: $ {{ parameters.sonarCloudProjectName }}
     cliSources: '.'
+  enabled: false
 
 - task: SonarCloudAnalyze@1
+  enabled: false
 
 - script: |
-    ls -a $(Build.Repository.LocalPath)
+    ls -a $(Build.Repository.LocalPath)/dist
 
 - task: PublishPipelineArtifact@1
   inputs:
@@ -59,3 +62,4 @@ steps:
     artifact: 'front-end-artifact'
     publishLocation: 'pipeline'
   displayName: Publish Pipeline Artifact
+  enabled: false
