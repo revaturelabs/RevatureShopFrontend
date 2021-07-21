@@ -6,10 +6,14 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+parameters:
+- name: repoOrganization # the name of the repo's organization
+  type: string
+  default: '1054-Daniel-Felleman-Revature-Swag-Shop'
+
 steps:
-- template: frontend-build-pipeline-parameters.yml
-  parameters:
-    repoOrganization: '1054-daniel-felleman-revature-swag-shop'
+
+
 
 # Node.js is required to build Angular apps
 - task: NodeTool@0
