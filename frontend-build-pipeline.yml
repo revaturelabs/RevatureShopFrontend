@@ -53,13 +53,9 @@ steps:
 - task: SonarCloudAnalyze@1
   enabled: false
 
-- script: |
-    ls -a $(Build.Repository.LocalPath)/dist
-
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Build.Repository.LocalPath)/dist/**'
+    targetPath: '$(Build.Repository.LocalPath)/dist'
     artifact: 'front-end-artifact'
     publishLocation: 'pipeline'
   displayName: Publish Pipeline Artifact
-  enabled: false
