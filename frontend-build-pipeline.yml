@@ -52,7 +52,7 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Build.Repository.LocalPath)/dist/RevatureShopFrontend'
+    targetPath: '$(Build.Repository.LocalPath)/dist/**/*'
     artifact: 'front-end-artifact'
     publishLocation: 'pipeline'
   displayName: Publish Pipeline Artifact
