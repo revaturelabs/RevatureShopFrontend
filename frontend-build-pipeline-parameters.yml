@@ -1,3 +1,4 @@
 parameters:
 - name: organization # the name of the repo's organization
   type: string
+  default: '1054-daniel-felleman-revature-swag-shop'
