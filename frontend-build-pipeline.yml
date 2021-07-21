@@ -9,7 +9,7 @@ pool:
 parameters:
 - name: repoOrganization # the name of the repo's organization
   type: string
-  default: '1054-Daniel-Felleman-Revature-Swag-Shop'
+  default: '1054-daniel-felleman-revature-swag-shop'
 
 steps:
 
