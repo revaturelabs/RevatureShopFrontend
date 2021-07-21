@@ -10,6 +10,12 @@ parameters:
 - name: repoOrganization # the name of the repo's organization
   type: string
   default: '1054-daniel-felleman-revature-swag-shop'
+- name: sonarCloudProjectKey # sonar cloud's cli project key
+  type: string
+  default: '1054-Daniel-Felleman-Revature-Swag-Shop_RevatureShopFrontend'
+- name: sonarCloudProjectName # sonar cloud's cli project name
+  type: string
+  default: 'RevatureShopFrontend'
 
 steps:
 
@@ -38,8 +44,8 @@ steps:
     organization: ${{ parameters.repoOrganization }}
     scannerMode: 'CLI'
     configMode: 'manual'
-    cliProjectKey: '1054-Daniel-Felleman-Revature-Swag-Shop_RevatureShopFrontend'
-    cliProjectName: 'RevatureShopFrontend'
+    cliProjectKey: ${{ parameters.sonarCloudProjectKey }}
+    cliProjectName: $ {{ parameters.sonarCloudProjectName }}
     cliSources: '.'
 
 - task: SonarCloudAnalyze@1
