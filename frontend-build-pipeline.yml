@@ -16,7 +16,7 @@ steps:
 
 - script: |
     npm ci
-    npx ng build --prod
+    npx ng build
   displayName: 'npm Build'
 
 # skipped failing unit tests
