@@ -3,13 +3,15 @@ trigger:
 - staging
 - development
 
+extends:
+  template: frontend-build-pipeline-parameters.yml
+  parameters:
+      organization: '1054-daniel-felleman-revature-swag-shop'
+
 pool:
   vmImage: ubuntu-latest
 
 steps:
-- template: frontend-build-pipeline-parameters.yml
-  parameters:
-    organization: '1054-daniel-felleman-revature-swag-shop'
 
 # Node.js is required to build Angular apps
 - task: NodeTool@0
