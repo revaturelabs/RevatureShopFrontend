@@ -52,7 +52,7 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Pipeline.Workspace)/s/dist/RevatureShopFrontend'
+    targetPath: 'dist/*'
     artifact: 'front-end-artifact'
     publishLocation: 'pipeline'
   displayName: Publish Pipeline Artifact
