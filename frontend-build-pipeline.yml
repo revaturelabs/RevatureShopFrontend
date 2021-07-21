@@ -50,6 +50,9 @@ steps:
 
 - task: SonarCloudAnalyze@1
 
+- script: |
+    ls -a $(Build.Repository.LocalPath)
+
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(Build.Repository.LocalPath)/dist/**'
