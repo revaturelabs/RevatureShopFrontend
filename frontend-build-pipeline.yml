@@ -30,6 +30,9 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
+    ls $(Build.Repository.LocalPath)
+
+- script: |
     npm ci
   displayName: 'npm CI'
   workingDirectory: $(appDir)
