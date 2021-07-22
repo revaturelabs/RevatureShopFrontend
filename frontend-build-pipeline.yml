@@ -35,7 +35,7 @@ steps:
 # skipped failing unit tests
 # https://jasmine.github.io/tutorials/your_first_suite#section-Pending_Specs
 - script: |
-    npx ng test --watch=false --browsers=ChromeHeadless
+    npx ng test --watch=false --browsers=ChromeHeadless --code-coverage
   displayName: 'Run Unit Tests'
 
 - task: SonarCloudPrepare@1
