@@ -17,9 +17,8 @@ parameters:
   type: string
   default: 'RevatureShopFrontend'
 
+
 steps:
-
-
 
 # Node.js is required to build Angular apps
 - task: NodeTool@0
@@ -52,6 +51,10 @@ steps:
       sonar.javascript.lcov.reportPaths=$(appDir)/coverage/$(appDir)/lcov.info
 
 - task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 
 - task: PublishPipelineArtifact@1
   inputs:
