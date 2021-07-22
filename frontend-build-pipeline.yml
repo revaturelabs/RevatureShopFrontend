@@ -7,7 +7,7 @@ pool:
   vmImage: ubuntu-latest
 
 parameters:
-- name: repoOrganization # the name of the repo's organization
+- name: repoOrganization # the name of the SonarCloud repo's organization
   type: string
   default: '1054-daniel-felleman-revature-swag-shop'
 - name: sonarCloudProjectKey # sonar cloud's cli project key
