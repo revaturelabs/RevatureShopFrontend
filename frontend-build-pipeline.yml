@@ -28,6 +28,9 @@ steps:
 
 - script: |
     npm ci
+  displayName: 'npm CI'
+
+- script: |
     npx ng build
   displayName: 'npm Build'
 
