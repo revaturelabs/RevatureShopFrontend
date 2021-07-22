@@ -34,8 +34,6 @@ steps:
     npx ng build
   displayName: 'npm Build'
 
-# skipped failing unit tests
-# https://jasmine.github.io/tutorials/your_first_suite#section-Pending_Specs
 - script: |
     npx ng test --watch=false --browsers=ChromeHeadless --code-coverage
   displayName: 'Run Unit Tests'
