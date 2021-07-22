@@ -47,6 +47,9 @@ steps:
     cliProjectKey: ${{ parameters.sonarCloudProjectKey }}
     cliProjectName: $ {{ parameters.sonarCloudProjectName }}
     cliSources: '.'
+    extraProperties: |
+      sonar.coverage.exclusions=**/*.spec.ts
+      sonar.javascript.lcov.reportPaths=$(appDir)/coverage/$(appDir)/lcov.info
 
 - task: SonarCloudAnalyze@1
 
