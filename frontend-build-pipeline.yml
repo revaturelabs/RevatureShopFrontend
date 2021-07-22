@@ -35,21 +35,21 @@ steps:
 - script: |
     npm ci
   displayName: 'npm CI'
-  workingDirectory: $(appDir)
+  workingDirectory: $(Build.Repository.LocalPath)
 
 - script: |
     npx ng build
   displayName: 'npm Build'
-  workingDirectory: $(appDir)
+  workingDirectory: $(Build.Repository.LocalPath)
 
 - script: |
     npx ng test --watch=false --browsers=ChromeHeadless --code-coverage
   displayName: 'Run Unit Tests'
-  workingDirectory: $(appDir)
+  workingDirectory: $(Build.Repository.LocalPath)
 
 - script: npx ng lint
   displayName: Lint
-  workingDirectory: $(appDir)
+  workingDirectory: $(Build.Repository.LocalPath)
 
 - task: SonarCloudPrepare@1
   inputs:
