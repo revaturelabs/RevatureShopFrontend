@@ -6,6 +6,9 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  appDir: RevatureShopFrontend
+
 parameters:
 - name: repoOrganization # the name of the SonarCloud repo's organization
   type: string
