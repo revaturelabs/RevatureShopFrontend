@@ -47,10 +47,8 @@ steps:
     cliProjectKey: ${{ parameters.sonarCloudProjectKey }}
     cliProjectName: $ {{ parameters.sonarCloudProjectName }}
     cliSources: '.'
-  enabled: false
 
 - task: SonarCloudAnalyze@1
-  enabled: false
 
 - task: PublishPipelineArtifact@1
   inputs:
