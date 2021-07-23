@@ -22,7 +22,7 @@ box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 2px 17px rgba(0, 0, 0, 0
                         <li *ngFor="let category of this.navbarService.clothingCategories">
                             <a class="dropdown-item" [routerLink]="['/shop',category]">{{category}}</a>
                         </li>
-                        
+
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -33,9 +33,9 @@ box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 2px 17px rgba(0, 0, 0, 0
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li *ngFor="let category of this.navbarService.accessoryCategories">
                             <a class="dropdown-item" [routerLink]="['/shop',category]">{{category}}</a>
-                        </li>                    
-                        
-                        
+                        </li>
+
+
                     </ul>
                 </li>
             </ul>
@@ -47,7 +47,7 @@ box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 2px 17px rgba(0, 0, 0, 0
                         ADMIN
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminOptions">
-                        <li><a class="dropdown-item" routerLink="updatestock">Update stock</a></li>
+                        <li><a class="dropdown-item" routerLink="updateitem">Update Item</a></li>
                         <li><a class="dropdown-item" routerLink="newinventory">Create stock item</a></li>
                         <li><a class="dropdown-item" routerLink="points">Edit user points</a></li>
                     </ul>
