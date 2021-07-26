@@ -19,7 +19,15 @@ parameters:
 - name: sonarCloudProjectName # sonar cloud's cli project name
   type: string
   default: 'RevatureShopFrontend'
-
+- name: sonarCloudExclude # files for sonar cloud to ignore
+  type: string
+  default: '**/*.spec.ts'
+- name: sonarCloudCoverageDir
+  type: string
+  default: '$(Build.Repository.LocalPath)/coverage/lcov.info'
+- name: sonarCloudSources
+  type: string
+  default: '.'
 
 steps:
 
@@ -34,7 +42,7 @@ steps:
 
 - script: |
     npm install
-  displayName: 'npm install'
+  displayName: 'npm Install'
   workingDirectory: $(Build.Repository.LocalPath)
 
 - script: |
@@ -47,6 +55,7 @@ steps:
   displayName: 'Run Unit Tests'
   workingDirectory: $(Build.Repository.LocalPath)
 
+# shopt -s globstar makes '**' search through folders of any depth
 - script: |
     shopt -s globstar
     npm run eslint src/**/*.ts
@@ -61,10 +70,10 @@ steps:
     configMode: 'manual'
     cliProjectKey: ${{ parameters.sonarCloudProjectKey }}
     cliProjectName: $ {{ parameters.sonarCloudProjectName }}
-    cliSources: '.'
+    cliSources: ${{ parameters.sonarCloudSources }}
     extraProperties: |
-      sonar.coverage.exclusions=**/*.spec.ts
-      sonar.javascript.lcov.reportPaths=$(appDir)/coverage/$(appDir)/lcov.info
+      sonar.coverage.exclusions=${{ parameters.sonarCloudExclude }}
+      sonar.javascript.lcov.reportPaths=${{ parameters.sonarCloudCoverageDir }}
 
 - task: SonarCloudAnalyze@1
 
