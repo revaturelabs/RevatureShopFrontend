@@ -32,7 +32,9 @@ parameters:
 steps:
 - script: |
     ls $(Build.Repository.LocalPath)
+    echo '----'
     ls $(Pipeline.Workspace)
+    echo '----'
     ls
   displayName: 'testing'
 
