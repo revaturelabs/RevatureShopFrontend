@@ -13,6 +13,8 @@ export class ItemModalComponent implements OnInit {
     @Input() description: string = '';
     @Input() quantity: number = 0;
     @Input() id: number = 0;
+    @Input() size: string = '';
+    @Input() category: string = '';
 
     itemImagesURL: string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
     loggedShopper: string = '';
