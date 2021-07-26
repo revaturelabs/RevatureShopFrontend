@@ -13,8 +13,8 @@ export class ItemModalComponent implements OnInit {
     @Input() description: string = '';
     @Input() quantity: number = 0;
     @Input() id: number = 0;
-    @Input() size: string = '';
     @Input() category: string = '';
+    selectedSize: string = '';
 
     itemImagesURL: string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
     loggedShopper: string = '';
@@ -30,6 +30,7 @@ export class ItemModalComponent implements OnInit {
 
     addToCart(): void {
         this.httpItemModalService.getItemByName(this.title).subscribe((item) => {
+            item.size=this.selectedSize;
             this.httpItemModalService.addItemToCart(item, this.loggedShopper);
         });
 
