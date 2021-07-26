@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {HttpCartService} from "./http-cart.service";
+import {HttpCartService} from "../../services/http-cart.service";
 import {InventoryItem} from "../../services/inventory-items.service";
 import {AccountService} from "../../services/account.service";
 import {Router} from "@angular/router";

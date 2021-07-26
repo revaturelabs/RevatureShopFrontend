@@ -3,7 +3,7 @@ import {FormBuilder} from "@angular/forms";
 import {InventoryItem, InventoryItemsService} from "../../services/inventory-items.service";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-import { NavbarServiceService } from 'src/app/navbar/navbar-service.service';
+import { NavbarServiceService } from '../../services/navbar-service.service';
 
 @Component({
   selector: 'app-admin-newinventory-page',
