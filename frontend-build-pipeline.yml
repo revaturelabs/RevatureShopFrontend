@@ -41,8 +41,8 @@ steps:
     ls $(Build.Repository.LocalPath)
 
 - script: |
-    npm install
-  displayName: 'npm Install'
+    npm ci
+  displayName: 'npm CI'
   workingDirectory: $(Build.Repository.LocalPath)
 
 - script: |
