@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <div class="card text-center" fxFlexAlign="center">
+        <h2 class="card-header">
+            User information
+        </h2>
+
+    </div>
+    <div class="card-body text-center">
+        <p>
+            {{accountInfo.email}}
+        </p>
+        <p>
+            {{accountInfo.points}} points
+        </p>
+
+
+    </div>
+</div>
+<!--
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Description</th>
+            <th scope="col">Amount</th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr  *ngFor="let order of historyList">
+
+            <td>{{order.date}}</td>
+            <td>{{order.cause}}</td>
+            <td [ngStyle]="{'color': order.change > 0 ? 'green' : 'red'}">{{(order.change > 0 ? "+" : "") + order.change}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+-->
+
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Description</th>
+            <th scope="col">Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let order of historyList">
+
+            <td>{{order.date}}</td>
+            <td>{{order.cause}}</td>
+            <td [ngStyle]="{'color': order.change > 0 ? 'green' : 'red'}">{{(order.change > 0 ? "+" : "") + order.change}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

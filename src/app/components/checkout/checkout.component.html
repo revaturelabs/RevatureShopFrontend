@@ -1,0 +1,83 @@
+<div class="holding-container">
+    <mat-card mat-typography class="shipping-card">
+        <mat-card-header>
+            <mat-card-title>Shipping Information</mat-card-title>
+            <mat-card-subtitle>Your Current Points: {{account.points}}</mat-card-subtitle>
+            <mat-card-subtitle>Your points after transaction: {{pointsAfterMath}}</mat-card-subtitle>
+
+        </mat-card-header>
+        <mat-card-content>
+            <mat-vertical-stepper [linear]="true" #stepper>
+                <mat-step [stepControl]="firstFormGroup">
+                    <form [formGroup]="firstFormGroup">
+                        <mat-card-header style="background-color: orange; width:100px;">
+                            <ng-template matStepLabel>Enter name for order</ng-template>
+                        </mat-card-header>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="First name" formControlName="firstName" required>
+
+                            <mat-error *ngIf="firstFormGroup.controls['firstName'].hasError('required')">
+                                First name is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Last name" formControlName="lastName" required>
+                            <mat-error *ngIf="firstFormGroup.controls['lastName'].hasError('required')">
+                                Last name is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <div>
+                            <button mat-button matStepperNext>Next</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="secondFormGroup">
+                    <form [formGroup]="secondFormGroup">
+                        <ng-template matStepLabel>Address Information</ng-template>
+                        <mat-form-field class="full-width">
+                            <textarea matInput placeholder="Address" formControlName="address"></textarea>
+                            <mat-error *ngIf="addressForm.controls['address'].hasError('required')">
+                                Address is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="City" formControlName="city">
+                            <mat-error *ngIf="addressForm.controls['city'].hasError('required')">
+                                City is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <mat-select placeholder="State" formControlName="state">
+                                <mat-option *ngFor="let state of states" [value]="state.abbreviation">
+                                    {{ state.name }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="addressForm.controls['state'].hasError('required')">
+                                State is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <input matInput #postalCode minlength="5" placeholder="Postal Code" type="number"
+                                   maxlength="10"
+                                   formControlName="postalCode">
+                            <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+                        </mat-form-field>
+                        <div>
+                            <button mat-button matStepperPrevious>Back</button>
+                            <button mat-button matStepperNext>Next</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="thirdFormGroup">
+                    <mat-form-field [formGroup]="thirdFormGroup">
+                        <ng-template matStepLabel>Additional Information</ng-template>
+                        <mat-label>Any additional delivery instructions</mat-label>
+                        <textarea matInput formControlName="moreInfo"></textarea>
+                    </mat-form-field>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext (click)="checkout()">Place Your Order</button>
+                </mat-step>
+            </mat-vertical-stepper>
+        </mat-card-content>
+    </mat-card>
+</div>

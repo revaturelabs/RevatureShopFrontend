@@ -1,0 +1,36 @@
+<div
+
+
+    class="container" fxLayout="column" fxLayoutAlign="center">
+
+    <form  [formGroup]="myform"  class="form form-register">
+        <div class="input-group flex-nowrap">
+
+            <input type="text" class="form-control" id="email" placeholder="User email here" formControlName="email" required>
+
+        </div>
+
+        <br>
+        <div>
+            <input type="number" class="form-control" placeholder="Amount" formControlName="change" required>
+
+        </div>
+        <br>
+        <div>
+            <input type="text" class="form-control" placeholder="Description" formControlName="cause" required>
+
+        </div>
+        <br>
+        <div fxLayoutAlign="center">
+            <button type="button" class="btn btn-primary" (click)="updatePoints()">Submit</button>
+        </div>
+        <div *ngIf="errorMessage">
+            <p>
+                Something went wrong, try again.
+            </p>
+        </div>
+    </form>
+</div>
+<div class="alert alert-warning alert-dismissible fade" role="alert" id="addedAlert">Points Updated!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>

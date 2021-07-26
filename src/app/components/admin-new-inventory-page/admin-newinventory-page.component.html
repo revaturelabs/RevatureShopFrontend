@@ -1,0 +1,96 @@
+
+
+<div *ngIf="!itemFinishedBeingCreated" style="text-align: center; margin-top: 50px;">
+    <h5>ADMIN</h5>
+    <h1>Create an Item</h1>
+</div>
+
+<div *ngIf="!itemFinishedBeingCreated" style="max-width: 600px; margin: 0 auto; margin-top: 20px;">
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Title</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" [(ngModel)]="title">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="description"></textarea>
+    </div>
+
+    <div class="display:flex; justify-content:center;">
+    
+        
+
+        <div style="display: flex; justify-content: space-between;">
+            
+            <div class="mb-3" style="width:300px;">
+                <label for="exampleFormControlInput2" class="form-label" style="margin-top:0px;">Category</label>
+                <input type="text" class="form-control" id="exampleFormControlInput2" [(ngModel)]="category">
+            </div>
+
+            
+            
+            <select class="selectPicker" id="genderSelector" [(ngModel)]="gender" style="display: block; border-radius: 4px; width:165px; height:40px; margin-top: 31px; margin-right: 25px;">
+
+                <option>---- Select gender ----</option>
+                <option>None</option>
+                <option>Men's</option>
+                <option>Women's</option>
+            
+            </select>
+
+        </div>
+        
+
+    </div>
+
+    
+      
+
+    <div style="display: flex; margin-top: 10px; justify-content: space-between;">
+        <div class="mb-3" style="width:44%;" >
+            <label for="exampleFormControlInput1" class="form-label " style="margin-top:7px;">Price (RevCoins)</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" style="margin-left: 0px;" [(ngModel)]="price">
+        </div>
+    
+        <div class="mb-3" style="width:44%; margin-left: 75px;">
+            <label for="exampleFormControlInput1" class="form-label" style="margin-top:7px;">Quantity</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" style="margin-left: 0px;" [(ngModel)]="quantity">
+        </div>
+    </div>
+
+    
+    
+
+    
+
+      <app-file-uploader  [imageUploadProgress]="imageUploadProgress" (fileSelectedEvent)="setFileSelected($event)" ></app-file-uploader>
+
+
+      <!-- Custom Button for Create Item-->
+      <div style="display: flex; justify-content: center;">
+        <input #imageInput
+            id="createItemButton"
+           hidden
+           (click)="addNewItem()">
+  
+        <label class="buttonLabel" for="createItemButton" style="margin-top: 20px;"  >Create!</label>
+      </div>
+
+      <div *ngIf="missingInput" style="text-align: center; color:red">Missing input fields</div>
+      <div *ngIf="itemNameAlreadyExists" style="text-align: center; color:red">An item with that name already exists</div>
+      <div *ngIf="priceOrQuantityError" style="text-align: center; color:red">Price and quantity cannot be negative</div>
+</div>
+
+
+
+
+
+<div *ngIf="itemFinishedBeingCreated" style="margin-top: 200px;">
+    <div style="display:flex; justify-content: center;">
+        <img src="../assets/images/GreenCheckCircle2.png" style="width: 150px;">
+        <h1 style="text-align: center; color: rgb(0, 80, 0);">
+            Item successfully created
+        </h1>
+    </div>
+    <a [routerLink]="" (click)="refresh();" style="display:block; text-align: center;">Create another item</a>
+    <a [routerLink]="['/updatestock']" style="display:block; text-align: center;">View all inventory items</a>
+</div>

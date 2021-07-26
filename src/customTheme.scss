@@ -1,0 +1,75 @@
+@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
+
+$custom-typography: mat.define-typography-config(
+    $font-family: 'FuturaBook'
+);
+@include mat.core($custom-typography);
+
+$default-palette-primary: (
+    50: #fff3e1,
+    100: #ffdfb6,
+    200: #ffca87,
+    300: #ffb459,
+    400: #ffa43a,
+    500: #ff9429,
+    600: #ff8928,
+    700: #f97926,
+    800: #f26925,
+    900: #e75023,
+
+    contrast: (
+        50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: rgba(black, 0.87),
+        400: rgba(black, 0.87),
+        500: rgba(black, 0.87),
+        600: rgba(black, 0.87),
+        700: rgba(black, 0.87),
+        800: rgba(black, 0.87),
+        900: rgba(black, 0.87),
+
+    )
+);
+$default-palette-secondary: (
+    50: #e7f1f6,
+    100: #c3dde9,
+    200: #a2c8db,
+    300: #85b3cc,
+    400: #72a3c2,
+    500: #6395b9,
+    600: #5888ad,
+    700: #4c779c,
+    800: #43678a,
+    900: #2c4c70,
+
+    contrast: (
+        50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: rgba(black, 0.87),
+        400: rgba(black, 0.87),
+        500: rgba(black, 0.87),
+        600: rgba(black, 0.87),
+        700: rgba(black, 0.87),
+        800: rgba(black, 0.87),
+        900: rgba(black, 0.87),
+
+    )
+);
+
+$my-primary: mat.define-palette($default-palette-primary, 700);
+$my-accent: mat.define-palette($default-palette-secondary, 400);
+
+
+
+$default-theme: mat.define-light-theme((
+    color: (
+        primary: $my-primary,
+        accent: $my-accent,
+    )
+));
+
+@include mat.all-component-themes($default-theme);
+//@include angular-material-theme($default-theme);

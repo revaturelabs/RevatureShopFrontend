@@ -1,0 +1,36 @@
+.cart-image {
+    width: 200px;
+}
+
+.quantity {
+    width: 100%;
+}
+
+.center-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item-link {
+    color: black;
+    font-size: 1.3rem;
+}
+
+hr {
+    background-color: lightgray;
+}
+
+.item-desc {
+    font-weight: 100;
+    max-width: 40%;
+    margin-bottom: fill!important;
+}
+
+.container {
+    border-radius: 0.5rem;
+}
+
+#sadCartWrapper{
+    max-width: 100%;
+}

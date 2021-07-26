@@ -1,0 +1,49 @@
+<h1 class="card-header" style="text-align: center">Current Rev Coins: {{shopperPoints}}</h1>
+<div class="container bg-light">
+    <div class="row item-row" *ngFor="let cartItem of cartItems">
+
+        <div class="col-1 center-column" *ngIf="getCartQuantity(cartItem.itemName)">
+            <input class="quantity" type="number" min="1" max="99" [value]="getCartQuantity(cartItem.itemName)"
+                   (change)="updateCartQuantity($event, cartItem.itemName)">
+            <!--            <p>{{cartItem.cartQuantity}}</p>-->
+        </div>
+        <div class="col-2 center-column" *ngIf="getCartQuantity(cartItem.itemName)">
+            <img [src]="getItemImage(cartItem)" class="w-75 h-75">
+        </div>
+        <div class="col-9" *ngIf="getCartQuantity(cartItem.itemName)">
+            <div class="row link-row mt-3 justify-content-between">
+                <a href="#" class="item-link w-auto"><p>{{cartItem.itemName}}</p></a>
+                <p class="item-link mr-3 w-auto">{{cartItem.itemPrice}}</p>
+            </div>
+            <div class="row" *ngIf="getCartQuantity(cartItem.itemName)">
+                <p class="item-desc">{{cartItem.description}}</p>
+            </div>
+            <div class="row delete-row mb-3" *ngIf="getCartQuantity(cartItem.itemName)">
+                <a (click)="removeCartItem(cartItem.itemName)" routerLink="/cart">Delete item</a>
+            </div>
+        </div>
+
+        <hr>
+    </div>
+    <div class="row">
+        <p class="mr-3 text-right">Total Price: {{totalPrice}}</p>
+    </div>
+    <div class="row">
+        <div class="row" *ngIf="httpCartService.totalItems==0">
+            <div class="col-6" id="sadCartWrapper">
+                <img class="img-fluid" src="./assets/images/sad%20cart" alt="">
+            </div>
+            <h1 class="col-4">Your cart is empty!</h1>
+        </div>
+        <span id="btnMessage" class="row justify-content-end" data-bs-toggle="tooltip"
+              title="You don't have enough points!">
+        <button class="btn btn-primary btn-lg my-3 mx-3 w-25" disabled *ngIf="isDisabled">Proceed to Checkout</button>
+        </span>
+        <span class="row justify-content-end">
+        <button class="btn btn-primary btn-lg my-3 mx-3 w-25" *ngIf="!isDisabled" (click)="checkout()">Proceed to
+            Checkout
+        </button>
+            </span>
+    </div>
+</div>
+

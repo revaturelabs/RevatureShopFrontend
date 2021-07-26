@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'FuturaBold';
+    src: url('./assets/fonts/Futura-Std-Bold.otf') format('opentype');
+}
+@font-face {
+    font-family: 'FuturaBook';
+    src: url('./assets/fonts/Futura-Std-Book.otf') format('opentype');
+}
+@font-face {
+    font-family: 'FuturaHeavy';
+    src: url('./assets/fonts/Futura-Std-Heavy.otf') format('opentype');
+}
+@font-face {
+    font-family: 'FuturaMedium';
+    src: url('./assets/fonts/Futura-Std-Medium.otf') format('opentype');
+}
+body {
+    margin: 0;
+    font-family: 'FuturaBook', sans-serif;
+}
+
+html, body { height: 100%;}

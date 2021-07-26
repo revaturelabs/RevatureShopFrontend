@@ -1,0 +1,26 @@
+.container {
+    min-height: 90%;
+
+    width: 100%;
+}
+.jumbotron{
+    background: inherit;
+}
+.jumbotron h1{
+    font-family: 'FuturaHeavy', sans-serif;
+    color: #F26925;
+    font-size: 700%
+}
+
+#loginBtn{
+    background-color: #F26925;
+    color: white;
+}
+#userDropdown{
+    background-color: #474C55;
+color: white;
+}
+
+h1 p {
+    margin: 3rem;
+}

@@ -1,0 +1,27 @@
+
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+    <input #imageInput
+            id="imgInID"
+           type="file"
+           accept="image/*"
+           (change)="processFile(imageInput)"
+           hidden>
+  
+    <label for="imgInID" >Add Image</label>
+
+
+    <div style="display: flex; margin-top: 10px;">
+      
+      <div class="imageUploadText" [ngClass]="{'uploadSuccess': imageUploadFinished, 'uploadProblem': imageFormatError}" >{{imageUploadMessage}}</div>
+
+      <button *ngIf="xVisible" type="button" class="close" aria-label="Close" (click)="removeImageToBeUploaded()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div *ngIf="imageUploadProgress" class="imageUploadText" [ngClass]="{'uploadSuccess': imageUploadProgress == 'Image successfully uploaded', 'uploadLoading': imageUploadProgress != 'Image successfully uploaded'}" >{{imageUploadProgress}}</div>
+
+    <!-- Image Preview -->
+    <img [src]="imagePreviewURL" height="150px" *ngIf="imagePreviewURL">
+</div>
