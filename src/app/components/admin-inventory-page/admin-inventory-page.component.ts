@@ -16,7 +16,7 @@ export class AdminInventoryPageComponent implements OnInit {
   itemsPerPage = 12;
   pageSize: number = 0;
 
-  selectedItem : InventoryItem = new InventoryItem(1,"",1,1,"","");
+  selectedItem : InventoryItem = new InventoryItem(1,"",1,1,"","","");
   inStockChecked : boolean = true;
   outOfStockChecked : boolean = true;
 

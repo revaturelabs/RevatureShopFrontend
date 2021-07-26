@@ -10,22 +10,42 @@
                 <div class="row">
                     <div class="col-md-6"><img class="img-fluid" src="{{itemImagesURL+'/'+id}}" alt="no image"></div>
                     <div class="col-md-6">{{description}}</div>
+                    <div *ngIf="category == 'Unisex Shirt' || category == 'Men\'s Shirt' || category == 'Women\'s Shirt'">
+                        <label for="selectSize">Select a size </label>
+                        <select>
+                            <option value="Small">Small</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Large">Large</option>
+                        </select>
+                    </div>
+                </div>
+                <div *ngIf="category == 'Unisex Shirt' || category == 'Men\'s Shirt' || category == 'Women\'s Shirt'" >
+                    <select class='form-control' [(ngModel)]="selectedSize">
+                        <option value="" selected disabled>Select a size</option>
+                        <option>Small</option>
+                        <option>Medium</option>
+                        <option>Large</option>
+                    </select>
                 </div>
             </div>
             <div class="modal-footer">
                 <div class="row">
-                <div class = "col-6">
-                <div id= "customAlert" class="alert alert-warning alert-dismissible fade show" role="alert" style="display: none">
-                    Your item has been added to your cart!
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeCustomAlert()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                </div>
-                <div id = "btnRapper">
-                <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal" (click) = "closeCustomAlert()">Close</button>
-                <button type="button" class="btn btn-primary mx-2" *ngIf="quantity" (click)="addToCart()">Add to cart</button>
-                </div>
+                    <div class="col-6">
+                        <div id="customAlert" class="alert alert-warning alert-dismissible fade show" role="alert"
+                            style="display: none">
+                            Your item has been added to your cart!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                                (click)="closeCustomAlert()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="btnRapper">
+                        <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal"
+                            (click)="closeCustomAlert()">Close</button>
+                        <button type="button" class="btn btn-primary mx-2" *ngIf="quantity" (click)="addToCart()">Add to
+                            cart</button>
+                    </div>
                 </div>
             </div>
         </div>

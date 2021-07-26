@@ -13,6 +13,7 @@
         <div class="col-9" *ngIf="getCartQuantity(cartItem.itemName)">
             <div class="row link-row mt-3 justify-content-between">
                 <a href="#" class="item-link w-auto"><p>{{cartItem.itemName}}</p></a>
+                <p *ngIf="cartItem.category == 'Unisex Shirt' || cartItem.category == 'Men\'s Shirt' || cartItem.category == 'Women\'s Shirt'">({{cartItem.size}})</p>
                 <p class="item-link mr-3 w-auto">{{cartItem.itemPrice}}</p>
             </div>
             <div class="row" *ngIf="getCartQuantity(cartItem.itemName)">

@@ -58,7 +58,7 @@
                     <div *ngFor="let item of this.inventoryItemsFiltered  | slice: pageSize | slice: 0:itemsPerPage"
                      class="card" type="button" data-bs-toggle="modal" data-bs-target="#itemModal" (click)="itemClicked(item)"
                      [ngClass]="{'inStockItem' : item.quantity > 0, 'outOfStockItem' : item.quantity == 0}">
-
+                        
                         <div class="imageContainer" style="overflow: hidden;">
                           <img class="card-img-top" src = "{{itemImagesURL+'/'+item.id}}" alt="Item image">
                         </div>
@@ -74,14 +74,15 @@
                             <h5 class="card-text price" style="margin-top: 15px; font-size: 18px;">{{item.itemPrice}} RevCoins</h5>
                             <h6 class="card-text model">Item #{{item.id}}</h6>
 
-                        </div>
+                        
                         <!-- <app-item-modal [title]="item.itemName" [src]="item.imageURL" [description]="item.description"></app-item-modal> -->
+                      </div>
                     </div>
 
         </div>
 
 
-        <ngb-pagination [collectionSize]="this.inventoryItemsService.inventoryItems.length" #numPages [pageSize]="itemsPerPage" [(page)]="currentPage" (pageChange)="onPageChange(currentPage)">
+        <ngb-pagination [collectionSize]="this.inventoryItemsFiltered.length" #numPages [pageSize]="itemsPerPage" [(page)]="currentPage" (pageChange)="onPageChange(currentPage)">
             <ng-template ngbPaginationPrevious>Prev</ng-template>
             <ng-template ngbPaginationNext>Next</ng-template>
           </ngb-pagination>
@@ -89,7 +90,8 @@
 
 
 <app-item-modal [title]="this.selectedItem.itemName" [src]="this.selectedItem.imageURL" 
-[description]="this.selectedItem.description" [quantity]="this.selectedItem.quantity" [id]="this.selectedItem.id"></app-item-modal>
+[description]="this.selectedItem.description" [quantity]="this.selectedItem.quantity" [id]="this.selectedItem.id" 
+[category]="this.selectedItem.category"></app-item-modal>
 
 <br>
 <br>

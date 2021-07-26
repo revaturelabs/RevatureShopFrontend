@@ -19,7 +19,7 @@ export class UserInventoryPageComponent implements OnInit {
   itemsPerPage = 12;
   pageSize: number = 0;
 
-  selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "");
+  selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "","");
   inStockChecked : boolean = true;
   outOfStockChecked : boolean = false;
 
@@ -92,7 +92,8 @@ export class UserInventoryPageComponent implements OnInit {
       Filter by stock status
     */
     this.inventoryItemsFiltered = this._inventoryItemsService.inventoryItems.filter(element => {
-      return (this.inStockChecked && element.quantity > 0) || (this.outOfStockChecked && element.quantity == 0);
+      return ((this.inStockChecked && element.quantity > 0) || (this.outOfStockChecked && element.quantity == 0))
+      && (element.size == null || element.size == 'Small');
   });
 
   }
