@@ -19,6 +19,14 @@
                         </select>
                     </div>
                 </div>
+                <div *ngIf="category == 'Unisex Shirt' || category == 'Men\'s Shirt' || category == 'Women\'s Shirt'" >
+                    <select class='form-control' [(ngModel)]="selectedSize">
+                        <option value="" selected disabled>Select a size</option>
+                        <option>Small</option>
+                        <option>Medium</option>
+                        <option>Large</option>
+                    </select>
+                </div>
             </div>
             <div class="modal-footer">
                 <div class="row">
