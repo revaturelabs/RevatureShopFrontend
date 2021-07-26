@@ -47,7 +47,9 @@ steps:
   displayName: 'Run Unit Tests'
   workingDirectory: $(Build.Repository.LocalPath)
 
-- script: npm run eslint src/**/*.ts
+- script: |
+    shopt -s globstar
+    npm run eslint src/**/*.ts
   displayName: Lint
   workingDirectory: $(Build.Repository.LocalPath)
 
