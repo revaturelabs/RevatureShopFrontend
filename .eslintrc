@@ -1,0 +1,91 @@
+{
+  "env": {
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+# ESLint rule documentation:
+# https://eslint.org/docs/rules/
+#
+# Possible Errors
+      "for-direction": "warn",
+	  "getter-return": "warn",
+	  "no-async-promise-executor": "warn",
+	  "no-compare-neg-zero": "warn",
+	  "no-cond-assign": "warn",
+	  "no-constant-condition": "warn",
+	  "no-control-regex": "warn",
+	  "no-debugger": "warn",
+	  "no-dupe-args": "warn",
+	  "no-dupe-else-if": "warn",
+	  "no-dupe-keys": "warn",
+	  "no-duplicate-case": "warn",
+	  "no-empty": "warn",
+	  "no-empty-character-class": "warn",
+	  "no-ex-assign": "warn",
+	  "no-extra-boolean-cast": "warn",
+	  "no-func-assign": "warn",
+	  "no-import-assign": "warn",
+	  "no-inner-declarations": "warn",
+	  "no-invalid-regexp": "warn",
+	  "no-irregular-whitespace": "warn",
+	  "no-misleading-character-class": "warn",
+	  "no-obj-calls": "warn",
+	  "no-prototype-builtins": "warn",
+	  "no-regex-spaces": "warn",
+	  "no-setter-return": "warn",
+	  "no-sparse-arrays": "warn",
+	  "no-unexpected-multiline": "warn",
+	  "no-unreachable": "warn",
+	  "no-unsafe-finally": "warn",
+	  "no-unsafe-negation": "warn",
+	  "use-isnan": "warn",
+	  "valid-typeof": "warn",
+# Best Practices
+      "no-case-declarations": "warn",
+	  "no-empty-pattern": "warn",
+	  "no-fallthrough": "warn",
+	  "no-global-assign": "warn",
+	  "no-octal": "warn",
+	  "no-redeclare": "warn",
+	  "no-self-assign": "warn",
+	  "no-unused-labels": "warn",
+	  "no-useless-catch": "warn",
+	  "no-useless-escape": "warn",
+	  "no-with": "warn",
+# Variables
+      "no-delete-var": "warn",
+	  "no-shadow-restricted-names": "warn",
+	  "no-undef": "warn",
+# Style
+      "no-mixed-spaces-and-tabs": "warn",
+# TypeScript-ESLint rule documentation:
+# https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#supported-rules
+#
+# TypeScript Rules
+      "@typescript-eslint/adjacent-overload-signatures": "warn",
+	  "@typescript-eslint/ban-ts-comment": "warn",
+	  "@typescript-eslint/ban-types": "warn",
+	  "@typescript-eslint/explicit-module-boundary-types": "warn",
+	  "@typescript-eslint/no-empty-interface": "warn",
+	  "@typescript-eslint/no-explicit-any": "warn",
+	  "@typescript-eslint/no-extra-non-null-assertion": "warn",
+	  "@typescript-eslint/no-for-in-array": "warn",
+	  "@typescript-eslint/no-inferrable-types": "warn",
+	  "@typescript-eslint/no-misused-new": "warn",
+	  "@typescript-eslint/no-namespace": "warn",
+	  "@typescript-eslint/no-non-null-asserted-optional-chain": "warn",
+	  "@typescript-eslint/no-non-null-assertion": "warn",
+	  "@typescript-eslint/no-this-alias": "warn",
+	  "@typescript-eslint/no-var-requires": "warn",
+	  "@typescript-eslint/prefer-as-const": "warn",
+	  "@typescript-eslint/prefer-namespace-keyword": "warn",
+	  "@typescript-eslint/triple-slash-reference": "warn",
+# TypeScript Extention Rules
+      "@typescript-eslint/no-array-constructor": "warn",
+	  "@typescript-eslint/no-empty-function": "warn",
+	  "@typescript-eslint/no-extra-semi": "warn",
+	  "@typescript-eslint/no-unused-vars": "warn"
+  }
+}
