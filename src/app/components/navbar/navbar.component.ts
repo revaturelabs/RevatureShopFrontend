@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccountService } from '../services/account.service';
-import { NavbarServiceService } from './navbar-service.service';
-import {HttpCartService} from "../components/cart/http-cart.service";
+import { AccountService } from '../../services/account.service';
+import { NavbarServiceService } from '../../services/navbar-service.service';
+import {HttpCartService} from "../../services/http-cart.service";
 
 @Component({
   selector: 'app-navbar',
