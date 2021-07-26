@@ -11,8 +11,8 @@
                     <div class="col-md-6"><img class="img-fluid" src="{{itemImagesURL+'/'+id}}" alt="no image"></div>
                     <div class="col-md-6">{{description}}</div>
                     <div *ngIf="category == 'Unisex Shirt' || category == 'Men\'s Shirt' || category == 'Women\'s Shirt'">
-                        <label for="selectSize">Select a size </label>
                         <select>
+                            <option>Select a Size</option>
                             <option value="Small">Small</option>
                             <option value="Medium">Medium</option>
                             <option value="Large">Large</option>
