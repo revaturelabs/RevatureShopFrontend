@@ -47,24 +47,20 @@ steps:
 - script: |
     npm ci
   displayName: 'npm CI'
-  workingDirectory: $(Build.Repository.LocalPath)
 
 - script: |
     npx ng build
   displayName: 'npm Build'
-  workingDirectory: $(Build.Repository.LocalPath)
 
 - script: |
     npx ng test --watch=false --browsers=ChromeHeadless --code-coverage
   displayName: 'Run Unit Tests'
-  workingDirectory: $(Build.Repository.LocalPath)
 
 # shopt -s globstar makes '**' search through folders of any depth
 - script: |
     shopt -s globstar
     npm run eslint src/**/*.ts
   displayName: Lint
-  workingDirectory: $(Build.Repository.LocalPath)
 
 - task: SonarCloudPrepare@1
   inputs:
