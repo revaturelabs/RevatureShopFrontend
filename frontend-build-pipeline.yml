@@ -30,6 +30,11 @@ parameters:
   default: '.'
 
 steps:
+- script: |
+    ls $(Build.Repository.LocalPath)
+    ls $(Pipeline.Workspace)
+    ls
+  displayName: 'testing'
 
 # Node.js is required to build Angular apps
 - task: NodeTool@0
