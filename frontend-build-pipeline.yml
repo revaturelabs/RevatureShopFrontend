@@ -19,7 +19,7 @@ parameters:
 - name: sonarCloudProjectName # sonar cloud's cli project name
   type: string
   default: 'RevatureShopFrontend'
-- name: sonarCloudExclude # files for sonar cloud to ignore
+- name: sonarCloudCoverageExclude # files for sonar cloud coverage to ignore
   type: string
   default: '**/*.spec.ts'
 - name: sonarCloudCoverageDir
@@ -69,7 +69,7 @@ steps:
     cliProjectName: $ {{ parameters.sonarCloudProjectName }}
     cliSources: ${{ parameters.sonarCloudSources }}
     extraProperties: |
-      sonar.coverage.exclusions=${{ parameters.sonarCloudExclude }}
+      sonar.coverage.exclusions=${{ parameters.sonarCloudCoverageExclude }}
       sonar.javascript.lcov.reportPaths=${{ parameters.sonarCloudCoverageDir }}
 
 - task: SonarCloudAnalyze@1
