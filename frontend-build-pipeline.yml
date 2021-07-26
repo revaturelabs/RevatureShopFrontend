@@ -47,7 +47,7 @@ steps:
   displayName: 'Run Unit Tests'
   workingDirectory: $(Build.Repository.LocalPath)
 
-- script: npx ng lint
+- script: npm run eslint src/**/*.ts
   displayName: Lint
   workingDirectory: $(Build.Repository.LocalPath)
 
