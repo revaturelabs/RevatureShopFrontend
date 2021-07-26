@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-6"><img class="img-fluid" src="{{itemImagesURL+'/'+id}}" alt="no image"></div>
+                    <div class="col-md-6"><img class="img-fluid" src="{{itemImagesURL+'/images/'+title+'.png'}}" alt="no image"></div>
                     <div class="col-md-6">{{description}}</div>
                     <div *ngIf="category == 'Unisex Shirt' || category == 'Men\'s Shirt' || category == 'Women\'s Shirt'">
                         <select>
@@ -18,14 +18,6 @@
                             <option value="Large">Large</option>
                         </select>
                     </div>
-                </div>
-                <div *ngIf="category == 'Unisex Shirt' || category == 'Men\'s Shirt' || category == 'Women\'s Shirt'" >
-                    <select class='form-control' [(ngModel)]="selectedSize">
-                        <option value="" selected disabled>Select a size</option>
-                        <option>Small</option>
-                        <option>Medium</option>
-                        <option>Large</option>
-                    </select>
                 </div>
             </div>
             <div class="modal-footer">

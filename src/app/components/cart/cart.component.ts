@@ -22,7 +22,7 @@ export class CartComponent implements OnInit {
     totalPrice: number;
     loggedShopper: string = '';
     shopperPoints: number = 0;
-    itemImagesURL: string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
+    itemImagesURL: string = "https://rss-images.s3.us-east-2.amazonaws.com";
 
     constructor(private http: HttpClient, public httpCartService: HttpCartService, private accountsService: AccountService, private router: Router) {
         this.cartItems = new Array<InventoryItem>();
@@ -69,7 +69,7 @@ export class CartComponent implements OnInit {
 
     getItemImage(item: InventoryItem): string {
 
-        return this.itemImagesURL + '/' + item.id;
+        return this.itemImagesURL + '/images/' + item.itemName + '.png';
     }
 
     getCartQuantity(itemName: string): number {
