@@ -6,7 +6,7 @@
 
 .outOfStockItem {
     color: rgb(190, 190, 190);
-    
+
 }
 
 .outOfStockItem img {
@@ -21,7 +21,7 @@
     /* Margins */
     margin-left: auto;
     margin-right: auto;
-    
+
     margin-top: 100px;
 
 }
@@ -71,10 +71,10 @@
     font-size: 34px;
     margin-left: 25px;
     flex-grow: 1;
-    
 
-    
-    
+
+
+
 }
 
 .filtersAndTitle {
@@ -87,9 +87,9 @@
 
     margin-bottom: 8px;
 
-    
 
-    
+
+
 
 }
 
@@ -131,20 +131,20 @@ CARD
   border-color: rgb(201, 201, 201);
   background-color: rgb(246, 249, 255);
   width: 275px;
-  height:477px;
+  height: 510px;
   text-overflow: ellipsis;
   text-align: center;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 1px 2px 11px rgba(116, 116, 116, 0.3); 
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 1px 2px 11px rgba(116, 116, 116, 0.3);
   overflow: hidden;
 
 
 }
 .inventory-grid > div img {
-    text-align: center; 
-    max-width: 100%; 
-    height: 240px; 
-    object-fit:cover; 
-    
+    text-align: center;
+    max-width: 100%;
+    height: 240px;
+    object-fit:cover;
+
 }
 
 /* TRANSLUSCENT MASK OVER THE IMAGE
@@ -168,10 +168,10 @@ CARD (Moible devices)
         margin-top: 5.2%;
     }
     .inventory-grid > div img {
-        text-align: center; 
-        max-width: 100%; 
-        height: 280px; 
-        object-fit:cover; 
+        text-align: center;
+        max-width: 100%;
+        height: 280px;
+        object-fit:cover;
         margin-top: 0px
     }
     /* TRANSLUSCENT MASK OVER THE IMAGE
@@ -194,21 +194,21 @@ CARD (Moible devices)
 
 /* Card Hover Styling */
 
-.inventory-grid>div img { 
+.inventory-grid>div img {
     transition: all 0.2s linear;
 }
-.inventory-grid>div:hover img { 
+.inventory-grid>div:hover img {
 	transform: scale(1.07);
-} 
+}
 
 
 
 .inventory-grid>div .mask {
     opacity: 0;
-    background-color: rgba(255, 115, 0, 0.959); 
+    background-color: rgba(255, 115, 0, 0.959);
     transition: all 0.2s linear;
 }
-.inventory-grid > div .mask:hover { 
+.inventory-grid > div .mask:hover {
 	opacity: 0.2;
 }
 
@@ -286,8 +286,7 @@ ngb-pagination  ngb-template ::ng-deep a.active {
 }
 
 ngb-pagination {
-    margin-top: 30px; 
-    margin-left: auto; 
+    margin-top: 30px;
+    margin-left: auto;
     margin-right: auto;
 }
-
