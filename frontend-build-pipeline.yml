@@ -40,7 +40,8 @@ parameters:
   default: '.'
 
 stages:
-- stage:
+- stage: TestBuild
+  displayName: Test and Build
   jobs:
     - job: TestBuild
       displayName: Test and Build
@@ -117,7 +118,7 @@ stages:
 
 - stage: Deploy
   displayName: Deploy to AKS Cluster
-  dependsOn: Check
+  dependsOn: TestBuild
   condition: and(succeeded(), in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI'))
   variables:
     releaseNumber: $[counter('swag-release.1.', 100)]
