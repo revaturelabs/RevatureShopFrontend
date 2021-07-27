@@ -1,0 +1,91 @@
+trigger:
+  branches:
+    include:
+      - main
+      - staging
+      - development
+
+pr:
+  branches:
+    include:
+      - main
+      - staging
+      - development
+      - feature_*
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  appDir: RevatureShopFrontend
+
+parameters:
+- name: repoOrganization # the name of the SonarCloud repo's organization
+  type: string
+  default: '1054-daniel-felleman-revature-swag-shop'
+- name: sonarCloudProjectKey # sonar cloud's cli project key
+  type: string
+  default: '1054-Daniel-Felleman-Revature-Swag-Shop_RevatureShopFrontend'
+- name: sonarCloudProjectName # sonar cloud's cli project name
+  type: string
+  default: 'RevatureShopFrontend'
+- name: sonarCloudCoverageExclude # files for sonar cloud coverage to ignore
+  type: string
+  default: '**/*.spec.ts'
+- name: sonarCloudCoverageDir
+  type: string
+  default: '$(Build.Repository.LocalPath)/coverage/lcov.info'
+- name: sonarCloudSources
+  type: string
+  default: '.'
+
+steps:
+
+# Node.js is required to build Angular apps
+- task: NodeTool@0
+  inputs:
+    versionSpec: '12.14'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm ci
+  displayName: 'npm CI'
+
+- script: |
+    npx ng build
+  displayName: 'npm Build'
+
+- script: |
+    npx ng test --watch=false --browsers=ChromeHeadless --code-coverage
+  displayName: 'Run Unit Tests'
+
+- script: |
+    npx ng lint
+  displayName: Lint
+  continueOnError: true
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: ${{ parameters.repoOrganization }}
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: ${{ parameters.sonarCloudProjectKey }}
+    cliProjectName: $ {{ parameters.sonarCloudProjectName }}
+    cliSources: ${{ parameters.sonarCloudSources }}
+    extraProperties: |
+      sonar.coverage.exclusions=${{ parameters.sonarCloudCoverageExclude }}
+      sonar.javascript.lcov.reportPaths=${{ parameters.sonarCloudCoverageDir }}
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.Repository.LocalPath)/dist'
+    artifact: 'front-end-artifact'
+    publishLocation: 'pipeline'
+  displayName: Publish Pipeline Artifact
