@@ -58,8 +58,7 @@ steps:
 
 # shopt -s globstar makes '**' search through folders of any depth
 - script: |
-    shopt -s globstar
-    npm run eslint src/**/*.ts
+    npx ng lint
   displayName: Lint
 
 - task: SonarCloudPrepare@1
