@@ -22,6 +22,8 @@ export class AdminInventoryPageComponent implements OnInit {
 
   sortMode : string = "id asc";
 
+  selectedOption: string = '';
+
 
   itemImagesURL : string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
 
@@ -85,7 +87,9 @@ export class AdminInventoryPageComponent implements OnInit {
   }
 
   updateDiscountClicked(itemToUpdate: InventoryItem, newDiscount: string, inputId: string) {
-    var newDiscountInt = parseInt(newDiscount);
+    //console.log(typeof newDiscount);
+    var newDiscountInt = parseFloat(newDiscount);
+    //console.log(newDiscountInt);
     if(!isNaN(newDiscountInt)) {
       if(newDiscountInt >= 0) {
         this.httpUserInventoryService.updateItemDiscount(itemToUpdate, newDiscountInt).subscribe(
@@ -93,9 +97,15 @@ export class AdminInventoryPageComponent implements OnInit {
             if(couldUpdate) {
               this.fetchInventoryItemsFromServer();
             }
+            else {
+
+            }
           }
         )
       }
+    }
+    else {
+
     }
   }
 
