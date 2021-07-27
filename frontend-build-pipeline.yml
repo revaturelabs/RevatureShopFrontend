@@ -1,7 +1,17 @@
 trigger:
-- main
-- staging
-- development
+  branches:
+    include:
+      - main
+      - staging
+      - development
+
+pr:
+  branches:
+    include:
+      - main
+      - staging
+      - development
+      - feature_*
 
 pool:
   vmImage: ubuntu-latest
