@@ -56,7 +56,6 @@ steps:
     npx ng test --watch=false --browsers=ChromeHeadless --code-coverage
   displayName: 'Run Unit Tests'
 
-# shopt -s globstar makes '**' search through folders of any depth
 - script: |
     npx ng lint
   displayName: Lint
