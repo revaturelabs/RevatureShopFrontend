@@ -6,7 +6,7 @@ import {CheckoutComponent} from "./components/checkout/checkout.component";
 import {AuthGuard} from "./auth.guard";
 import {CartComponent} from "./components/cart/cart.component";
 import {UserPageComponent} from "./components/user-page/user-page.component";
-import {LandingPageComponent} from "./landing-page/landing-page.component";
+import {LandingPageComponent} from "./components/landing-page/landing-page.component";
 import { AdminInventoryPageComponent } from './components/admin-inventory-page/admin-inventory-page.component';
 import { AdminNewInventoryPageComponent } from "./components/admin-new-inventory-page/admin-newinventory-page.component";
 import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";

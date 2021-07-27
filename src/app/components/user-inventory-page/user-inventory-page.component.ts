@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InventoryItem, InventoryItemsService } from '../../services/inventory-items.service'
-import { HttpUserInventoryPageService } from './http-user-inventory-page.service';
+import { HttpUserInventoryPageService } from '../../services/http-user-inventory-page.service';
 
 @Component({
   selector: 'app-user-inventory-page',
