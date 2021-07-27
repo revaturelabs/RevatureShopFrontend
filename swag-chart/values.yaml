@@ -5,7 +5,7 @@ frontend:
   deploymentName: frontend
   serviceName: frontend-service
   role: frontend-app
-  image: aypas/swag-frontend
+  image: may24devopscontainers.azurecr.io/frontend
   tag: latest
   memoryRequest: 128Mi
   cpuRequest: 250m
