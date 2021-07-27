@@ -30,13 +30,6 @@ parameters:
   default: '.'
 
 steps:
-- script: |
-    ls $(Build.Repository.LocalPath)
-    echo '----'
-    ls $(Pipeline.Workspace)
-    echo '----'
-    ls
-  displayName: 'testing'
 
 # Node.js is required to build Angular apps
 - task: NodeTool@0
@@ -59,6 +52,7 @@ steps:
 - script: |
     npx ng lint
   displayName: Lint
+  continueOnError: true
 
 - task: SonarCloudPrepare@1
   inputs:
