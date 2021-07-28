@@ -26,7 +26,7 @@ import {FileUploaderComponent} from './components/file-uploader/file-uploader.co
 import {CheckoutConfirmationPageComponent} from './components/checkout-confirmation-page/checkout-confirmation-page.component';
 import {AdminAddPointsComponent} from './components/admin-add-points/admin-add-points.component';
 import {UserPageComponent} from './components/user-page/user-page.component';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
     declarations: [
         AppComponent,
@@ -50,6 +50,7 @@ import {UserPageComponent} from './components/user-page/user-page.component';
         FileUploaderComponent,
         PageNotFoundComponent,
         CheckoutConfirmationPageComponent,
+
     ],
     imports: [
         BrowserModule,
@@ -62,7 +63,8 @@ import {UserPageComponent} from './components/user-page/user-page.component';
         FormsModule,
         ReactiveFormsModule,
         MatIconModule,
-        MaterialFileInputModule
+        MaterialFileInputModule,
+        Ng2SearchPipeModule 
     ],
     providers: [],
     bootstrap: [AppComponent]

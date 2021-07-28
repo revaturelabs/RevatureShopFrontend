@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InventoryItem, InventoryItemsService } from '../../services/inventory-items.service'
 import { HttpUserInventoryPageService } from '../../services/http-user-inventory-page.service';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @Component({
   selector: 'app-user-inventory-page',
@@ -19,12 +20,13 @@ export class UserInventoryPageComponent implements OnInit {
   itemsPerPage = 12;
   pageSize: number = 0;
 
-  selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "","");
+  selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "","",0);
   inStockChecked : boolean = true;
   outOfStockChecked : boolean = false;
 
   sortMode : string = "id asc";
 
+  searchText='';
 
 
   constructor(private _inventoryItemsService : InventoryItemsService,
