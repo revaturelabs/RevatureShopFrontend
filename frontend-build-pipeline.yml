@@ -100,7 +100,7 @@ stages:
 
       - template: "./azure-templates/docker-template.yml"
         parameters:
-          repository: front-end
+          repository: frontend
           tag: "$(Build.BuildNumber)"
           Dockerfile: ./Dockerfile
           containerRegistry: "acr-team3"
@@ -109,7 +109,7 @@ stages:
 
       - template: "./azure-templates/docker-template.yml"
         parameters:
-          repository: front-end
+          repository: frontend
           tag: "latest"
           Dockerfile: ./Dockerfile
           containerRegistry: "acr-team3"
