@@ -4,6 +4,7 @@ trigger:
       - main
       - staging
       - development
+      - feature_cd
 
 pr:
   branches:
