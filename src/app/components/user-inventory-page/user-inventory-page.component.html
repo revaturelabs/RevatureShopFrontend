@@ -1,8 +1,11 @@
 
 
+
 <div class="title-and-inventory-grid" name="top">
 
-
+  <div class="searchBar">
+    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;  Start searching for a product">
+  </div>
 
 
 
@@ -55,7 +58,7 @@
         <div class="inventory-grid" style="margin-top: 20px;" >
 
 
-                    <div *ngFor="let item of this.inventoryItemsFiltered  | slice: pageSize | slice: 0:itemsPerPage"
+                    <div *ngFor="let item of this.inventoryItemsFiltered  | slice: pageSize | slice: 0:itemsPerPage | filter: searchText"
                      class="card" type="button" data-bs-toggle="modal" data-bs-target="#itemModal" (click)="itemClicked(item)"
                      [ngClass]="{'inStockItem' : item.quantity > 0, 'outOfStockItem' : item.quantity == 0}">
 
