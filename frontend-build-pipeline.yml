@@ -1,0 +1,195 @@
+trigger:
+  branches:
+    include:
+      - main
+      - staging
+      - development
+
+pr:
+  branches:
+    include:
+      - main
+      - staging
+      - development
+      - feature_*
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  appDir: RevatureShopFrontend
+
+parameters:
+- name: repoOrganization # the name of the SonarCloud repo's organization
+  type: string
+  default: '1054-daniel-felleman-revature-swag-shop'
+- name: sonarCloudProjectKey # sonar cloud's cli project key
+  type: string
+  default: '1054-Daniel-Felleman-Revature-Swag-Shop_RevatureShopFrontend'
+- name: sonarCloudProjectName # sonar cloud's cli project name
+  type: string
+  default: 'RevatureShopFrontend'
+- name: sonarCloudCoverageExclude # files for sonar cloud coverage to ignore
+  type: string
+  default: '**/*.spec.ts'
+- name: sonarCloudCoverageDir
+  type: string
+  default: '$(Build.Repository.LocalPath)/coverage/lcov.info'
+- name: sonarCloudSources
+  type: string
+  default: '.'
+
+stages:
+- stage: TestBuild
+  displayName: Test and Build
+  jobs:
+    - job: TestBuild
+      displayName: Test and Build
+      steps:
+      # Node.js is required to build Angular apps
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '12.14'
+        displayName: 'Install Node.js'
+
+      - script: |
+          npm ci
+        displayName: 'npm CI'
+
+      - script: |
+          npx ng build
+        displayName: 'npm Build'
+
+      - script: |
+          npx ng test --watch=false --browsers=ChromeHeadless --code-coverage
+        displayName: 'Run Unit Tests'
+
+      - script: |
+          npx ng lint
+        displayName: Lint
+        continueOnError: true
+
+      - task: SonarCloudPrepare@1
+        inputs:
+          SonarCloud: 'SonarCloud'
+          organization: ${{ parameters.repoOrganization }}
+          scannerMode: 'CLI'
+          configMode: 'manual'
+          cliProjectKey: ${{ parameters.sonarCloudProjectKey }}
+          cliProjectName: $ {{ parameters.sonarCloudProjectName }}
+          cliSources: ${{ parameters.sonarCloudSources }}
+          extraProperties: |
+            sonar.coverage.exclusions=${{ parameters.sonarCloudCoverageExclude }}
+            sonar.javascript.lcov.reportPaths=${{ parameters.sonarCloudCoverageDir }}
+
+      - task: SonarCloudAnalyze@1
+
+      - task: SonarCloudPublish@1
+        inputs:
+          pollingTimeoutSec: '300'
+
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: '$(Build.Repository.LocalPath)/dist'
+          artifact: 'front-end-artifact'
+          publishLocation: 'pipeline'
+        displayName: Publish Pipeline Artifact
+
+      # Docker Image is created and pushed to ACR with build specific tag.
+
+      - template: "./azure-templates/docker-template.yml"
+        parameters:
+          repository: frontend
+          tag: "$(Build.BuildNumber)"
+          Dockerfile: ./Dockerfile
+          containerRegistry: "acr-team3"
+
+      # Docker Image is created and pushed to ACR with latest tag.
+
+      - template: "./azure-templates/docker-template.yml"
+        parameters:
+          repository: frontend
+          tag: "latest"
+          Dockerfile: ./Dockerfile
+          containerRegistry: "acr-team3"
+
+
+# Deployment Stage. Using images pushed to the Azure Container Registry, and a helm Chart.
+
+- stage: Deploy
+  displayName: Deployment
+  dependsOn: TestBuild
+  condition: and(succeeded(), in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI'))
+  jobs:
+  - deployment: development
+    displayName: Deploy to Development AKS Cluster
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/development')
+    environment: dev
+    pool:
+      vmImage: ubuntu-latest
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          # In the next steps, we're dynamically determining Deployment Environment based on branch of CI. 
+          # If not main, staging, or development, ideally this would be test.
+          # For testing purposes the default is dev. To be updated when a production and testing environment are available..
+
+          # Creating Image Pull secrets for Helm/K8S to access the images and use on the cluster.
+
+          - task: KubernetesManifest@0
+            displayName: Create Pull Secret Dev
+            inputs:
+              action: "createSecret"
+              kubernetesServiceConnection: "k8s-team3-config-dev"
+              namespace: "team3"
+              secretType: "dockerRegistry"
+              secretName: "team3pullsecret"
+              dockerRegistryEndpoint: "acr-team3"
+
+          # Helm deploys to a cluster, dependant on branch. development = dev, staging = staging (main = production)
+
+          - template: "./azure-templates/helm-template.yml"
+            parameters:
+              aksConnection: "k8s-team3-config-dev"
+              releaseName: swag-deploy-frontend
+              nameSpace: "team3"
+              chartName: "swag-chart"
+              overrides: ingress.host=test.api.swag-chart.ml
+
+  - deployment: staging
+    displayName: Deploy to Staging AKS Cluster
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/staging')
+    environment: staging
+    pool:
+      vmImage: ubuntu-latest
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          # In the next steps, we're dynamically determining Deployment Environment based on branch of CI. 
+          # If not main, staging, or development, ideally this would be test.
+          # For testing purposes the default is dev. To be updated when a production and testing environment are available..
+
+          # Creating Image Pull secrets for Helm/K8S to access the images and use on the cluster.
+
+          - task: KubernetesManifest@0
+            displayName: Create Pull Secret Dev
+            inputs:
+              action: "createSecret"
+              kubernetesServiceConnection: "k8s-team3-config-staging"
+              namespace: "team3"
+              secretType: "dockerRegistry"
+              secretName: "team3pullsecret"
+              dockerRegistryEndpoint: "acr-team3"
+
+          # Helm deploys to a cluster, dependant on branch. development = dev, staging = staging (main = production)
+
+          - template: "./azure-templates/helm-template.yml"
+            parameters:
+              aksConnection: "k8s-team3-config-staging"
+              releaseName: swag-deploy-frontend
+              nameSpace: "team3"
+              chartName: "swag-chart"

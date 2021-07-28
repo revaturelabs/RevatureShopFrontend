@@ -1,0 +1,22 @@
+app: swag-frontend-app
+
+frontend:
+  baseURL: /
+  deploymentName: frontend
+  serviceName: frontend-service
+  role: frontend-app
+  image: may24devopscontainers.azurecr.io/frontend
+  tag: latest
+  memoryRequest: 128Mi
+  cpuRequest: 250m
+  memoryLimit: 128Mi
+  cpuLimit: 250m
+  replicas: 1
+  containerPort: 80
+  usePullSecret: true
+  pullSecret: team3pullsecret
+
+ingress:
+  host: swag-shop.ml
+  useHost: true
+  useIngress: false

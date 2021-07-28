@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { InventoryItem, InventoryItemsService } from '../../services/inventory-items.service'
-import { HttpUserInventoryPageService } from '../user-inventory-page/http-user-inventory-page.service';
+import { HttpUserInventoryPageService } from '../../services/http-user-inventory-page.service';
 
 @Component({
   selector: 'app-admin-inventory-page',
@@ -16,11 +16,13 @@ export class AdminInventoryPageComponent implements OnInit {
   itemsPerPage = 12;
   pageSize: number = 0;
 
-  selectedItem : InventoryItem = new InventoryItem(1,"",1,1,"","");
+  selectedItem : InventoryItem = new InventoryItem(1,"",1,1,"","", 0);
   inStockChecked : boolean = true;
   outOfStockChecked : boolean = true;
 
   sortMode : string = "id asc";
+
+  selectedOption: string = '';
 
 
   itemImagesURL : string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
@@ -81,6 +83,29 @@ export class AdminInventoryPageComponent implements OnInit {
       }
     }
     else {
+    }
+  }
+
+  updateDiscountClicked(itemToUpdate: InventoryItem, newDiscount: string, inputId: string) {
+    //console.log(typeof newDiscount);
+    var newDiscountInt = parseFloat(newDiscount);
+    //console.log(newDiscountInt);
+    if(!isNaN(newDiscountInt)) {
+      if(newDiscountInt >= 0) {
+        this.httpUserInventoryService.updateItemDiscount(itemToUpdate, newDiscountInt).subscribe(
+          (couldUpdate) => {
+            if(couldUpdate) {
+              this.fetchInventoryItemsFromServer();
+            }
+            else {
+
+            }
+          }
+        )
+      }
+    }
+    else {
+
     }
   }
 
