@@ -11,7 +11,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 })
 export class UserInventoryPageComponent implements OnInit {
 
-  itemImagesURL : string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
+  itemImagesURL : string = "https://rss-images.s3.us-east-2.amazonaws.com";
 
   categoryOfItems : string = '';
   inventoryItemsFiltered : InventoryItem[] = [];
@@ -20,7 +20,7 @@ export class UserInventoryPageComponent implements OnInit {
   itemsPerPage = 12;
   pageSize: number = 0;
 
-  selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "", 0);
+  selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "","",0);
   inStockChecked : boolean = true;
   outOfStockChecked : boolean = false;
 
@@ -94,7 +94,8 @@ export class UserInventoryPageComponent implements OnInit {
       Filter by stock status
     */
     this.inventoryItemsFiltered = this._inventoryItemsService.inventoryItems.filter(element => {
-      return (this.inStockChecked && element.quantity > 0) || (this.outOfStockChecked && element.quantity == 0);
+      return ((this.inStockChecked && element.quantity > 0) || (this.outOfStockChecked && element.quantity == 0))
+      && (element.size == null || element.size == 'Small');
   });
 
   }
