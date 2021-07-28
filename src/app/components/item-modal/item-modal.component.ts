@@ -15,8 +15,11 @@ export class ItemModalComponent implements OnInit {
     @Input() id: number = 0;
     @Input() category: string = '';
     selectedSize: string = '';
+    quantity_small: number = 0;
+    quantity_medium: number = 0;
+    quantity_large: number = 0;
 
-    itemImagesURL: string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
+    itemImagesURL: string = "https://rss-images.s3.us-east-2.amazonaws.com";
     loggedShopper: string = '';
 
     constructor(private httpItemModalService: HttpItemModalService, private accountsService: AccountService) {
@@ -26,11 +29,16 @@ export class ItemModalComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        
     }
 
     addToCart(): void {
-        this.httpItemModalService.getItemByName(this.title).subscribe((item) => {
-            item.size=this.selectedSize;
+        // this.httpItemModalService.getItemByName(this.title).subscribe((item) => {
+        //     item.size=this.selectedSize;
+        //     this.httpItemModalService.addItemToCart(item, this.loggedShopper);
+        // });
+
+        this.httpItemModalService.getItemById(this.id).subscribe((item) => {
             this.httpItemModalService.addItemToCart(item, this.loggedShopper);
         });
 
@@ -61,5 +69,12 @@ export class ItemModalComponent implements OnInit {
         if (customAlert) {
             customAlert.style.display = 'none';
         }
+    }
+
+    updateSize() {
+        this.httpItemModalService.getItemByNameAndSize(this.title, this.selectedSize).subscribe((item) => {
+            this.id = item.id;
+            this.quantity = item.quantity;
+        });
     }
 }

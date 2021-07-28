@@ -48,12 +48,12 @@ export class CheckoutComponent {
         }
         this.cs.getCart(this.loggedShopper).subscribe(cart=>{
             this.checkoutCart=cart;
-            Object.keys(this.checkoutCart.stockItemMap).forEach((itemName) => {
+            Object.keys(this.checkoutCart.stockItemMap).map(Number).forEach((id) => {
                 let price:number=0;
-                this.cs.getItemByName(itemName).subscribe((item) => {
+                this.cs.getItemById(id).subscribe((item) => {                    
                     item.imageURL="";
                     // @ts-ignore
-                    price += item.itemPrice * this.checkoutCart.stockItemMap[item.itemName];
+                    price += item.itemPrice * this.checkoutCart.stockItemMap[item.id];
                     this.pointsAfterMath=<number>this.as.account?.points-price;
                 });
         });

@@ -27,6 +27,10 @@ export class HttpCartService {
 
     }
 
+    getItemById(id: number): Observable<InventoryItem> {
+        return this.http.get<InventoryItem>("http://" + window.location.hostname + ":9001/inventoryms/api/inventory/get/item/id?id=" + id);
+    }
+
     getCart(username: string): Observable<any> {
         return this.http.get("http://" + window.location.hostname + ":9001/commercems/commerce/myCart/" + username);
     }

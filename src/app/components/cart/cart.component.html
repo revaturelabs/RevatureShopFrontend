@@ -2,25 +2,25 @@
 <div class="container bg-light">
     <div class="row item-row" *ngFor="let cartItem of cartItems">
 
-        <div class="col-1 center-column" *ngIf="getCartQuantity(cartItem.itemName)">
-            <input class="quantity" type="number" min="1" max="99" [value]="getCartQuantity(cartItem.itemName)"
-                   (change)="updateCartQuantity($event, cartItem.itemName)">
+        <div class="col-1 center-column" *ngIf="getCartQuantity(cartItem.id)">
+            <input class="quantity" type="number" min="1" max="99" [value]="getCartQuantity(cartItem.id)"
+                   (change)="updateCartQuantity($event, cartItem.id)">
             <!--            <p>{{cartItem.cartQuantity}}</p>-->
         </div>
-        <div class="col-2 center-column" *ngIf="getCartQuantity(cartItem.itemName)">
+        <div class="col-2 center-column" *ngIf="getCartQuantity(cartItem.id)">
             <img [src]="getItemImage(cartItem)" class="w-75 h-75">
         </div>
-        <div class="col-9" *ngIf="getCartQuantity(cartItem.itemName)">
+        <div class="col-9" *ngIf="getCartQuantity(cartItem.id)">
             <div class="row link-row mt-3 justify-content-between">
                 <a href="#" class="item-link w-auto"><p>{{cartItem.itemName}}</p></a>
-                <p *ngIf="cartItem.category == 'Unisex Shirt' || cartItem.category == 'Men\'s Shirt' || cartItem.category == 'Women\'s Shirt'">({{cartItem.size}})</p>
                 <p class="item-link mr-3 w-auto">{{cartItem.itemPrice}}</p>
+                <p *ngIf="cartItem.category == 'Unisex Shirt' || cartItem.category == 'Men\'s Shirt' || cartItem.category == 'Women\'s Shirt'">({{cartItem.size}})</p>
             </div>
-            <div class="row" *ngIf="getCartQuantity(cartItem.itemName)">
+            <div class="row" *ngIf="getCartQuantity(cartItem.id)">
                 <p class="item-desc">{{cartItem.description}}</p>
             </div>
-            <div class="row delete-row mb-3" *ngIf="getCartQuantity(cartItem.itemName)">
-                <a (click)="removeCartItem(cartItem.itemName)" routerLink="/cart">Delete item</a>
+            <div class="row delete-row mb-3" *ngIf="getCartQuantity(cartItem.id)">
+                <a (click)="removeCartItem(cartItem.id)" routerLink="/cart">Delete item</a>
             </div>
         </div>
 
