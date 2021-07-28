@@ -27,6 +27,9 @@ import {CheckoutConfirmationPageComponent} from './components/checkout-confirmat
 import {AdminAddPointsComponent} from './components/admin-add-points/admin-add-points.component';
 import {UserPageComponent} from './components/user-page/user-page.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { DisplaySaleComponent } from './components/display-sale/display-sale.component';
+import { DisplayFeaturedComponent } from './components/display-featured/display-featured.component';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -50,6 +53,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
         FileUploaderComponent,
         PageNotFoundComponent,
         CheckoutConfirmationPageComponent,
+        DisplaySaleComponent,
+        DisplayFeaturedComponent
 
     ],
     imports: [
