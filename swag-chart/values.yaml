@@ -13,6 +13,8 @@ frontend:
   cpuLimit: 250m
   replicas: 1
   containerPort: 80
+  usePullSecret: true
+  pullSecret: team3pullsecret
 
 ingress:
   host: swag-shop.ml

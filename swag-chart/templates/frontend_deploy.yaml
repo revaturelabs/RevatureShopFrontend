@@ -30,4 +30,8 @@ spec:
             cpu: {{ quote .cpuLimit }}
         ports:
         - containerPort: {{ .containerPort }}
+      {{ if .usePullSecret}}
+      imagePullSecrets:
+      - name: {{ .pullSecret }}
+      {{ end }}
 {{ end }}
