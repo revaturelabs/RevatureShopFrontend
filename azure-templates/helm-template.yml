@@ -9,6 +9,9 @@ parameters:
     type: string
   - name: 'chartName'
     type: string
+  - name: 'overrides'
+    type: string
+    default: ''
 
 steps:
   - task: HelmDeploy@0
@@ -30,3 +33,4 @@ steps:
       chartType: 'FilePath'
       chartPath: './swag-chart/'
       valueFile: './swag-chart/values.yaml'
+      overrideValues: ${{ parameters.overrides }}
