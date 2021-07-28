@@ -124,7 +124,7 @@ stages:
   - deployment: development
     displayName: Deploy to Development AKS Cluster
     condition: eq(variables['Build.SourceBranch'], 'ref/heads/development')
-    environment: env.k8s-team3-config-dev
+    environment: dev
     pool:
       vmImage: ubuntu-latest
     strategy:
@@ -160,7 +160,7 @@ stages:
   - deployment: staging
     displayName: Deploy to Staging AKS Cluster
     condition: eq(variables['Build.SourceBranch'], 'ref/heads/staging')
-    environment: env.k8s-team3-config-staging
+    environment: staging
     pool:
       vmImage: ubuntu-latest
     strategy:
