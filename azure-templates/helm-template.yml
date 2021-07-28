@@ -20,6 +20,13 @@ steps:
       command: 'package'
       chartPath: './${{ parameters.chartName }}/'
       destination: './helm/'
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: './helm/'
+      artifact: '${{ parameters.chartName }}-package'
+      publishLocation: 'pipeline'
+    displayName: Publish Pipeline Artifact
   
   - task: HelmDeploy@0
     displayName: Helm Deploy to AKS
