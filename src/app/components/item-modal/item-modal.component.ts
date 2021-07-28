@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {HttpItemModalService} from "./http-item-modal.service";
+import {HttpItemModalService} from "../../services/http-item-modal.service";
 import {AccountService} from "../../services/account.service";
 
 @Component({

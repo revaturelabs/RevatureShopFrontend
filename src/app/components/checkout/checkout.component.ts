@@ -4,7 +4,7 @@ import {StatesService, state} from "../../services/states.service";
 import {Account, AccountService} from "../../services/account.service";
 import {CheckoutService} from "../../services/checkout.service";
 import {Router} from "@angular/router";
-import {HttpCartService} from "../cart/http-cart.service";
+import {HttpCartService} from "../../services/http-cart.service";
 import {Cart} from "../cart/cart.component";
 
 @Component({
