@@ -40,11 +40,19 @@ export class HttpUserInventoryPageService {
 
    updateInventoryItemQuantity(inventoryItem : InventoryItem,  newQuantity : number) : Observable<boolean> {
 
-      var updatedInventoryItem = {"id": inventoryItem.id, "itemName": inventoryItem.itemName, "itemPrice": inventoryItem.itemPrice, "quantity": newQuantity, "category": inventoryItem.category, "description": inventoryItem.description};
+      var updatedInventoryItem = {"id": inventoryItem.id, "itemName": inventoryItem.itemName, "itemPrice": inventoryItem.itemPrice, "quantity": newQuantity, "category": inventoryItem.category, "description": inventoryItem.description, "discount": inventoryItem.discount};
 
       var couldUpdate: Observable<boolean> = this.http.put<boolean>(this.baseServerURL + "/api/inventory/stockitem/update/quantity", updatedInventoryItem, this.httpOptionsJSON);
 
       return couldUpdate;
 
+   }
+
+   updateItemDiscount(inventoryItem: InventoryItem, newDiscount: number): Observable<boolean> {
+     var updatedInventoryItem = {"id": inventoryItem.id, "itemName": inventoryItem.itemName, "itemPrice": inventoryItem.itemPrice, "quantity": inventoryItem.quantity, "category": inventoryItem.category, "description": inventoryItem.description, "discount": newDiscount};
+
+     var couldUpdate: Observable<boolean> = this.http.put<boolean>(this.baseServerURL + "/api/inventory/stockitem/update/discount", updatedInventoryItem, this.httpOptionsJSON);
+
+     return couldUpdate;
    }
 }

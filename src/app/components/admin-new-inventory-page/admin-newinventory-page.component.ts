@@ -37,7 +37,7 @@ export class AdminNewInventoryPageComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private router : Router, private http: HttpClient, inventoryService: InventoryItemsService,
     private navbarService : NavbarServiceService ) {
-     this.itemConvert = new InventoryItem(0,'',0,0,'','');
+     this.itemConvert = new InventoryItem(0,'',0,0,'','', 0);
   }
 
   ngOnInit(): void {
