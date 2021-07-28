@@ -123,7 +123,7 @@ stages:
   jobs:
   - deployment: development
     displayName: Deploy to Development AKS Cluster
-    condition: eq(variables['Build.SourceBranch'], 'ref/heads/development')
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/development')
     environment: dev
     pool:
       vmImage: ubuntu-latest
@@ -160,7 +160,7 @@ stages:
 
   - deployment: staging
     displayName: Deploy to Staging AKS Cluster
-    condition: eq(variables['Build.SourceBranch'], 'ref/heads/staging')
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/staging')
     environment: staging
     pool:
       vmImage: ubuntu-latest
