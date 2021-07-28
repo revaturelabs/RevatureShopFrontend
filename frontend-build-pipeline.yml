@@ -161,3 +161,7 @@ stages:
             releaseName: "$(releaseNumber)"
             nameSpace: "team3"
             chartName: "swag-chart"
+            ${{ if eq(variables['Build.SourceBranchName'], 'development') }}:
+              overrideValues: ingress.host=test.api.swag-chart.ml
+            ${{ if eq(variables['Build.SourceBranchName'], 'feature_cd') }}:
+              overrideValues: ingress.host=test.api.swag-chart.ml
