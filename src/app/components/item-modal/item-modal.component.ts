@@ -33,11 +33,6 @@ export class ItemModalComponent implements OnInit {
     }
 
     addToCart(): void {
-        // this.httpItemModalService.getItemByName(this.title).subscribe((item) => {
-        //     item.size=this.selectedSize;
-        //     this.httpItemModalService.addItemToCart(item, this.loggedShopper);
-        // });
-
         this.httpItemModalService.getItemById(this.id).subscribe((item) => {
             this.httpItemModalService.addItemToCart(item, this.loggedShopper);
         });

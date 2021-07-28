@@ -25,13 +25,11 @@ export class HttpItemModalService {
     }
 
     getItemByNameAndSize(itemName: string, size: string): Observable<InventoryItem> {
-        let item: Observable<InventoryItem> = this.http.get<InventoryItem>("http://" + window.location.hostname + ":9001/inventoryms/api/inventory/get/item/name/size?itemName=" + itemName + "&size=" + size);
-        return item;
+        return this.http.get<InventoryItem>("http://" + window.location.hostname + ":9001/inventoryms/api/inventory/get/item/name/size?itemName=" + itemName + "&size=" + size);
     }
 
     getItemById(id: number): Observable<InventoryItem> {
-        let item: Observable<InventoryItem> = this.http.get<InventoryItem>("http://" + window.location.hostname + ":9001/inventoryms/api/inventory/get/item/id?id=" + id);
-        return item;
+        return this.http.get<InventoryItem>("http://" + window.location.hostname + ":9001/inventoryms/api/inventory/get/item/id?id=" + id);
     }
 
     addItemToCart(item: InventoryItem, username: string) {
