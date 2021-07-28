@@ -26,6 +26,8 @@ import {FileUploaderComponent} from './components/file-uploader/file-uploader.co
 import {CheckoutConfirmationPageComponent} from './components/checkout-confirmation-page/checkout-confirmation-page.component';
 import {AdminAddPointsComponent} from './components/admin-add-points/admin-add-points.component';
 import {UserPageComponent} from './components/user-page/user-page.component';
+import { DisplaySaleComponent } from './components/display-sale/display-sale.component';
+import { DisplayFeaturedComponent } from './components/display-featured/display-featured.component';
 
 @NgModule({
     declarations: [
@@ -50,6 +52,8 @@ import {UserPageComponent} from './components/user-page/user-page.component';
         FileUploaderComponent,
         PageNotFoundComponent,
         CheckoutConfirmationPageComponent,
+        DisplaySaleComponent,
+        DisplayFeaturedComponent,
     ],
     imports: [
         BrowserModule,
