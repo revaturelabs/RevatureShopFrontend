@@ -16,7 +16,7 @@ export class AdminInventoryPageComponent implements OnInit {
   itemsPerPage = 12;
   pageSize: number = 0;
 
-  selectedItem : InventoryItem = new InventoryItem(1,"",1,1,"","", 0);
+  selectedItem : InventoryItem = new InventoryItem(1,"",1,1,"","","",0);
   inStockChecked : boolean = true;
   outOfStockChecked : boolean = true;
 
@@ -25,7 +25,7 @@ export class AdminInventoryPageComponent implements OnInit {
   selectedOption: string = '';
 
 
-  itemImagesURL : string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
+  itemImagesURL : string = "https://rss-images.s3.us-east-2.amazonaws.com";
 
   constructor(private _inventoryItemsService : InventoryItemsService,
     private router : Router,

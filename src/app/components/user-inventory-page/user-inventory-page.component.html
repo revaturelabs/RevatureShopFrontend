@@ -1,8 +1,11 @@
 
 
+
 <div class="title-and-inventory-grid" name="top">
 
-
+  <div class="searchBar">
+    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;  Start searching for a product">
+  </div>
 
 
 
@@ -50,17 +53,17 @@
 
 
 
-<!-- class="card" type="button" data-bs-toggle="modal" data-bs-target="#itemModal"> -->
+  <!-- class="card" type="button" data-bs-toggle="modal" data-bs-target="#itemModal"> -->
 
         <div class="inventory-grid" style="margin-top: 20px;" >
 
 
-                    <div *ngFor="let item of this.inventoryItemsFiltered  | slice: pageSize | slice: 0:itemsPerPage"
+                    <div *ngFor="let item of this.inventoryItemsFiltered  | slice: pageSize | slice: 0:itemsPerPage | filter: searchText"
                      class="card" type="button" data-bs-toggle="modal" data-bs-target="#itemModal" (click)="itemClicked(item)"
                      [ngClass]="{'inStockItem' : item.quantity > 0, 'outOfStockItem' : item.quantity == 0}">
-
+                        
                         <div class="imageContainer" style="overflow: hidden;">
-                          <img class="card-img-top" src = "{{itemImagesURL+'/'+item.id}}" alt="Item image">
+                          <img class="card-img-top" src = "{{itemImagesURL+'/images/'+item.itemName+'.png'}}" alt="Item image">
                         </div>
 
                         <!-- Mask applied over image when hovered over-->
@@ -74,20 +77,23 @@
                             <h5 class="card-text price" style="margin-top: 15px; font-size: 18px;">{{item.itemPrice * (1-item.discount)}} RevCoins</h5>
 
                         </div>
+
                     </div>
+
 
         </div>
 
 
-        <ngb-pagination [collectionSize]="this.inventoryItemsService.inventoryItems.length" #numPages [pageSize]="itemsPerPage" [(page)]="currentPage" (pageChange)="onPageChange(currentPage)">
+        <ngb-pagination [collectionSize]="this.inventoryItemsFiltered.length" #numPages [pageSize]="itemsPerPage" [(page)]="currentPage" (pageChange)="onPageChange(currentPage)">
             <ng-template ngbPaginationPrevious>Prev</ng-template>
             <ng-template ngbPaginationNext>Next</ng-template>
           </ngb-pagination>
 </div>
 
 
-<app-item-modal [title]="this.selectedItem.itemName" [src]="this.selectedItem.imageURL"
-[description]="this.selectedItem.description" [quantity]="this.selectedItem.quantity" [id]="this.selectedItem.id"></app-item-modal>
+<app-item-modal [title]="this.selectedItem.itemName" [src]="this.selectedItem.imageURL" 
+[description]="this.selectedItem.description" [quantity]="this.selectedItem.quantity" [id]="this.selectedItem.id" 
+[category]="this.selectedItem.category"></app-item-modal>
 
 <br>
 <br>
