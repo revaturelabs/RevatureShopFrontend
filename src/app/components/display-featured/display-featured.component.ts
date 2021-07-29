@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InventoryItem, InventoryItemsService } from '../../services/inventory-items.service'
-// import { DisplayFeaturedService } from '../../services/display-featured.service';
-import { HttpUserInventoryPageService } from '../../services/http-user-inventory-page.service';
+import { DisplayFeaturedService } from '../../services/display-featured.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @Component({
@@ -21,7 +20,7 @@ export class DisplayFeaturedComponent implements OnInit {
   itemsPerPage = 2;
   pageSize: number = 0;
 
-  selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "", "", 1);
+  selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "", "", 0);
   inStockChecked : boolean = true;
 
   sortMode : string = "id asc";
@@ -32,7 +31,7 @@ export class DisplayFeaturedComponent implements OnInit {
   constructor(private _inventoryItemsService : InventoryItemsService,
     private router : Router,
     private route : ActivatedRoute,
-    private httpUserInventoryPageService : HttpUserInventoryPageService) {
+    private displayFeaturedService : DisplayFeaturedService) {
 
    }
 
@@ -48,23 +47,23 @@ export class DisplayFeaturedComponent implements OnInit {
 
   fetchItemListByCategory(category: string) {
 
-    // if (category == 'featured') {
+    if (category == 'featured') {
 
-    //   this.displayFeaturedService.getInventoryItemsByCategory( category.toString() ).subscribe(
+      this.displayFeaturedService.getInventoryItemsByCategory( category.toString() ).subscribe(
 
-    //     itemsList => {
-    //       this.inventoryItemsService.inventoryItems = itemsList;
-    //       this.filterListByStock();
-    //     }
-    //   )
+        itemsList => {
+          this.inventoryItemsService.inventoryItems = itemsList;
+          this.filterListByStock();
+        }
+      )
 
-    // }
-    // else{
-        this.httpUserInventoryPageService.getAllInventoryItems().subscribe(itemsList=>{
+    }
+    else{
+        this.displayFeaturedService.getAllInventoryItems().subscribe(itemsList=>{
             this.inventoryItemsService.inventoryItems = itemsList;
             this.filterListByStock();
         });
-    // }
+    }
   }
 
   itemClicked(selectedItem : InventoryItem) {

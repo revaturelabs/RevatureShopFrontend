@@ -20,7 +20,7 @@ export class UserInventoryPageComponent implements OnInit {
   itemsPerPage = 12;
   pageSize: number = 0;
 
-  selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "","",1);
+  selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "","",0);
   inStockChecked : boolean = true;
   outOfStockChecked : boolean = false;
 
@@ -103,7 +103,6 @@ export class UserInventoryPageComponent implements OnInit {
 
   public onPageChange(pageNum: number): void {
     this.pageSize = this.itemsPerPage*(pageNum - 1);
-    window.scrollTo(0,0);
   }
 
   public changePagesize(num: number): void {
