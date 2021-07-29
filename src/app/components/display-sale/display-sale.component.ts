@@ -47,23 +47,23 @@ export class DisplaySaleComponent implements OnInit {
 
   fetchItemListByCategory(category: string) {
 
-    if (category == 'on-sale') {
+    // if (category == 'on-sale') {
 
-      this.displaySaleService.getInventoryItemsByCategory( category.toString() ).subscribe(
+    //   this.displaySaleService.getInventoryItemsByCategory( category.toString() ).subscribe(
 
-        itemsList => {
-          this.inventoryItemsService.inventoryItems = itemsList;
-          this.filterListByStock();
-        }
-      )
+    //     itemsList => {
+    //       this.inventoryItemsService.inventoryItems = itemsList;
+    //       this.filterListByStock();
+    //     }
+    //   )
 
-    }
-    else{
+    // }
+    // else{
         this.displaySaleService.getAllInventoryItems().subscribe(itemsList=>{
             this.inventoryItemsService.inventoryItems = itemsList;
             this.filterListByStock();
         });
-    }
+    // }
   }
 
   itemClicked(selectedItem : InventoryItem) {

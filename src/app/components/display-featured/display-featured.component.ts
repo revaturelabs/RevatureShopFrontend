@@ -47,23 +47,23 @@ export class DisplayFeaturedComponent implements OnInit {
 
   fetchItemListByCategory(category: string) {
 
-    if (category == 'featured') {
+    // if (category == 'featured') {
 
-      this.displayFeaturedService.getInventoryItemsByCategory( category.toString() ).subscribe(
+    //   this.displayFeaturedService.getInventoryItemsByCategory( category.toString() ).subscribe(
 
-        itemsList => {
-          this.inventoryItemsService.inventoryItems = itemsList;
-          this.filterListByStock();
-        }
-      )
+    //     itemsList => {
+    //       this.inventoryItemsService.inventoryItems = itemsList;
+    //       this.filterListByStock();
+    //     }
+    //   )
 
-    }
-    else{
+    // }
+    // else{
         this.displayFeaturedService.getAllInventoryItems().subscribe(itemsList=>{
             this.inventoryItemsService.inventoryItems = itemsList;
             this.filterListByStock();
         });
-    }
+    // }
   }
 
   itemClicked(selectedItem : InventoryItem) {
