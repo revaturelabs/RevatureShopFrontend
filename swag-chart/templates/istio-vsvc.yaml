@@ -1,0 +1,19 @@
+{{ if not .Values.ingress.useIngress}}
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: frontend-route
+spec:
+  gateways:
+  - swag-frontend-gateway
+  hosts:
+  - "*"
+  http:
+  - name: "frontend"
+    match:
+    - uri:
+        prefix: {{ .Values.frontend.baseURL }}
+    route:
+    - destination:
+        host: {{ .Values.frontend.serviceName }}
+{{ end }}
