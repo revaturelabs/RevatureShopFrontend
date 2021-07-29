@@ -11,21 +11,20 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 })
 export class DisplayFeaturedComponent implements OnInit {
 
-  itemImagesURL : string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
+  featureditemImagesURL : string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
 
-  categoryOfItems : string = 'Featured Items';
+  featuredcategoryOfItems : string = 'Featured Items';
   featuredItemsFiltered : InventoryItem[] = [];
 
-  currentPage = 1;
-  itemsPerPage = 3;
-  pageSize: number = 0;
+  featuredcurrentPage = 1;
+  featureditemsPerPage = 3;
+  featuredpageSize: number = 0;
 
-  selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "", "", 0);
-  inStockChecked : boolean = true;
+  featuredselectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "", "", 0);
+  featuredinStockChecked : boolean = true;
 
-  sortMode : string = "id asc";
 
-  searchText='';
+  featuredsearchText='';
 
 
   constructor(private _featuredItemsService : InventoryItemsService,
@@ -37,7 +36,7 @@ export class DisplayFeaturedComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.fetchItemListByCategory("xxx");
+    this.fetchfeaturedItemListByCategory("xxx");
   }
 
 
@@ -45,7 +44,7 @@ export class DisplayFeaturedComponent implements OnInit {
     return this._featuredItemsService;
   }
 
-  fetchItemListByCategory(category: string) {
+  fetchfeaturedItemListByCategory(category: string) {
 
     if (category == 'featured') {
 
@@ -53,7 +52,7 @@ export class DisplayFeaturedComponent implements OnInit {
 
         itemsList => {
           this.featuredItemsService.inventoryItems = itemsList;
-          this.filterListByStock();
+          this.filterfeaturedListByStock();
         }
       )
 
@@ -61,31 +60,31 @@ export class DisplayFeaturedComponent implements OnInit {
     else{
         this.displayFeaturedService.getAllInventoryItems().subscribe(itemsList=>{
             this.featuredItemsService.inventoryItems = itemsList;
-            this.filterListByStock();
+            this.filterfeaturedListByStock();
         });
     }
   }
 
-  itemClicked(selectedItem : InventoryItem) {
-    this.selectedItem = selectedItem;
+  featureditemClicked(selectedItem : InventoryItem) {
+    this.featuredselectedItem = selectedItem;
 
   }
 
-  filterListByStock() {
+  filterfeaturedListByStock() {
 
     this.featuredItemsFiltered = this._featuredItemsService.inventoryItems.filter(element => {
-      return (this.inStockChecked && element.quantity > 0);
+      return (this.featuredinStockChecked && element.quantity > 0);
   });
 
   }
 
 
-  public onPageChange(pageNum: number): void {
-    this.pageSize = this.itemsPerPage*(pageNum - 1);
+  public featuredonPageChange(pageNum: number): void {
+    this.featuredpageSize = this.featureditemsPerPage*(pageNum - 1);
   }
 
-  public changePagesize(num: number): void {
-  this.itemsPerPage = this.pageSize + num;
+  public featuredchangePagesize(num: number): void {
+  this.featureditemsPerPage = this.featuredpageSize + num;
 }
 
 

@@ -11,21 +11,20 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 })
 export class DisplaySaleComponent implements OnInit {
 
-  itemImagesURL : string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
+  saleitemImagesURL : string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
 
-  categoryOfItems : string = 'On Sale';
+  salecategoryOfItems : string = 'On Sale';
   saleItemsFiltered : InventoryItem[] = [];
 
-  currentPage = 1;
-  itemsPerPage = 3;
-  pageSize: number = 0;
+  salecurrentPage = 1;
+  saleitemsPerPage = 3;
+  salepageSize: number = 0;
 
-  selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "", "", 0);
-  inStockChecked : boolean = true;
+  saleselectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "", "", 0);
+  saleinStockChecked : boolean = true;
 
-  sortMode : string = "id asc";
 
-  searchText='';
+  salesearchText='';
 
 
   constructor(private _saleItemsService : InventoryItemsService,
@@ -37,7 +36,7 @@ export class DisplaySaleComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.fetchItemListByCategory("xxx");
+    this.fetchsaleItemListByCategory("xxx");
   }
 
 
@@ -45,7 +44,7 @@ export class DisplaySaleComponent implements OnInit {
     return this._saleItemsService;
   }
 
-  fetchItemListByCategory(category: string) {
+  fetchsaleItemListByCategory(category: string) {
 
     if (category == 'on-sale') {
 
@@ -53,7 +52,7 @@ export class DisplaySaleComponent implements OnInit {
 
         itemsList => {
           this.saleItemsService.inventoryItems = itemsList;
-          this.filterListByStock();
+          this.filtersaleListByStock();
         }
       )
 
@@ -61,31 +60,31 @@ export class DisplaySaleComponent implements OnInit {
     else{
         this.displaySaleService.getAllInventoryItems().subscribe(itemsList=>{
             this.saleItemsService.inventoryItems = itemsList;
-            this.filterListByStock();
+            this.filtersaleListByStock();
         });
     }
   }
 
-  itemClicked(selectedItem : InventoryItem) {
-    this.selectedItem = selectedItem;
+  saleitemClicked(selectedItem : InventoryItem) {
+    this.saleselectedItem = selectedItem;
 
   }
 
-  filterListByStock() {
+  filtersaleListByStock() {
 
     this.saleItemsFiltered = this._saleItemsService.inventoryItems.filter(element => {
-      return (this.inStockChecked && element.quantity > 0);
+      return (this.saleinStockChecked && element.quantity > 0);
   });
 
   }
 
 
-  public onPageChange(pageNum: number): void {
-    this.pageSize = this.itemsPerPage*(pageNum - 1);
+  public saleonPageChange(pageNum: number): void {
+    this.salepageSize = this.saleitemsPerPage*(pageNum - 1);
   }
 
-  public changePagesize(num: number): void {
-  this.itemsPerPage = this.pageSize + num;
+  public salechangePagesize(num: number): void {
+  this.saleitemsPerPage = this.salepageSize + num;
 }
 
 
