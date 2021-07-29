@@ -54,7 +54,7 @@ import { DisplayFeaturedComponent } from './components/display-featured/display-
         PageNotFoundComponent,
         CheckoutConfirmationPageComponent,
         DisplaySaleComponent,
-        DisplayFeaturedComponent
+        DisplayFeaturedComponent,
 
     ],
     imports: [
