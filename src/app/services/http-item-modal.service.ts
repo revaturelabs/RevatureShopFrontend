@@ -24,14 +24,23 @@ export class HttpItemModalService {
         return item;
     }
 
+    getItemByNameAndSize(itemName: string, size: string): Observable<InventoryItem> {
+        return this.http.get<InventoryItem>("http://" + window.location.hostname + ":9001/inventoryms/api/inventory/get/item/name/size?itemName=" + itemName + "&size=" + size);
+    }
+
+    getItemById(id: number): Observable<InventoryItem> {
+        return this.http.get<InventoryItem>("http://" + window.location.hostname + ":9001/inventoryms/api/inventory/get/item/id?id=" + id);
+    }
+
     addItemToCart(item: InventoryItem, username: string) {
         const itemDto = JSON.stringify({
             "myshopper": username,
+            "id": item.id,
             "itemName": item.itemName,
             "itemPrice": item.itemPrice,
             "cartQuantity": 1,
             "category": item.category,
-            "description": item.description
+            "description": item.description,
         });
 
         this.http.put("http://" + window.location.hostname + ":9001/commercems/commerce/addtocart", itemDto, this.httpOptionsJSON).subscribe(() => {
