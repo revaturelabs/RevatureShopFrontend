@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { InventoryItem, InventoryItemsService } from '../../services/inventory-items.service'
 import { HttpUserInventoryPageService } from '../../services/http-user-inventory-page.service';
 
+
 @Component({
   selector: 'app-user-inventory-page',
   templateUrl: './user-inventory-page.component.html',
@@ -10,21 +11,20 @@ import { HttpUserInventoryPageService } from '../../services/http-user-inventory
 })
 export class UserInventoryPageComponent implements OnInit {
 
-  itemImagesURL : string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
+  itemImagesURL : string = "https://rss-images.s3.us-east-2.amazonaws.com";
 
   categoryOfItems : string = '';
   inventoryItemsFiltered : InventoryItem[] = [];
 
-  currentPage = 1;
-  itemsPerPage = 12;
-  pageSize: number = 0;
+  p = 1;
 
-  selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "", 0);
+  selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "","",0);
   inStockChecked : boolean = true;
   outOfStockChecked : boolean = false;
 
   sortMode : string = "id asc";
 
+  searchText='';
 
 
   constructor(private _inventoryItemsService : InventoryItemsService,
@@ -92,20 +92,11 @@ export class UserInventoryPageComponent implements OnInit {
       Filter by stock status
     */
     this.inventoryItemsFiltered = this._inventoryItemsService.inventoryItems.filter(element => {
-      return (this.inStockChecked && element.quantity > 0) || (this.outOfStockChecked && element.quantity == 0);
+      return ((this.inStockChecked && element.quantity > 0) || (this.outOfStockChecked && element.quantity == 0))
+      && (element.size == null || element.size == 'Small');
   });
 
   }
-
-
-  public onPageChange(pageNum: number): void {
-    this.pageSize = this.itemsPerPage*(pageNum - 1);
-    window.scrollTo(0,0);
-  }
-
-  public changePagesize(num: number): void {
-  this.itemsPerPage = this.pageSize + num;
-}
 
   applySortFilters() {
     // Sort By: None is the same as sort by item number (default)
