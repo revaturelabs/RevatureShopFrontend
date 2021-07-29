@@ -24,6 +24,8 @@ export class AdminInventoryPageComponent implements OnInit {
 
   selectedOption: string = '';
 
+  p = 1;
+  searchText='';
 
   itemImagesURL : string = "https://rss-images.s3.us-east-2.amazonaws.com";
 

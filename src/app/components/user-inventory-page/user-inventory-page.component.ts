@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InventoryItem, InventoryItemsService } from '../../services/inventory-items.service'
 import { HttpUserInventoryPageService } from '../../services/http-user-inventory-page.service';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 @Component({
   selector: 'app-user-inventory-page',
@@ -16,9 +16,7 @@ export class UserInventoryPageComponent implements OnInit {
   categoryOfItems : string = '';
   inventoryItemsFiltered : InventoryItem[] = [];
 
-  currentPage = 1;
-  itemsPerPage = 12;
-  pageSize: number = 0;
+  p = 1;
 
   selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "","",0);
   inStockChecked : boolean = true;
@@ -99,15 +97,6 @@ export class UserInventoryPageComponent implements OnInit {
   });
 
   }
-
-
-  public onPageChange(pageNum: number): void {
-    this.pageSize = this.itemsPerPage*(pageNum - 1);
-  }
-
-  public changePagesize(num: number): void {
-  this.itemsPerPage = this.pageSize + num;
-}
 
   applySortFilters() {
     // Sort By: None is the same as sort by item number (default)
