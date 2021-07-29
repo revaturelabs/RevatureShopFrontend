@@ -103,7 +103,6 @@ export class UserInventoryPageComponent implements OnInit {
 
   public onPageChange(pageNum: number): void {
     this.pageSize = this.itemsPerPage*(pageNum - 1);
-    window.scrollTo(0,0);
   }
 
   public changePagesize(num: number): void {
