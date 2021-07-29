@@ -32,6 +32,7 @@ export class ItemModalComponent implements OnInit {
         
     }
 
+    
     addToCart(): void {
         this.httpItemModalService.getItemById(this.id).subscribe((item) => {
             this.httpItemModalService.addItemToCart(item, this.loggedShopper);

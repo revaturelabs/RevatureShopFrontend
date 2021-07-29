@@ -29,6 +29,7 @@ import {UserPageComponent} from './components/user-page/user-page.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DisplaySaleComponent } from './components/display-sale/display-sale.component';
 import { DisplayFeaturedComponent } from './components/display-featured/display-featured.component';
+import { ViewPreviousOrdersComponent } from './components/view-previous-orders/view-previous-orders.component';
 
 @NgModule({
     declarations: [
@@ -54,8 +55,9 @@ import { DisplayFeaturedComponent } from './components/display-featured/display-
         PageNotFoundComponent,
         CheckoutConfirmationPageComponent,
         DisplaySaleComponent,
-        DisplayFeaturedComponent
+        DisplayFeaturedComponent,
 
+        ViewPreviousOrdersComponent
     ],
     imports: [
         BrowserModule,
