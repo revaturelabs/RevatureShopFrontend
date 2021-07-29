@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InventoryItem, InventoryItemsService } from '../../services/inventory-items.service'
 import { DisplayFeaturedService } from '../../services/display-featured.service';
+import { HttpUserInventoryPageService } from '../../services/http-user-inventory-page.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @Component({
@@ -20,7 +21,7 @@ export class DisplayFeaturedComponent implements OnInit {
   itemsPerPage = 2;
   pageSize: number = 0;
 
-  selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "", "", 0);
+  selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "", "", 1);
   inStockChecked : boolean = true;
 
   sortMode : string = "id asc";
@@ -31,7 +32,7 @@ export class DisplayFeaturedComponent implements OnInit {
   constructor(private _inventoryItemsService : InventoryItemsService,
     private router : Router,
     private route : ActivatedRoute,
-    private displayFeaturedService : DisplayFeaturedService) {
+    private httpUserInventoryPageService : HttpUserInventoryPageService) {
 
    }
 
@@ -59,7 +60,7 @@ export class DisplayFeaturedComponent implements OnInit {
 
     // }
     // else{
-        this.displayFeaturedService.getAllInventoryItems().subscribe(itemsList=>{
+        this.httpUserInventoryPageService.getAllInventoryItems().subscribe(itemsList=>{
             this.inventoryItemsService.inventoryItems = itemsList;
             this.filterListByStock();
         });
@@ -82,7 +83,6 @@ export class DisplayFeaturedComponent implements OnInit {
 
   public onPageChange(pageNum: number): void {
     this.pageSize = this.itemsPerPage*(pageNum - 1);
-    window.scrollTo(0,0);
   }
 
   public changePagesize(num: number): void {
