@@ -26,6 +26,9 @@ export class AdminInventoryPageComponent implements OnInit {
 
   selectedSize: string = '';
 
+  p = 1;
+  searchText='';
+
   itemImagesURL : string = "https://rss-images.s3.us-east-2.amazonaws.com";
 
   constructor(private _inventoryItemsService : InventoryItemsService,

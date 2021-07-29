@@ -45,12 +45,12 @@ export class CartComponent implements OnInit {
     loadCart() {
         this.totalPrice = 0;
         this.httpCartService.getCart(this.loggedShopper).subscribe((cart) => {
-            this.userCart = cart;            
+            this.userCart = cart;
             Object.keys(cart.stockItemMap).map(Number).forEach((id) => {
                 this.httpCartService.getItemById(id).subscribe((item) => {
                     item.imageURL = "";
                     this.cartItems.push(item);
-                    this.totalPrice += item.itemPrice * this.getCartQuantity(item.id);
+                    this.totalPrice += item.itemPrice*(1- item.discount) * this.getCartQuantity(item.id);
                 });
 
             });
@@ -62,7 +62,7 @@ export class CartComponent implements OnInit {
     updatePrice() {
         this.totalPrice = 0;
         for (let i = 0; i < this.cartItems.length; i++) {
-            this.totalPrice += this.cartItems[i].itemPrice * this.getCartQuantity(this.cartItems[i].id);
+            this.totalPrice += this.cartItems[i].itemPrice*(1-this.cartItems[i].discount) * this.getCartQuantity(this.cartItems[i].id);
         }
     }
 
