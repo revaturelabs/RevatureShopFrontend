@@ -31,11 +31,11 @@ export class DisplaySaleService {
 
   }
 
-  getInventoryItemsByCategory(category: string) : Observable<InventoryItem[]> {
+  // getInventoryItemsByCategory(category: string) : Observable<InventoryItem[]> {
 
-     var items: Observable<InventoryItem[]> =  this.http.post<InventoryItem[]>(this.baseServerURL + "/api/inventory/view/itemsbycategory", category,  this.httpOptionsTEXT);
-     return items;
+  //    var items: Observable<InventoryItem[]> =  this.http.post<InventoryItem[]>(this.baseServerURL + "/api/inventory/view/itemsbycategory", category,  this.httpOptionsTEXT);
+  //    return items;
 
-  }
+  // }
 
 }

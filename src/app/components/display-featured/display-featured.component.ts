@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InventoryItem, InventoryItemsService } from '../../services/inventory-items.service'
-import { DisplayFeaturedService } from '../../services/display-featured.service';
+// import { DisplayFeaturedService } from '../../services/display-featured.service';
 import { HttpUserInventoryPageService } from '../../services/http-user-inventory-page.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
