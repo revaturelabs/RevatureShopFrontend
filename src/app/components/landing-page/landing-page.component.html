@@ -13,10 +13,15 @@
                         <div class="col-md-8 mr-auto ml-auto">
                             <div class="card page-carousel">
                                 <ngb-carousel>
-                                    <ng-template ngbSlide *ngFor="let item of this.featuredItemsFiltered  | slice: featuredpageSize | slice: 0: featureditemsPerPage | filter: featuredsearchText">
-                                        <img src = "{{featureditemImagesURL+'/'+item.id}}" alt="Random first slide">
+                                    <ng-template ngbSlide *ngFor="let item of featuredItemsFiltered">
+                                        <div class="image-holder">
+                                        <img class="image" src = "{{itemImagesURL+'/images/'+item.itemName+'.png'}}" alt="Random first slide">
+                                    </div>
                                      <div class="carousel-caption">
-                                        <p></p>
+                                         <span>
+                                             <p>{{item.itemName}}</p>
+                                            <p></p>
+                                        </span>  
                                     </div>
                                     </ng-template>
                             </ngb-carousel>

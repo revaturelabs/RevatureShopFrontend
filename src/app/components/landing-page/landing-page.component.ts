@@ -10,7 +10,8 @@ import {AccountService} from "../../services/account.service";
 })
 export class LandingPageComponent implements OnInit {
 
-  featureditemImagesURL : string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
+  itemImagesURL : string = "https://rss-images.s3.us-east-2.amazonaws.com";
+
 
   featuredcategoryOfItems : string = 'Featured Items';
   featuredItemsFiltered : InventoryItem[] = [];
@@ -22,7 +23,9 @@ export class LandingPageComponent implements OnInit {
   featuredselectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "", "", 0);
   featuredinStockChecked : boolean = true;
 
+
   featuredsearchText='';
+
 
   constructor(
     private _featuredItemsService: InventoryItemsService,
@@ -32,7 +35,7 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.fetchfeaturedItemListByCategory("xxx");
+    this.fetchfeaturedItemListByCategory();
   }
 
 
@@ -40,18 +43,15 @@ export class LandingPageComponent implements OnInit {
     return this._featuredItemsService;
   }
 
-  fetchfeaturedItemListByCategory(category: string) {
+  fetchfeaturedItemListByCategory() {
 
-    if (category == 'featured') {
-
-      this.displayFeaturedService.getInventoryItemsByCategory( category.toString() ).subscribe(
-
-        itemsList => {
-          this.featuredItemsService.inventoryItems = itemsList;
-          this.filterfeaturedListByStock();
-        }
-      )
-    }
+    this.displayFeaturedService.getInventoryItemsByFeatured().subscribe(
+      itemsList => {
+        this._featuredItemsService.inventoryItems = itemsList;
+        console.log(itemsList)
+        this.filterfeaturedListByStock();
+      }
+    )
   }
 
   featureditemClicked(selectedItem : InventoryItem) {
