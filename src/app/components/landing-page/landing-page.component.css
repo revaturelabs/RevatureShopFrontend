@@ -1,10 +1,66 @@
-.jumbotron {
-    min-height: 350px;
-    background-color: rgb(248, 112, 21);
-    color: aliceblue;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 0;
+.wrapper{
+    min-height: 90%;
+    width: 100%;
+    left: 0;
+    padding: 0;
 }
+
+.page-header {
+    background-image: linear-gradient( rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5) ), url('../../../assets/images/business-success.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    max-height: 999px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .page-header.page-header-small {
+    min-height: 65vh !important;
+    max-height: 700px;
+  }
+  .page-header.page-header-xs {
+    min-height: 40vh !important;
+  }
+  .page-header.section-dark .content-center,
+  .page-header.section-dark .category-absolute {
+    z-index: 1;
+  }
+
+  .banner {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      background-color: #F26925;
+      height: 25vh;
+      width: 100%;
+      margin-top: 200px;
+      padding: 30px;
+  }
+
+  .title {
+      font-size: 3em;
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px #474C55;
+  }
+
+  .message {
+    text-align: center;
+    color: white;
+    font-size: 1.2em;
+    width: 50%;
+    margin-top: 15px;
+  }
+
+  .message span {
+      font-weight: bold;
+      font-size: 1.4em;
+      text-shadow: 2px 2px #474C55;
+  }
