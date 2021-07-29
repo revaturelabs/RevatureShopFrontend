@@ -1,13 +1,13 @@
-<div class="inventoryTitle">
+<div class="saleTitle">
 
     {{categoryOfItems}}
 
 </div>
 
-<div class="inventory-grid" style="margin-top: 20px;" >
+<div class="sale-grid" style="margin-top: 20px;" >
 
 
-    <div *ngFor="let item of this.inventoryItemsFiltered  | slice: pageSize | slice: 0:itemsPerPage | filter: searchText"
+    <div *ngFor="let item of this.saleItemsFiltered  | slice: pageSize | slice: 0:itemsPerPage | filter: searchText"
      class="card" type="button" data-bs-toggle="modal" data-bs-target="#itemModal" (click)="itemClicked(item)"
      [ngClass]="{'inStockItem' : item.quantity > 0, 'outOfStockItem' : item.quantity == 0}">
 
@@ -33,7 +33,7 @@
 </div>
 
 
-<ngb-pagination [collectionSize]="this.inventoryItemsService.inventoryItems.length" #numPages [pageSize]="itemsPerPage" [(page)]="currentPage" (pageChange)="onPageChange(currentPage)">
+<ngb-pagination [collectionSize]="this.saleItemsService.inventoryItems.length" #numPages [pageSize]="itemsPerPage" [(page)]="currentPage" (pageChange)="onPageChange(currentPage)">
 <ng-template ngbPaginationPrevious>Prev</ng-template>
 <ng-template ngbPaginationNext>Next</ng-template>
 </ngb-pagination>

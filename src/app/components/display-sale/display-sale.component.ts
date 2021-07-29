@@ -14,10 +14,10 @@ export class DisplaySaleComponent implements OnInit {
   itemImagesURL : string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
 
   categoryOfItems : string = 'On Sale';
-  inventoryItemsFiltered : InventoryItem[] = [];
+  saleItemsFiltered : InventoryItem[] = [];
 
   currentPage = 1;
-  itemsPerPage = 2;
+  itemsPerPage = 3;
   pageSize: number = 0;
 
   selectedItem : InventoryItem = new InventoryItem(1,"",1,1, "", "", "", 0);
@@ -28,7 +28,7 @@ export class DisplaySaleComponent implements OnInit {
   searchText='';
 
 
-  constructor(private _inventoryItemsService : InventoryItemsService,
+  constructor(private _saleItemsService : InventoryItemsService,
     private router : Router,
     private route : ActivatedRoute,
     private displaySaleService : DisplaySaleService) {
@@ -41,8 +41,8 @@ export class DisplaySaleComponent implements OnInit {
   }
 
 
-  get inventoryItemsService() {
-    return this._inventoryItemsService;
+  get saleItemsService() {
+    return this._saleItemsService;
   }
 
   fetchItemListByCategory(category: string) {
@@ -52,7 +52,7 @@ export class DisplaySaleComponent implements OnInit {
       this.displaySaleService.getInventoryItemsByCategory( category.toString() ).subscribe(
 
         itemsList => {
-          this.inventoryItemsService.inventoryItems = itemsList;
+          this.saleItemsService.inventoryItems = itemsList;
           this.filterListByStock();
         }
       )
@@ -60,7 +60,7 @@ export class DisplaySaleComponent implements OnInit {
     }
     else{
         this.displaySaleService.getAllInventoryItems().subscribe(itemsList=>{
-            this.inventoryItemsService.inventoryItems = itemsList;
+            this.saleItemsService.inventoryItems = itemsList;
             this.filterListByStock();
         });
     }
@@ -73,7 +73,7 @@ export class DisplaySaleComponent implements OnInit {
 
   filterListByStock() {
 
-    this.inventoryItemsFiltered = this._inventoryItemsService.inventoryItems.filter(element => {
+    this.saleItemsFiltered = this._saleItemsService.inventoryItems.filter(element => {
       return (this.inStockChecked && element.quantity > 0);
   });
 
