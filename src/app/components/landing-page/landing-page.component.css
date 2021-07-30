@@ -94,7 +94,7 @@
     background-color: #F26925;
   }
   
-  .carousel-control .icon-prev, .carousel-control .icon-next, .carousel-control .fa, .carousel-control .fa {
+  .carousel-control .icon-prev, .carousel-control .icon-next, .carousel-control .fa{
     display: inline-block;
     z-index: 5;
   }
