@@ -32,7 +32,6 @@ export class ViewPreviousOrdersComponent implements OnInit {
     let username = email.split("=")[1].split("%")[0];
     let system = email.split("=")[1].split("%")[1].split('0')[1];
     this.email = username + `@${system}`;
-    console.log(this.email)
 
   }
 
@@ -44,19 +43,18 @@ export class ViewPreviousOrdersComponent implements OnInit {
     this.httpCartService.orderHistory(this.email).subscribe(
       data => {
         this.previousOrders = data;
-        console.log(this.previousOrders)
+        console.log(this.previousOrders);
 
 
         for (let i = 0; i < data.length; i++) {
 
 
           let status = this.calculateStatus(this.previousOrders[i].purchaseDate);
-
+          // Change here when backend is updated.
           let itemName = this.previousOrders[i].itemName;
-          console.log(itemName);
           this.httpCartService.getItemByName(itemName).subscribe((item) => {
-            console.log(item);
             this.previousOrders[i].itemId = item.id;
+            console.log(this.previousOrders)
           });
 
 
@@ -66,7 +64,6 @@ export class ViewPreviousOrdersComponent implements OnInit {
           switch (status) {
             case 0:
               this.previousOrders[i].status = "Pending"
-              console.log(this.previousOrders);
               break;
             case 1:
               this.previousOrders[i].status = "Confirmed"
@@ -97,10 +94,10 @@ export class ViewPreviousOrdersComponent implements OnInit {
 
 
 
-  orderAgian(itemName: string): void {
+  orderAgian(itemId: number): void {
 
-    if (itemName) {
-      this.addToCart(itemName);
+    if (itemId) {
+      this.addToCart(itemId);
     }
   }
 
@@ -117,10 +114,9 @@ export class ViewPreviousOrdersComponent implements OnInit {
     return 0;
   }
 
-  addToCart(itemName: string): void {
-    console.log
-    let item = this.httpModalService.getItemByName(itemName).subscribe((item) => {
-      console.log(item)
+  addToCart(itemId: number): void {
+    let item = this.httpModalService.getItemById(itemId).subscribe((item) => {
+      
       this.httpModalService.addItemToCart(item, this.email, 1);
     });
   }
