@@ -19,6 +19,7 @@ export class ViewPreviousOrdersComponent implements OnInit {
   itemId: number = 0;
   itemName: string = '';
   itemImagesURL: string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
+  shirtImageURL: string = "https://rss-images.s3.us-east-2.amazonaws.com/images/";
 
   ngOnInit(): void {
     this.setEmail();
@@ -29,7 +30,9 @@ export class ViewPreviousOrdersComponent implements OnInit {
     let email: string = document.cookie
     email.split("=");
     let username = email.split("=")[1].split("%")[0];
-    this.email = username;
+    let system = email.split("=")[1].split("%")[1].split('0')[1];
+    this.email = username + `@${system}`;
+    console.log(this.email)
 
   }
 
@@ -37,10 +40,11 @@ export class ViewPreviousOrdersComponent implements OnInit {
 
   getOrderHistory(): void {
 
-    let email = this.email + "@gmail.com";
-    this.httpCartService.orderHistory(email).subscribe(
+
+    this.httpCartService.orderHistory(this.email).subscribe(
       data => {
         this.previousOrders = data;
+        console.log(this.previousOrders)
 
 
         for (let i = 0; i < data.length; i++) {
@@ -62,7 +66,6 @@ export class ViewPreviousOrdersComponent implements OnInit {
           switch (status) {
             case 0:
               this.previousOrders[i].status = "Pending"
-
               console.log(this.previousOrders);
               break;
             case 1:
@@ -115,9 +118,10 @@ export class ViewPreviousOrdersComponent implements OnInit {
   }
 
   addToCart(itemName: string): void {
+    console.log
     let item = this.httpModalService.getItemByName(itemName).subscribe((item) => {
-      let email = this.email + "@gmail.com"
-      this.httpModalService.addItemToCart(item, email);
+      console.log(item)
+      this.httpModalService.addItemToCart(item, this.email, 1);
     });
   }
 

@@ -24,6 +24,10 @@ export class AdminInventoryPageComponent implements OnInit {
 
   selectedOption: string = '';
 
+  selectedSize: string = '';
+
+  p = 1;
+  searchText='';
 
   itemImagesURL : string = "https://rss-images.s3.us-east-2.amazonaws.com";
 
@@ -202,6 +206,11 @@ export class AdminInventoryPageComponent implements OnInit {
     this.applySortFilters();
   }
 
-
+  updateSize() {
+    // this.httpItemModalService.getItemByNameAndSize(this.title, this.selectedSize).subscribe((item) => {
+    //     this.id = item.id;
+    //     this.quantity = item.quantity;
+    // });
+  }
 
 }

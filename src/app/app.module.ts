@@ -30,6 +30,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DisplaySaleComponent } from './components/display-sale/display-sale.component';
 import { DisplayFeaturedComponent } from './components/display-featured/display-featured.component';
 import { ViewPreviousOrdersComponent } from './components/view-previous-orders/view-previous-orders.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
     declarations: [
@@ -71,7 +72,8 @@ import { ViewPreviousOrdersComponent } from './components/view-previous-orders/v
         ReactiveFormsModule,
         MatIconModule,
         MaterialFileInputModule,
-        Ng2SearchPipeModule 
+        Ng2SearchPipeModule,
+        NgxPaginationModule
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -41,9 +41,10 @@
                     <div style="display: flex;">
 
 
-                        <div class="col-md-3"><img class="img-fluid" src="{{itemImagesURL + '/' + previousOrder.itemId}}" alt="no image">
-
+                        <div class="col-md-3"><img class="img-fluid"
+                                src="{{previousOrder.itemId ? itemImagesURL + '/' + previousOrder.itemId : shirtImageURL + previousOrder.itemName + '.png'}}" alt="no image">
                         </div>
+                        
                         <div class="col-md-9">
                             {{previousOrder.itemName}}
                         </div>
