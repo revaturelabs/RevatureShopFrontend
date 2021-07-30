@@ -29,7 +29,8 @@ import {UserPageComponent} from './components/user-page/user-page.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DisplaySaleComponent } from './components/display-sale/display-sale.component';
 import { DisplayFeaturedComponent } from './components/display-featured/display-featured.component';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
+import {CarouselModule} from 'primeng/carousel';
 
 @NgModule({
     declarations: [
@@ -71,7 +72,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
         MatIconModule,
         MaterialFileInputModule,
         Ng2SearchPipeModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        CarouselModule
     ],
     providers: [],
     bootstrap: [AppComponent]
