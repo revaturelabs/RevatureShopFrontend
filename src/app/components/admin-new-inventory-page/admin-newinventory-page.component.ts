@@ -3,7 +3,7 @@ import {FormBuilder} from "@angular/forms";
 import {InventoryItem, InventoryItemsService} from "../../services/inventory-items.service";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-import { NavbarServiceService } from 'src/app/navbar/navbar-service.service';
+import { NavbarServiceService } from '../../services/navbar-service.service';
 
 @Component({
   selector: 'app-admin-newinventory-page',
@@ -24,6 +24,7 @@ export class AdminNewInventoryPageComponent implements OnInit {
     gender: string = "---- Select gender ----";
     price: number = 0;
     quantity: number = 0;
+    size: string = "";
 
     missingInput = false;
     itemNameAlreadyExists = false;
@@ -37,7 +38,7 @@ export class AdminNewInventoryPageComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private router : Router, private http: HttpClient, inventoryService: InventoryItemsService,
     private navbarService : NavbarServiceService ) {
-     this.itemConvert = new InventoryItem(0,'',0,0,'','');
+     this.itemConvert = new InventoryItem(0,'',0,0,'','','',0);
   }
 
   ngOnInit(): void {

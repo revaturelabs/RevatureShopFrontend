@@ -1,0 +1,19 @@
+.wrapper{
+    min-height: 90%;
+    width: 100%;
+    left: 0;
+    padding: 0;
+}
+
+.page-header {
+    background-color: #474C55;
+    min-height: 100vh;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+

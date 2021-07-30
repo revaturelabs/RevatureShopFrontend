@@ -13,11 +13,11 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ItemModalComponent} from './components/item-modal/item-modal.component';
 import {CheckoutComponent} from "./components/checkout/checkout.component";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NavbarComponent} from './navbar/navbar.component';
+import {NavbarComponent} from './components/navbar/navbar.component';
 import {CookieModule} from "ngx-cookie";
 import {AdminItemModalComponent} from './components/admin-item-modal/admin-item-modal.component';
-import {LandingPageComponent} from './landing-page/landing-page.component';
-import {PointTrackerComponent} from './point-tracker/point-tracker.component';
+import {LandingPageComponent} from './components/landing-page/landing-page.component';
+import {PointTrackerComponent} from './components/point-tracker/point-tracker.component';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {AdminNewInventoryPageComponent} from './components/admin-new-inventory-page/admin-newinventory-page.component';
 import {MatIconModule} from "@angular/material/icon";
@@ -26,6 +26,12 @@ import {FileUploaderComponent} from './components/file-uploader/file-uploader.co
 import {CheckoutConfirmationPageComponent} from './components/checkout-confirmation-page/checkout-confirmation-page.component';
 import {AdminAddPointsComponent} from './components/admin-add-points/admin-add-points.component';
 import {UserPageComponent} from './components/user-page/user-page.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { DisplaySaleComponent } from './components/display-sale/display-sale.component';
+import { DisplayFeaturedComponent } from './components/display-featured/display-featured.component';
+import {CarouselModule} from 'primeng/carousel';
+import { ViewPreviousOrdersComponent } from './components/view-previous-orders/view-previous-orders.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
     declarations: [
@@ -50,6 +56,10 @@ import {UserPageComponent} from './components/user-page/user-page.component';
         FileUploaderComponent,
         PageNotFoundComponent,
         CheckoutConfirmationPageComponent,
+        DisplaySaleComponent,
+        DisplayFeaturedComponent,
+
+        ViewPreviousOrdersComponent
     ],
     imports: [
         BrowserModule,
@@ -62,7 +72,10 @@ import {UserPageComponent} from './components/user-page/user-page.component';
         FormsModule,
         ReactiveFormsModule,
         MatIconModule,
-        MaterialFileInputModule
+        MaterialFileInputModule,
+        Ng2SearchPipeModule,
+        NgxPaginationModule,
+        CarouselModule
     ],
     providers: [],
     bootstrap: [AppComponent]

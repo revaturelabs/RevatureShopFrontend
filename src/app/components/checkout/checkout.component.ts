@@ -4,7 +4,7 @@ import {StatesService, state} from "../../services/states.service";
 import {Account, AccountService} from "../../services/account.service";
 import {CheckoutService} from "../../services/checkout.service";
 import {Router} from "@angular/router";
-import {HttpCartService} from "../cart/http-cart.service";
+import {HttpCartService} from "../../services/http-cart.service";
 import {Cart} from "../cart/cart.component";
 
 @Component({
@@ -48,12 +48,12 @@ export class CheckoutComponent {
         }
         this.cs.getCart(this.loggedShopper).subscribe(cart=>{
             this.checkoutCart=cart;
-            Object.keys(this.checkoutCart.stockItemMap).forEach((itemName) => {
+            Object.keys(this.checkoutCart.stockItemMap).map(Number).forEach((id) => {
                 let price:number=0;
-                this.cs.getItemByName(itemName).subscribe((item) => {
+                this.cs.getItemById(id).subscribe((item) => {                    
                     item.imageURL="";
                     // @ts-ignore
-                    price += item.itemPrice * this.checkoutCart.stockItemMap[item.itemName];
+                    price += item.itemPrice * this.checkoutCart.stockItemMap[item.id];
                     this.pointsAfterMath=<number>this.as.account?.points-price;
                 });
         });
@@ -76,7 +76,7 @@ export class CheckoutComponent {
         this.thirdFormGroup = this.fb.group({
             moreInfo: null,
         })
-        //NOT EXACTLY SURE IF THIS WORKS THIS WAY,
+        // NOT EXACTLY SURE IF THIS WORKS THIS WAY,
         // HOPEFULLY THESE FORMS OVERWRITE THE CORRECT INFORMATION IN THE SERVICE OBJECT
         this.firstFormGroup.valueChanges.subscribe(form => {
             this.co.checkOutInfo = form;
@@ -89,21 +89,22 @@ export class CheckoutComponent {
         })
     }
 
+    failedCheckout: boolean = false;
+
     checkout() {
-        this.cs.checkoutCart(this.checkoutCart).subscribe(()=>{
-
+        this.cs.checkoutCart(this.checkoutCart).subscribe((value)=>{
             this.as.account && this.as.getUserInfo(this.as.account.email);
+            if (value == -1) {
+                this.failedCheckout = true;
+            } else {
+                this.as.account!.points = this.pointsAfterMath;
+                this.cs.totalItems = 0;
+                this.router.navigate(['confirmCheckout']).then(r =>{});
+            }
         });
-        // @ts-ignore
-        this.as.account.points = this.pointsAfterMath;
-       this.cs.totalItems = 0;
-    this.router.navigate(['confirmCheckout']).then(r =>{});
-
     }
 
     get account(): Account {
         return <Account>this.as.account;
     }
-
-
 }

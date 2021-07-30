@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {HttpCartService} from "./http-cart.service";
+import {HttpCartService} from "../../services/http-cart.service";
 import {InventoryItem} from "../../services/inventory-items.service";
 import {AccountService} from "../../services/account.service";
 import {Router} from "@angular/router";
@@ -22,7 +22,7 @@ export class CartComponent implements OnInit {
     totalPrice: number;
     loggedShopper: string = '';
     shopperPoints: number = 0;
-    itemImagesURL: string = "https://revature-swag-shop-images.s3.us-east-2.amazonaws.com";
+    itemImagesURL: string = "https://rss-images.s3.us-east-2.amazonaws.com/images";
 
     constructor(private http: HttpClient, public httpCartService: HttpCartService, private accountsService: AccountService, private router: Router) {
         this.cartItems = new Array<InventoryItem>();
@@ -46,11 +46,11 @@ export class CartComponent implements OnInit {
         this.totalPrice = 0;
         this.httpCartService.getCart(this.loggedShopper).subscribe((cart) => {
             this.userCart = cart;
-            Object.keys(cart.stockItemMap).forEach((itemName) => {
-                this.httpCartService.getItemByName(itemName).subscribe((item) => {
+            Object.keys(cart.stockItemMap).map(Number).forEach((id) => {
+                this.httpCartService.getItemById(id).subscribe((item) => {
                     item.imageURL = "";
                     this.cartItems.push(item);
-                    this.totalPrice += item.itemPrice * this.getCartQuantity(item.itemName);
+                    this.totalPrice += item.itemPrice*(1- item.discount) * this.getCartQuantity(item.id);
                 });
 
             });
@@ -62,36 +62,37 @@ export class CartComponent implements OnInit {
     updatePrice() {
         this.totalPrice = 0;
         for (let i = 0; i < this.cartItems.length; i++) {
-            this.totalPrice += this.cartItems[i].itemPrice * this.getCartQuantity(this.cartItems[i].itemName);
+            this.totalPrice += this.cartItems[i].itemPrice*(1-this.cartItems[i].discount) * this.getCartQuantity(this.cartItems[i].id);
         }
     }
 
 
     getItemImage(item: InventoryItem): string {
 
-        return this.itemImagesURL + '/' + item.id;
+        return this.itemImagesURL + '/' + item.itemName + ".png";
     }
 
-    getCartQuantity(itemName: string): number {
-        if (this.hasKey(this.userCart.stockItemMap, itemName)) {
-            return this.userCart.stockItemMap[itemName];
+    getCartQuantity(id: number): number {
+        if (this.hasKey(this.userCart.stockItemMap, id)) {
+            return this.userCart.stockItemMap[id];
         }
         return 0;
     }
 
-    updateCartQuantity(event: Event, itemName: string): void {
-        if (this.hasKey(this.userCart.stockItemMap, itemName)) {
+    updateCartQuantity(event: Event, id: number): void {
+        if (this.hasKey(this.userCart.stockItemMap, id)) {
             // @ts-ignore
-            this.userCart.stockItemMap[itemName] = event.target.value;
+
+            this.userCart.stockItemMap[id] = event.target.value;
             this.updatePrice();
         }
         this.httpCartService.updateCart(this.userCart);
 
     }
 
-    removeCartItem(itemName: string): void {
-        if (this.hasKey(this.userCart.stockItemMap, itemName)) {
-            delete this.userCart.stockItemMap[itemName]// works fine!
+    removeCartItem(id: number): void {
+        if (this.hasKey(this.userCart.stockItemMap, id)) {
+            delete this.userCart.stockItemMap[id]// works fine!
             this.updatePrice();
         }
         this.httpCartService.updateCart(this.userCart);

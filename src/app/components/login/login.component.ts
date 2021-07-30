@@ -1,34 +1,33 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountService, Account} from "../../services/account.service";
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
+import { FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
+
 })
 export class LoginComponent implements OnInit {
-    public TextForButton: string = 'Please Select a User'
-    public username: string = '';
-    // @ts-ignore
-    public account: Account;
     accounts: Account[] = [];
+    loginForm = this.formBuilder.group({
+        email: ''
+    })
 
-    constructor(private accountService: AccountService, private router: Router) {
+    constructor(private accountService: AccountService, private router: Router, private formBuilder: FormBuilder) {
     }
 
     ngOnInit(): void {
-        this.accountService.getDummyAccounts().subscribe(data => this.accounts = data);
-    }
-
-    public setUserName(incAccount: Account) {
-        this.account = incAccount;
-        this.username = this.account.email;
-        this.TextForButton = this.account.email + " is selected for login";
+        this.accountService.getDummyAccounts().subscribe((data) => {
+            this.accounts = data
+            console.log(this.accounts)
+        });
+       
     }
 
     login() {
-        this.accountService.login(this.account.email, () => this.router.navigateByUrl("/home"));
+        this.accountService.login(this.loginForm.value.email, () => this.router.navigateByUrl("/home"));
 
     }
 }

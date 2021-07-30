@@ -1,0 +1,71 @@
+<!-- <div class="featured-title-and-inventory-grid" name="featured">
+
+<div class="featuredTitle">
+
+    {{featuredcategoryOfItems}}
+
+</div>
+
+<div class="featured-grid" style="margin-top: 20px;" >
+
+
+    <div *ngFor="let item of this.featuredItemsFiltered  | slice: featuredpageSize | slice: 0: featureditemsPerPage | filter: featuredsearchText"
+     class="card" type="button" data-bs-toggle="modal" data-bs-target="#itemModal" (click)="featureditemClicked(item)"
+     [ngClass]="{'inStockItem' : item.quantity > 0}">
+
+        <div class="imageContainer" style="overflow: hidden;">
+            <img class="card-img-top" src = "{{featureditemImagesURL+'/'+item.id}}" alt="Item image">
+        </div> -->
+
+<!-- Mask applied over image when hovered over-->
+<!-- <div class="mask"></div>
+
+
+        <div class="card-body" style="text-align: center;">
+
+
+            <h5 class="card-title title two-line-text" style="font-size: 21px;">{{item.itemName}}</h5>
+            <h5 class="card-text price" style="margin-top: 15px; font-size: 18px;">{{item.itemPrice * (1-item.discount)}} RevCoins</h5>
+            <h6 class="card-text sale">{{item.discount * 100}} % Off !</h6>
+
+        </div>
+        
+    </div>
+
+</div>
+
+
+<ngb-pagination [collectionSize]="this.featuredItemsService.inventoryItems.length" #numPages [pageSize]="featureditemsPerPage" [(page)]="featuredcurrentPage" (pageChange)="featuredonPageChange(featuredcurrentPage)">
+<ng-template ngbPaginationPrevious>Prev</ng-template>
+<ng-template ngbPaginationNext>Next</ng-template>
+</ngb-pagination>
+</div>
+
+<app-item-modal [title]="this.featuredselectedItem.itemName" [src]="this.featuredselectedItem.imageURL"
+[description]="this.featuredselectedItem.description" [quantity]="this.featuredselectedItem.quantity" [id]="this.featuredselectedItem.id" [category]="this.featuredselectedItem.category"></app-item-modal>
+
+<br>
+<br> -->
+<div class="banner">
+    <h1 class="title">Featured Items</h1>
+    <p class="message">Check out our awesome items!</p>
+    <p-carousel [value]="featuredItemsFiltered" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1"
+        [circular]="true" [autoplayInterval]="5000">
+        <ng-template pTemplate="header">
+        </ng-template>
+        <ng-template let-product pTemplate="item">
+            <div class="product-item">
+                <div class="product-item-content">
+                    <div class="p-mb-3">
+                        <img src="{{itemImagesURL+'/images/'+product.itemName+'.png'}}" [alt]="product.itemName"
+                            class="product-image" />
+                    </div>
+                    <div>
+                        <h4 class="p-mb-1">{{product.itemName}}</h4>
+                        <h6 class="p-mt-0 p-mb-3">{{product.itemPrice}} RevCoins</h6>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-carousel>
+</div>
